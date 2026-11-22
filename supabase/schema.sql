@@ -55,21 +55,21 @@ with check (consent = true);
 
 -- Only authenticated owner/admin can read and manage inquiry records.
 create policy "Owner reads inquiries" on public.inquiries
-for select to authenticated using (true);
+for select to authenticated using (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 create policy "Owner updates inquiries" on public.inquiries
-for update to authenticated using (true) with check (true);
+for update to authenticated using (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com') with check (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 create policy "Owner deletes inquiries" on public.inquiries
-for delete to authenticated using (true);
+for delete to authenticated using (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 -- Public can read published document metadata. Only authenticated owner can manage.
 create policy "Public reads published documents" on public.public_documents
-for select to anon, authenticated using (is_published = true);
+for select to anon using (is_published = true);
 create policy "Owner manages documents" on public.public_documents
-for all to authenticated using (true) with check (true);
+for all to authenticated using (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com') with check (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 -- Public can read approved testimonials only. Owner manages all moderation.
 create policy "Public reads approved testimonials" on public.testimonials
-for select to anon, authenticated using (status = 'approved' and publication_consent = true);
+for select to anon using (status = 'approved' and publication_consent = true);
 create policy "Owner manages testimonials" on public.testimonials
 for all to authenticated using (true) with check (true);
 
@@ -99,7 +99,7 @@ create table if not exists public.site_settings (
 );
 alter table public.site_settings enable row level security;
 create policy "Public reads profile photo setting" on public.site_settings
-for select to anon, authenticated using (key = 'profile_photo');
+for select to anon using (key = 'profile_photo');
 create policy "Owner manages site settings" on public.site_settings
 for all to authenticated using (true) with check (true);
 
@@ -118,76 +118,76 @@ for delete to authenticated using (bucket_id='portfolio-assets');
 -- Keep public reads limited to published documents and consented approved testimonials.
 create policy "Portfolio owner only inquiries select"
 on public.inquiries as restrictive for select to authenticated
-using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+using (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 create policy "Portfolio owner only inquiries update"
 on public.inquiries as restrictive for update to authenticated
-using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com')
-with check ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+using (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com')
+with check (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 create policy "Portfolio owner only inquiries delete"
 on public.inquiries as restrictive for delete to authenticated
-using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+using (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 create policy "Portfolio owner only documents select"
 on public.public_documents as restrictive for select to authenticated
-using (is_published = true or (select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+using (is_published = true or ((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 create policy "Portfolio owner only documents insert"
 on public.public_documents as restrictive for insert to authenticated
-with check ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+with check (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 create policy "Portfolio owner only documents update"
 on public.public_documents as restrictive for update to authenticated
-using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com')
-with check ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+using (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com')
+with check (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 create policy "Portfolio owner only documents delete"
 on public.public_documents as restrictive for delete to authenticated
-using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+using (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 create policy "Portfolio owner only testimonials select"
 on public.testimonials as restrictive for select to authenticated
-using ((status = 'approved' and publication_consent = true) or (select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+using ((status = 'approved' and publication_consent = true) or ((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 create policy "Portfolio owner only testimonials insert"
 on public.testimonials as restrictive for insert to authenticated
-with check ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+with check (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 create policy "Portfolio owner only testimonials update"
 on public.testimonials as restrictive for update to authenticated
-using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com')
-with check ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+using (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com')
+with check (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 create policy "Portfolio owner only testimonials delete"
 on public.testimonials as restrictive for delete to authenticated
-using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+using (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 create policy "Portfolio owner only site settings select"
 on public.site_settings as restrictive for select to authenticated
-using (key = 'profile_photo' or (select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+using (key = 'profile_photo' or ((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 create policy "Portfolio owner only site settings insert"
 on public.site_settings as restrictive for insert to authenticated
-with check ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+with check (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 create policy "Portfolio owner only site settings update"
 on public.site_settings as restrictive for update to authenticated
-using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com')
-with check ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+using (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com')
+with check (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 create policy "Portfolio owner only site settings delete"
 on public.site_settings as restrictive for delete to authenticated
-using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+using (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 create policy "Portfolio owner only portfolio storage"
 on storage.objects as restrictive for all to authenticated
 using (
   bucket_id not in ('portfolio-documents', 'portfolio-assets')
-  or (select auth.jwt() ->> 'email') = 'edcarsky@gmail.com'
+  or ((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com'
 )
 with check (
   bucket_id not in ('portfolio-documents', 'portfolio-assets')
-  or (select auth.jwt() ->> 'email') = 'edcarsky@gmail.com'
+  or ((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com'
 );
 
