@@ -22,6 +22,36 @@
   const {data:quotes}=await client.from("testimonials").select("display_name,affiliation,company,message").eq("status","approved").order("created_at",{ascending:false}).limit(6);
   if(quotes?.length){$("#testimonials").innerHTML="";quotes.forEach(q=>{const card=document.createElement("article");card.className="testimonial-card";const quote=document.createElement("blockquote");quote.textContent="“"+q.message+"”";const name=document.createElement("b");name.textContent=q.display_name;const meta=document.createElement("small");meta.textContent=[q.affiliation,q.company].filter(Boolean).join(" · ");card.append(quote,name,meta);$("#testimonials").append(card);});}
  }
+ 
+ const inquiryForm=$("#inquiryForm");
+ const socialMessage=$("#socialAuthMessage");
+ const applySocialProfile=async(user)=>{
+  if(!user)return;
+  const meta=user.user_metadata||{};
+  const name=meta.full_name||meta.name||meta.display_name||[meta.first_name,meta.last_name].filter(Boolean).join(" ");
+  if(name&&!inquiryForm.elements.full_name.value)inquiryForm.elements.full_name.value=name;
+  if(user.email&&!inquiryForm.elements.email.value)inquiryForm.elements.email.value=user.email;
+  if(socialMessage)socialMessage.textContent="Account connected. Supported name and email fields have been filled in. Review them before sending your inquiry.";
+ };
+ if(client){
+  client.auth.getUser().then(({data,error})=>{if(!error)applySocialProfile(data.user);});
+  client.auth.onAuthStateChange((event,session)=>{
+   if(event==="SIGNED_IN"&&session?.user)applySocialProfile(session.user);
+  });
+  document.querySelectorAll("[data-oauth-provider]").forEach(button=>{
+   button.addEventListener("click",async()=>{
+    const provider=button.dataset.oauthProvider;
+    if(socialMessage)socialMessage.textContent="Connecting securely to "+(provider==="google"?"Google":"Facebook")+"...";
+    const options={redirectTo:window.location.origin+window.location.pathname+"#contact"};
+    if(provider==="google")options.scopes="email profile";
+    if(provider==="facebook")options.scopes="email public_profile";
+    const {error}=await client.auth.signInWithOAuth({provider,options});
+    if(error&&socialMessage)socialMessage.textContent="Connection failed: "+error.message+". You may complete the form manually.";
+   });
+  });
+ }else if(socialMessage){
+  socialMessage.textContent="Social account connection is not active until Supabase is configured. You may complete the form manually.";
+ }
  $("#inquiryForm").addEventListener("submit",async e=>{e.preventDefault();const form=e.currentTarget,msg=$("#formMessage");if(!client){msg.textContent="This form is not connected yet. Use WhatsApp, Messenger or email until backend setup is complete.";return;}const fd=new FormData(form);const payload={full_name:fd.get("full_name").trim(),company:fd.get("company").trim()||null,affiliation:fd.get("affiliation").trim()||null,email:fd.get("email").trim(),phone:fd.get("phone").trim()||null,inquiry_type:fd.get("inquiry_type"),message:fd.get("message").trim(),consent:fd.get("consent")==="on"};const {error}=await client.from("inquiries").insert(payload);if(error){msg.textContent="Your inquiry was not sent. Please use WhatsApp, Messenger or email.";return;}form.reset();msg.textContent="Thank you. Your inquiry was submitted privately.";});
  loadPublicContent();
 })();
