@@ -17,18 +17,30 @@
  $("#login").addEventListener("click",async()=>{const {error}=await sb.auth.signInWithPassword({email:$("#email").value,password:$("#password").value});$("#loginMessage").textContent=error?error.message:"Signed in.";if(!error)show();});
  async function show(){const {data:{session}}=await sb.auth.getSession();if(session){$("#loginPanel").classList.add("hidden");$("#dashboard").classList.remove("hidden");$("#logout").classList.remove("hidden");$("#setupNotice").classList.add("hidden");refresh();}}
  $("#logout").addEventListener("click",async()=>{await sb.auth.signOut();location.reload();});
+ let previewUrl=null;
+ $("#docFile").addEventListener("change",()=>{
+  const file=$("#docFile").files[0],box=$("#docPreview");
+  if(previewUrl){URL.revokeObjectURL(previewUrl);previewUrl=null;}
+  if(!file){box.textContent="Choose a PDF to preview it here before upload.";return;}
+  if(file.type!=="application/pdf"){box.textContent="This file is not a PDF.";return;}
+  previewUrl=URL.createObjectURL(file);
+  box.innerHTML="<b>"+esc(file.name)+"</b> · "+(file.size/1048576).toFixed(2)+" MB<iframe title=\"Local PDF preview\" src=\""+previewUrl+"\" style=\"width:100%;height:420px;border:1px solid #d7dee8;border-radius:8px;margin-top:8px\"></iframe>";
+ });
  $("#uploadDoc").addEventListener("click",async()=>{
   const file=$("#docFile").files[0],type=$("#docType").value,name=$("#docName").value.trim()||file?.name;
-  if(!file||file.type!=="application/pdf"){ $("#docMessage").textContent="Choose a PDF file.";return;}
-  if(file.size>15*1024*1024){$("#docMessage").textContent="File exceeds 15 MB. Compress it before upload.";return;}
-  $("#docMessage").textContent="Uploading...";
+  if(!file||file.type!=="application/pdf"){$("#docMessage").textContent="Choose a PDF file.";return;}
+  if(file.size>15*1024*1024){$("#docMessage").textContent="File exceeds 15 MB.";return;}
+  $("#docMessage").textContent="Uploading hidden draft...";
   const path=type+"/"+Date.now()+"-"+file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
   const {error:upErr}=await sb.storage.from("portfolio-documents").upload(path,file,{contentType:"application/pdf",upsert:false});
   if(upErr){$("#docMessage").textContent=upErr.message;return;}
   const {data:urlData}=sb.storage.from("portfolio-documents").getPublicUrl(path);
-  const {error}=await sb.from("public_documents").upsert({document_type:type,display_name:name,storage_path:path,public_url:urlData.publicUrl,is_published:true,updated_at:new Date().toISOString()},{onConflict:"document_type"});
-  $("#docMessage").textContent=error?error.message:"Published. The public portfolio now links to this PDF.";
-  if(!error)refresh();
+  const {error}=await sb.from("public_documents").upsert({document_type:type,display_name:name,storage_path:path,public_url:urlData.publicUrl,is_published:false,updated_at:new Date().toISOString()},{onConflict:"document_type"});
+  if(error){await sb.storage.from("portfolio-documents").remove([path]);$("#docMessage").textContent=error.message;return;}
+  $("#docMessage").textContent="Hidden draft uploaded. Publish it from the document list after review.";
+  $("#docFile").value="";$("#docPreview").textContent="Draft uploaded. Use View PDF in the document list to review it.";
+  if(previewUrl){URL.revokeObjectURL(previewUrl);previewUrl=null;}
+  refresh();
  });
  $("#uploadProfile").addEventListener("click",async()=>{
   const file=$("#profileFile").files[0],msg=$("#profileMessage");
