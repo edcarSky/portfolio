@@ -1,0 +1,1 @@
+Add your own profile photo here, e.g. profile.jpg. Then follow README instructions to reference it from index.html.

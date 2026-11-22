@@ -1,0 +1,87 @@
+-- EdcarSky Portfolio v3 Supabase schema
+-- Run in Supabase SQL Editor. Create a Supabase project first.
+-- Never expose the service_role key in frontend code.
+
+create extension if not exists pgcrypto;
+
+create table if not exists public.inquiries (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  full_name text not null check (char_length(full_name) <= 120),
+  company text check (char_length(company) <= 160),
+  affiliation text check (char_length(affiliation) <= 120),
+  email text not null check (char_length(email) <= 254),
+  phone text check (char_length(phone) <= 40),
+  inquiry_type text not null,
+  message text not null check (char_length(message) <= 3000),
+  consent boolean not null default false,
+  status text not null default 'new' check (status in ('new','reviewed','replied','archived'))
+);
+
+create table if not exists public.public_documents (
+  id uuid primary key default gen_random_uuid(),
+  document_type text not null unique check (document_type in ('cv','cover_letter')),
+  display_name text not null,
+  storage_path text not null,
+  public_url text not null,
+  is_published boolean not null default false,
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists public.testimonials (
+  id uuid primary key default gen_random_uuid(),
+  inquiry_id uuid references public.inquiries(id) on delete set null,
+  created_at timestamptz not null default now(),
+  display_name text not null,
+  affiliation text,
+  company text,
+  message text not null check (char_length(message) <= 1500),
+  status text not null default 'pending' check (status in ('pending','approved','hidden')),
+  publication_consent boolean not null default false
+);
+
+alter table public.inquiries enable row level security;
+alter table public.public_documents enable row level security;
+alter table public.testimonials enable row level security;
+
+-- Public visitors can submit inquiries, but cannot read them.
+create policy "Visitors submit inquiries" on public.inquiries
+for insert to anon, authenticated
+with check (consent = true);
+
+-- Only authenticated owner/admin can read and manage inquiry records.
+create policy "Owner reads inquiries" on public.inquiries
+for select to authenticated using (true);
+create policy "Owner updates inquiries" on public.inquiries
+for update to authenticated using (true) with check (true);
+create policy "Owner deletes inquiries" on public.inquiries
+for delete to authenticated using (true);
+
+-- Public can read published document metadata. Only authenticated owner can manage.
+create policy "Public reads published documents" on public.public_documents
+for select to anon, authenticated using (is_published = true);
+create policy "Owner manages documents" on public.public_documents
+for all to authenticated using (true) with check (true);
+
+-- Public can read approved testimonials only. Owner manages all moderation.
+create policy "Public reads approved testimonials" on public.testimonials
+for select to anon, authenticated using (status = 'approved' and publication_consent = true);
+create policy "Owner manages testimonials" on public.testimonials
+for all to authenticated using (true) with check (true);
+
+-- Storage bucket: public portfolio-documents, public read for published CV/cover letter.
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('portfolio-documents','portfolio-documents',true,15728640,array['application/pdf'])
+on conflict (id) do update set public = true, file_size_limit = 15728640, allowed_mime_types = array['application/pdf'];
+
+-- Authenticated admin can upload/update/delete files in this bucket.
+create policy "Admin uploads portfolio PDFs" on storage.objects
+for insert to authenticated with check (bucket_id = 'portfolio-documents');
+create policy "Admin updates portfolio PDFs" on storage.objects
+for update to authenticated using (bucket_id = 'portfolio-documents') with check (bucket_id = 'portfolio-documents');
+create policy "Admin deletes portfolio PDFs" on storage.objects
+for delete to authenticated using (bucket_id = 'portfolio-documents');
+
+-- NOTE: Restrict admin accounts in Supabase Auth. Disable public sign-ups after creating your own user.
+-- IMPORTANT HARDENING: These authenticated policies assume only your own account is allowed to sign in.
+-- For a production multi-user project, add an admin allowlist/role table and verify role in every policy.
