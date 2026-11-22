@@ -85,3 +85,27 @@ for delete to authenticated using (bucket_id = 'portfolio-documents');
 -- NOTE: Restrict admin accounts in Supabase Auth. Disable public sign-ups after creating your own user.
 -- IMPORTANT HARDENING: These authenticated policies assume only your own account is allowed to sign in.
 -- For a production multi-user project, add an admin allowlist/role table and verify role in every policy.
+
+
+-- Public profile photo setting, managed by the authenticated owner.
+create table if not exists public.site_settings (
+  key text primary key,
+  value text not null,
+  updated_at timestamptz not null default now()
+);
+alter table public.site_settings enable row level security;
+create policy "Public reads profile photo setting" on public.site_settings
+for select to anon, authenticated using (key = 'profile_photo');
+create policy "Owner manages site settings" on public.site_settings
+for all to authenticated using (true) with check (true);
+
+-- Public image bucket for the owner-managed profile photo.
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('portfolio-assets','portfolio-assets',true,5242880,array['image/jpeg','image/png','image/webp'])
+on conflict (id) do update set public=true,file_size_limit=5242880,allowed_mime_types=array['image/jpeg','image/png','image/webp'];
+create policy "Admin uploads portfolio images" on storage.objects
+for insert to authenticated with check (bucket_id='portfolio-assets');
+create policy "Admin updates portfolio images" on storage.objects
+for update to authenticated using (bucket_id='portfolio-assets') with check (bucket_id='portfolio-assets');
+create policy "Admin deletes portfolio images" on storage.objects
+for delete to authenticated using (bucket_id='portfolio-assets');
