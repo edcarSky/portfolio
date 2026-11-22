@@ -20,13 +20,15 @@ create table if not exists public.inquiries (
 
 create table if not exists public.public_documents (
   id uuid primary key default gen_random_uuid(),
-  document_type text not null unique check (document_type in ('cv','cover_letter')),
+  document_type text not null check (document_type in ('cv','cover_letter')),
   display_name text not null,
   storage_path text not null,
   public_url text not null,
   is_published boolean not null default false,
   updated_at timestamptz not null default now()
 );
+
+create unique index if not exists public_documents_one_published_per_type on public.public_documents(document_type) where is_published = true;
 
 create table if not exists public.testimonials (
   id uuid primary key default gen_random_uuid(),
@@ -42,6 +44,8 @@ create table if not exists public.testimonials (
 
 alter table public.inquiries enable row level security;
 alter table public.public_documents enable row level security;
+create index if not exists testimonials_inquiry_id_idx on public.testimonials(inquiry_id);
+
 alter table public.testimonials enable row level security;
 
 -- Public visitors can submit inquiries, but cannot read them.
