@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Portfolio Admin | Edcar Tenedero</title><link rel="stylesheet" href="styles.css"><style>
+body{background:#eef2f7}.admin-shell{max-width:1000px;margin:45px auto;padding:0 20px}.admin-head{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}.admin-card{background:#fff;border:1px solid #dfe5ed;border-radius:10px;padding:24px;margin:16px 0}.admin-card h2{font:700 20px Manrope;letter-spacing:-.5px}.admin-card p,.hint{font-size:12px;color:#718096}.admin-card label{display:block;font-size:12px;font-weight:700;margin:12px 0}.admin-card input,.admin-card textarea,.admin-card select{display:block;width:100%;padding:10px;border:1px solid #d7dee8;border-radius:5px;margin-top:5px}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.hidden{display:none!important}.row-actions{display:flex;gap:8px;flex-wrap:wrap}.admin-table{width:100%;border-collapse:collapse;font-size:12px}.admin-table th,.admin-table td{padding:10px;border-bottom:1px solid #e6ebf1;text-align:left;vertical-align:top}.status{font-size:10px;padding:4px 7px;border-radius:20px;background:#edf2f8}.danger{background:#9b2c2c}.admin-note{background:#fff7e6;padding:12px;border-radius:6px;font-size:12px;color:#76551a}@media(max-width:650px){.admin-grid{grid-template-columns:1fr}.admin-head{align-items:flex-start;flex-direction:column}.admin-table{display:block;overflow:auto}}
+
+/* Compact owner dashboard on phones */
+@media(max-width:650px){
+ .admin-shell{margin:22px auto;padding:0 13px}
+ .admin-card{padding:15px;margin:12px 0;border-radius:9px}
+ .admin-card h2{font-size:18px}
+ .admin-head h1{font-size:32px!important}
+ .admin-table,.admin-table tbody{display:block;width:100%}
+ .admin-table thead{display:none}
+ .admin-table tr{display:block;background:#fff;border:1px solid #e1e7ef;border-radius:8px;margin:0 0 12px;padding:7px}
+ .admin-table td{display:block;width:100%;padding:8px 7px;border-bottom:1px solid #edf0f4;overflow-wrap:anywhere}
+ .admin-table td:last-child{border-bottom:0}
+ .admin-table td select{max-width:100%;margin:4px 5px 4px 0}
+ .admin-table td .button{padding:8px 9px;font-size:10px;margin:3px 4px 3px 0}
+ .admin-card input,.admin-card textarea,.admin-card select{font-size:16px}
+}
+</style></head><body><header class="site-header"><a class="wordmark" href="index.html"><span class="mark">ET</span><span>edcar<span class="muted-brand">Sky™</span></span></a><a href="index.html" class="nav-cta">View public site ↗</a></header>
+<div class="admin-shell"><div class="admin-head"><div><div class="section-kicker">PRIVATE OWNER AREA</div><h1 style="font-size:38px;color:#172033;margin:8px 0">Portfolio Admin</h1><p class="hint">Manage published documents, private inquiries and approved testimonials.</p></div><button id="logout" class="button button-outline-dark hidden">Sign out</button></div>
+<div id="setupNotice" class="admin-note">Supabase project configuration and database security are connected. The owner sign-in account still needs to be created in Supabase Authentication. This dashboard accepts the authorized owner account only. Never place a service_role or secret key in this website.</div>
+<section id="loginPanel" class="admin-card"><h2>Owner sign in</h2><p>Only the account you authorize in Supabase should access this dashboard.</p><label>Email<input id="email" type="email" autocomplete="username"></label><label>Password<input id="password" type="password" autocomplete="current-password"></label><button id="login" class="button button-dark">Sign in</button><p id="loginMessage" class="hint"></p></section>
+<div id="dashboard" class="hidden">
+<section class="admin-card"><h2>Profile photo</h2><p>Upload a square JPG, PNG or WebP image. This photo appears in the public profile panel.</p><label>Profile image<input id="profileFile" type="file" accept="image/jpeg,image/png,image/webp"></label><button id="uploadProfile" class="button button-dark">Upload profile photo</button><p id="profileMessage" class="hint"></p><div id="profilePreview"></div></section>
+<section class="admin-card"><h2>CV and document manager</h2><p>Select a PDF to preview it locally before uploading. Upload creates a hidden draft. Publish it only after checking the preview. Replacing a document keeps the current public version active until the replacement is published.</p><div class="admin-grid">
+<div><label>Document type<select id="docType"><option value="cv">Curriculum Vitae</option><option value="cover_letter">General Cover Letter</option></select></label><label>Display name<input id="docName" placeholder="Edcar Tenedero CV"></label><label>PDF file<input id="docFile" type="file" accept="application/pdf"></label><button id="uploadDoc" class="button button-dark">Upload as hidden draft</button><p id="docMessage" class="hint"></p><div id="docPreview" class="doc-preview hint">Choose a PDF to preview it here before upload.</div></div>
+<div><h3>Uploaded documents</h3><div id="docList" class="hint">Loading...</div></div></div></section>
+<section class="admin-card"><h2>Private employer / client inbox</h2><p>Submissions are private. Update their status as you process them. Do not copy personal contact information into public testimonials without permission.</p><div id="inbox" class="hint">Loading...</div></section>
+<section class="admin-card"><h2>Testimonial moderation</h2><p>Only approved testimonials with verified publication permission appear publicly. Use Approve & publish only after the person has agreed to public display of their name, affiliation/company and comment.</p><div id="moderation" class="hint">Loading...</div></section>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script src="admin.js"></script></body></html>
