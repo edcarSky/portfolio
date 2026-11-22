@@ -125,3 +125,8 @@ body[data-theme="slate"] .section-kicker{color:#647f9b}
  html{scroll-behavior:auto}
  *,*:before,*:after{transition:none!important;animation:none!important}
 }
+
+/* Header brand descriptor */
+.brand-lockup{display:flex;flex-direction:column;gap:3px;line-height:1.05}
+.brand-descriptor{font:700 8px "DM Sans",sans-serif;letter-spacing:1.35px;text-transform:uppercase;color:#778398}
+@media(max-width:620px){.brand-descriptor{font-size:7px;letter-spacing:1.15px}}
