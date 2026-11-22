@@ -109,3 +109,81 @@ create policy "Admin updates portfolio images" on storage.objects
 for update to authenticated using (bucket_id='portfolio-assets') with check (bucket_id='portfolio-assets');
 create policy "Admin deletes portfolio images" on storage.objects
 for delete to authenticated using (bucket_id='portfolio-assets');
+
+-- Restrict owner-only records and storage to the portfolio owner.
+-- Keep public reads limited to published documents and consented approved testimonials.
+create policy "Portfolio owner only inquiries select"
+on public.inquiries as restrictive for select to authenticated
+using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+
+create policy "Portfolio owner only inquiries update"
+on public.inquiries as restrictive for update to authenticated
+using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com')
+with check ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+
+create policy "Portfolio owner only inquiries delete"
+on public.inquiries as restrictive for delete to authenticated
+using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+
+create policy "Portfolio owner only documents select"
+on public.public_documents as restrictive for select to authenticated
+using (is_published = true or (select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+
+create policy "Portfolio owner only documents insert"
+on public.public_documents as restrictive for insert to authenticated
+with check ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+
+create policy "Portfolio owner only documents update"
+on public.public_documents as restrictive for update to authenticated
+using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com')
+with check ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+
+create policy "Portfolio owner only documents delete"
+on public.public_documents as restrictive for delete to authenticated
+using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+
+create policy "Portfolio owner only testimonials select"
+on public.testimonials as restrictive for select to authenticated
+using ((status = 'approved' and publication_consent = true) or (select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+
+create policy "Portfolio owner only testimonials insert"
+on public.testimonials as restrictive for insert to authenticated
+with check ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+
+create policy "Portfolio owner only testimonials update"
+on public.testimonials as restrictive for update to authenticated
+using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com')
+with check ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+
+create policy "Portfolio owner only testimonials delete"
+on public.testimonials as restrictive for delete to authenticated
+using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+
+create policy "Portfolio owner only site settings select"
+on public.site_settings as restrictive for select to authenticated
+using (key = 'profile_photo' or (select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+
+create policy "Portfolio owner only site settings insert"
+on public.site_settings as restrictive for insert to authenticated
+with check ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+
+create policy "Portfolio owner only site settings update"
+on public.site_settings as restrictive for update to authenticated
+using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com')
+with check ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+
+create policy "Portfolio owner only site settings delete"
+on public.site_settings as restrictive for delete to authenticated
+using ((select auth.jwt() ->> 'email') = 'edcarsky@gmail.com');
+
+create policy "Portfolio owner only portfolio storage"
+on storage.objects as restrictive for all to authenticated
+using (
+  bucket_id not in ('portfolio-documents', 'portfolio-assets')
+  or (select auth.jwt() ->> 'email') = 'edcarsky@gmail.com'
+)
+with check (
+  bucket_id not in ('portfolio-documents', 'portfolio-assets')
+  or (select auth.jwt() ->> 'email') = 'edcarsky@gmail.com'
+);
+
