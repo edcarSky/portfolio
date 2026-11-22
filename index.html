@@ -137,6 +137,18 @@
     </div>
     <form id="inquiryForm" class="inquiry-form">
       <div class="form-heading"><span>EMPLOYER & CLIENT INQUIRY</span><small>Private submission</small></div>
+      <div class="social-connect">
+        <p class="social-connect-title">CONNECT WITH AN ACCOUNT</p>
+        <p class="social-connect-copy">Use a social account to prefill supported profile details, then send your inquiry.</p>
+        <div class="social-connect-buttons">
+          <button type="button" class="social-auth-button google-auth" data-oauth-provider="google"><span class="auth-mark">G</span> Continue with Google</button>
+          <button type="button" class="social-auth-button facebook-auth" data-oauth-provider="facebook"><span class="auth-mark">f</span> Continue with Facebook</button>
+          <button type="button" class="social-auth-button tiktok-auth" disabled aria-describedby="tiktokAuthNote"><span class="auth-mark">♪</span> TikTok connection</button>
+        </div>
+        <small id="tiktokAuthNote" class="social-auth-note">TikTok sign-in is being prepared and will appear here after its developer app and secure OAuth callback are configured.</small>
+        <p id="socialAuthMessage" class="social-auth-message" aria-live="polite">You may also complete the form manually below.</p>
+      </div>
+      <div class="manual-entry-label">OR ENTER YOUR DETAILS MANUALLY</div>
       <label>Full name<input name="full_name" required maxlength="120" autocomplete="name" placeholder="Your full name"></label>
       <label>Company / organization<input name="company" maxlength="160" autocomplete="organization" placeholder="Company or organization"></label>
       <label>Professional affiliation / position<input name="affiliation" maxlength="120" placeholder="HR Manager, Recruiter, Client, etc."></label>
