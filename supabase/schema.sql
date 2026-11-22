@@ -71,7 +71,7 @@ for all to authenticated using (((select auth.jwt()) ->> 'email') = 'edcarsky@gm
 create policy "Public reads approved testimonials" on public.testimonials
 for select to anon using (status = 'approved' and publication_consent = true);
 create policy "Owner manages testimonials" on public.testimonials
-for all to authenticated using (true) with check (true);
+for all to authenticated using (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com') with check (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 -- Storage bucket: public portfolio-documents, public read for published CV/cover letter.
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
@@ -101,7 +101,7 @@ alter table public.site_settings enable row level security;
 create policy "Public reads profile photo setting" on public.site_settings
 for select to anon using (key = 'profile_photo');
 create policy "Owner manages site settings" on public.site_settings
-for all to authenticated using (true) with check (true);
+for all to authenticated using (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com') with check (((select auth.jwt()) ->> 'email') = 'edcarsky@gmail.com');
 
 -- Public image bucket for the owner-managed profile photo.
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
