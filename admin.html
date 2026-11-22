@@ -1,5 +1,21 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Portfolio Admin | Edcar Tenedero</title><link rel="stylesheet" href="styles.css"><style>
 body{background:#eef2f7}.admin-shell{max-width:1000px;margin:45px auto;padding:0 20px}.admin-head{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}.admin-card{background:#fff;border:1px solid #dfe5ed;border-radius:10px;padding:24px;margin:16px 0}.admin-card h2{font:700 20px Manrope;letter-spacing:-.5px}.admin-card p,.hint{font-size:12px;color:#718096}.admin-card label{display:block;font-size:12px;font-weight:700;margin:12px 0}.admin-card input,.admin-card textarea,.admin-card select{display:block;width:100%;padding:10px;border:1px solid #d7dee8;border-radius:5px;margin-top:5px}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.hidden{display:none!important}.row-actions{display:flex;gap:8px;flex-wrap:wrap}.admin-table{width:100%;border-collapse:collapse;font-size:12px}.admin-table th,.admin-table td{padding:10px;border-bottom:1px solid #e6ebf1;text-align:left;vertical-align:top}.status{font-size:10px;padding:4px 7px;border-radius:20px;background:#edf2f8}.danger{background:#9b2c2c}.admin-note{background:#fff7e6;padding:12px;border-radius:6px;font-size:12px;color:#76551a}@media(max-width:650px){.admin-grid{grid-template-columns:1fr}.admin-head{align-items:flex-start;flex-direction:column}.admin-table{display:block;overflow:auto}}
+
+/* Compact owner dashboard on phones */
+@media(max-width:650px){
+ .admin-shell{margin:22px auto;padding:0 13px}
+ .admin-card{padding:15px;margin:12px 0;border-radius:9px}
+ .admin-card h2{font-size:18px}
+ .admin-head h1{font-size:32px!important}
+ .admin-table,.admin-table tbody{display:block;width:100%}
+ .admin-table thead{display:none}
+ .admin-table tr{display:block;background:#fff;border:1px solid #e1e7ef;border-radius:8px;margin:0 0 12px;padding:7px}
+ .admin-table td{display:block;width:100%;padding:8px 7px;border-bottom:1px solid #edf0f4;overflow-wrap:anywhere}
+ .admin-table td:last-child{border-bottom:0}
+ .admin-table td select{max-width:100%;margin:4px 5px 4px 0}
+ .admin-table td .button{padding:8px 9px;font-size:10px;margin:3px 4px 3px 0}
+ .admin-card input,.admin-card textarea,.admin-card select{font-size:16px}
+}
 </style></head><body><header class="site-header"><a class="wordmark" href="index.html"><span class="mark">E</span><span>edcar<span class="muted-brand">Sky™</span></span></a><a href="index.html" class="nav-cta">View public site ↗</a></header>
 <div class="admin-shell"><div class="admin-head"><div><div class="section-kicker">PRIVATE OWNER AREA</div><h1 style="font-size:38px;color:#172033;margin:8px 0">Portfolio Admin</h1><p class="hint">Manage published documents, private inquiries and approved testimonials.</p></div><button id="logout" class="button button-outline-dark hidden">Sign out</button></div>
 <div id="setupNotice" class="admin-note">Setup required: configure Supabase in config.js, run supabase/schema.sql, create your admin account in Supabase Authentication, and configure Storage buckets and access policies. Do not publish a service_role key.</div>
