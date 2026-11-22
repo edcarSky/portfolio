@@ -1,4 +1,4 @@
-EDCARSKY™ PERSONAL & PROFESSIONAL PORTFOLIO — VERSION 3
+EDCARSKY™ PERSONAL & PROFESSIONAL PORTFOLIO — VERSION 3.1
 
 WHAT'S INCLUDED
 - Responsive hybrid creator + corporate portfolio.
@@ -7,11 +7,16 @@ WHAT'S INCLUDED
 - WhatsApp click-to-chat and Facebook Messenger links.
 - Professional profile, journey and skill sections.
 - CV and general cover letter public viewer/download links.
-- Owner dashboard at /admin.html for PDF publishing.
+- Owner dashboard at /admin.html for PDF publishing and profile photo upload.
 - Private employer/client inquiry form and owner inbox.
 - Testimonial moderation. Public testimonials require approval and publication consent.
 - Privacy notice template.
 - Supabase SQL schema and frontend configuration template.
+- GoatCounter visitor tracking and visitor-count display integration.
+- Five formal color themes with a footer refresh control.
+
+VERSION 3.1 UPDATE STATUS
+The source files include the requested frontend changes. Supabase-backed uploads and sign-in still require the owner's own Supabase project URL, anon key, SQL setup, and owner account. GoatCounter's visible visitor count also requires the site's GoatCounter setting "Allow adding visitor counts on your website" to be enabled. The visitor counter uses GoatCounter's visit_count integration. The theme selector works locally in the visitor's browser and stores the selected theme there.
 
 IMPORTANT STATUS
 The static website is built. The private dashboard and inquiry inbox become operational only after you create and configure a Supabase project, run the SQL, create your owner login, and add the project URL and anon key to config.js. No account credentials are included. Do not put a Supabase service_role key in the website.
