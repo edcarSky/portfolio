@@ -40,6 +40,7 @@ create index if not exists visitor_events_visitor_id_idx on public.visitor_event
 
 drop policy if exists "Public reads profile photo setting" on public.site_settings;
 drop policy if exists "Portfolio owner only site settings select" on public.site_settings;
+drop policy if exists "Public reads published portfolio asset settings" on public.site_settings;
 create policy "Public reads published portfolio asset settings" on public.site_settings
 for select to anon using (key in ('profile_photo','asset_team_logo','asset_hero_background','asset_watermark','asset_video_thumbnail'));
 create policy "Portfolio owner only site settings select" on public.site_settings as restrictive
