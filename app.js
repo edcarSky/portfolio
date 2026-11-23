@@ -14,11 +14,6 @@
  $("#themeRefresh").addEventListener("click",()=>{const choices=themes.filter(x=>x!==document.body.dataset.theme);applyTheme(choices[Math.floor(Math.random()*choices.length)]);});
  function setDoc(prefix,url,name){if(!url)return;const v=$("#"+prefix+"View"),d=$("#"+prefix+"Download");v.href=url;d.href=url;d.setAttribute("download",name||"");v.classList.remove("disabled");d.classList.remove("disabled");$("#"+prefix+"Status").textContent="Latest published version";}
  async function loadPublicContent(){
-  if(!client){$("#formMessage").textContent="Inquiry form setup is pending. Please contact me through WhatsApp, Messenger or email for now.";return;}
-  const {data:docs}=await client.from("public_documents").select("document_type,public_url,display_name").eq("is_published",true);
-  (docs||[]).forEach(doc=>{if(doc.document_type==="cv")setDoc("cv",doc.public_url,doc.display_name);if(doc.document_type==="cover_letter")setDoc("letter",doc.public_url,doc.display_name);});
-  const {data:settings}=await client.from("site_settings").select("value").eq("key","profile_photo").maybeSingle();
-  if(settings?.value){const hero=$("#heroPhoto");hero.innerHTML="";const img=document.createElement("img");img.src=settings.value;img.alt="Edcar Aguirre Tenedero";img.style.cssText="width:100%;height:100%;object-fit:cover;border-radius:inherit";hero.append(img);}
   try {
    const response=await fetch("testimonials.json",{cache:"no-store"});
    if(!response.ok)throw new Error("Testimonials archive unavailable");
@@ -38,6 +33,12 @@
   } catch(error) {
    const host=$("#testimonials");host.textContent="Recommendations archive is temporarily unavailable. View the original LinkedIn recommendations.";
   }
+  if(!client){$("#formMessage").textContent="Inquiry form setup is pending. Please contact me through WhatsApp, Messenger or email for now.";return;}
+  const {data:docs}=await client.from("public_documents").select("document_type,public_url,display_name").eq("is_published",true);
+  (docs||[]).forEach(doc=>{if(doc.document_type==="cv")setDoc("cv",doc.public_url,doc.display_name);if(doc.document_type==="cover_letter")setDoc("letter",doc.public_url,doc.display_name);});
+  const {data:settings}=await client.from("site_settings").select("value").eq("key","profile_photo").maybeSingle();
+  if(settings?.value){const hero=$("#heroPhoto");hero.innerHTML="";const img=document.createElement("img");img.src=settings.value;img.alt="Edcar Aguirre Tenedero";img.style.cssText="width:100%;height:100%;object-fit:cover;border-radius:inherit";hero.append(img);}
+
  }
  
  const inquiryForm=$("#inquiryForm");
