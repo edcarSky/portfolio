@@ -85,3 +85,28 @@ Latest Community commits:
 - 22e0c6dac59bfbfa44db514a66de5ba7e4cd4bb3 — compact card and responsive disclosure styling.
 
 Verification: source fetched after update; confirmed three teaser cards, three native details/summary controls, Messenger CTA and social links. Browser interaction and mobile rendering remain NOT TESTED. Existing platform policy and no-guarantee qualifications remain inside expandable details and compact commitment note.
+
+## Verification audit and visual sequence correction — 23 November 2026
+
+### Section background sequence
+- Corrected the Community outer section from dark to light so the page alternates consistently after the dark Documents section.
+- Kept the Community brand panel dark as an intentional internal contrast.
+- Updated the stylesheet cache token in index.html to styles.css?v=20261123-3.
+- Source commits: 5352c2b8a70f4366dc5d74353e1769dfcb588aa4 (CSS), e29e202d2299ef0c382bfc1e3d9b4552876a0ed4 (HTML cache token).
+- Latest Pages deployment run at audit time: 45122908731, in progress. Do not mark this visual correction live until the run completes successfully.
+
+### Supabase verification
+- Project cslsyziwxpnmgbatebda is ACTIVE_HEALTHY, PostgreSQL 17.
+- Public tables present: inquiries, public_documents, testimonials, site_settings. RLS is enabled on all four.
+- Storage buckets present: portfolio-documents (PDF, 15 MB limit) and portfolio-assets (JPG/PNG/WebP, 5 MB limit).
+- Security advisor: no findings.
+- Performance advisor: one INFO unused index on testimonials.inquiry_id_idx; one WARN multiple permissive INSERT policies on inquiries (visitor insert plus owner-management policy). This is a performance advisory, not a confirmed security exposure. Review policy consolidation separately.
+- Database currently has zero inquiry, public_documents and testimonial rows. site_settings contains profile_photo but its value is empty.
+- Auth query returned no owner user for edcarsky@gmail.com. Admin login is therefore not ready for owner use until the account is created/invited and sign-in is verified.
+
+### Feature audit status
+- Source present: hero, creator videos, professional profile, journey, social links, CV/cover-letter HTML pages, Community teaser cards with expandable details, Messenger AI CTA, inquiry form markup, testimonials host, GoatCounter counter hook, theme selector, admin dashboard UI, PDF upload code and profile-image upload code.
+- Not end-to-end verified: GoatCounter counter display, external video thumbnails, contact form submission, Google/Facebook OAuth, testimonials carousel, admin login, document upload/publish, profile image upload, and responsive browser QA.
+- CV and cover-letter fallback pages exist in repository. Supabase PDF records do not exist yet.
+- Only placeholder asset currently exists under assets/: PUT_PROFILE_PHOTO_HERE.txt. No supplied profile photo, watermark, logo artwork or custom icon artwork has been added.
+- The favicon is still the generic ET SVG; official profile/icon/logo artwork remains pending user upload.
