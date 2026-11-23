@@ -18,7 +18,7 @@
   if(client){
    const {data:quotes,error}=await client.from("testimonials").select("display_name,affiliation,company,message").eq("status","approved").eq("publication_consent",true);
    if(error){host.textContent="Testimonials are temporarily unavailable. Read the original LinkedIn recommendations."; }
-   else if(!quotes?.length){host.innerHTML='<div class="testimonial-empty">Recommendations are being prepared for publication. You may read the original LinkedIn recommendations using the link beside this section.</div>';}
+   else if(!quotes?.length){host.innerHTML='<div class="testimonial-empty"><strong>LinkedIn recommendations</strong><span>Read the original recommendations using the LinkedIn button beside this panel. Additional recommendations will appear here after publication approval.</span></div>';}
    else{
     let current=-1;
     const render=(index)=>{
@@ -57,6 +57,22 @@
  
  const inquiryForm=$("#inquiryForm");
  const socialMessage=$("#socialAuthMessage");
+ const inquiryExpand=$("#inquiryExpand");
+ const inquiryExtra=$("#inquiryExtra");
+ const revealInquiryDetails=()=>{
+  if(!inquiryExtra||!inquiryExpand||!inquiryExtra.hidden)return;
+  inquiryExtra.hidden=false;
+  inquiryExpand.setAttribute("aria-expanded","true");
+  inquiryExpand.innerHTML='Hide optional details <span aria-hidden="true">−</span>';
+ };
+ const hideInquiryDetails=()=>{
+  if(!inquiryExtra||!inquiryExpand||inquiryExtra.hidden)return;
+  inquiryExtra.hidden=true;
+  inquiryExpand.setAttribute("aria-expanded","false");
+  inquiryExpand.innerHTML='Add details or connect an account <span aria-hidden="true">＋</span>';
+ };
+ inquiryExpand?.addEventListener("click",()=>inquiryExtra?.hidden?revealInquiryDetails():hideInquiryDetails());
+ inquiryForm?.querySelector(".inquiry-primary")?.addEventListener("focusin",revealInquiryDetails);
  const applySocialProfile=async(user)=>{
   if(!user)return;
   const meta=user.user_metadata||{};
