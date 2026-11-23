@@ -140,3 +140,27 @@ body[data-theme="slate"] .section-kicker{color:#647f9b}
 .testimonial-card small{line-height:1.55;margin-top:5px}
 .testimonial-card .testimonial-note{color:#9a6b24;font-style:italic}
 @media(max-width:620px){.testimonial-list{max-height:none;overflow:visible;padding:0}.testimonial-card{padding:16px}.testimonial-card blockquote{font-size:12px;line-height:1.7}}
+
+/* November 2026 repair: testimonial carousel and compact provider icon row */
+.testimonial-list{display:flex;align-items:center;min-height:245px;max-height:none;overflow:visible;padding:0}
+.testimonial-card{width:100%;max-width:620px;min-height:220px;padding:28px;background:#fff;border:1px solid #e3e8ef;border-radius:14px;box-shadow:0 12px 35px #1720330d}
+.testimonial-card blockquote{margin:18px 0 16px;font-size:clamp(16px,2vw,20px);line-height:1.7;color:#27364d;white-space:pre-line}
+.testimonial-card>b{display:block;color:#172b4d}
+.testimonial-card>small{display:block;margin-top:5px;color:#78859a}
+.testimonial-controls{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
+.testimonial-controls button{border:1px solid #d9e0e9;background:#f7f9fc;color:#26364d;border-radius:7px;padding:7px 12px;font-size:11px;font-weight:700;cursor:pointer}
+.testimonial-empty{width:100%;padding:24px;border:1px dashed #cbd4e0;border-radius:12px;color:#68768b;font-size:13px}
+.social-auth-buttons{display:flex;flex-direction:row;align-items:center;gap:9px;flex-wrap:wrap}
+.social-auth-button{width:42px;height:42px;min-width:42px;display:grid;place-items:center;border:1px solid #dce2eb;border-radius:10px;background:#fff;cursor:pointer}
+.social-auth-button:disabled{opacity:.45;cursor:not-allowed}
+.instagram-auth .auth-mark{font-size:21px;color:#b43f86}
+.x-auth .auth-mark{font-size:17px;color:#111}
+@media(max-width:620px){
+ .testimonial-list{min-height:0}
+ .testimonial-card{padding:18px;min-height:0}
+ .testimonial-card blockquote{font-size:15px;line-height:1.65}
+ .social-auth-buttons{display:flex;flex-direction:row;gap:8px}
+ .social-auth-button{width:40px;height:40px;min-width:40px}
+ .social-connect-copy{margin-bottom:8px}
+ .social-auth-note{font-size:10px;line-height:1.45}
+}
