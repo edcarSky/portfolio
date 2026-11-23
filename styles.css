@@ -403,3 +403,43 @@ body[data-theme="slate"] .section-kicker{color:#647f9b}
 @media(max-width:620px){
  .contact-copy .contact-description{font-size:13px;line-height:1.75;margin:12px 0 8px}
 }
+
+
+/* Restore Community's theme-aware alternate background and reduce excess height. */
+.community-section{
+ padding:0!important;
+ background:#f1f4f8;
+}
+.community-section>.section-wrap{
+ padding:48px 28px 44px;
+}
+.community-hero-compact{
+ margin:14px 0 22px;
+ gap:24px;
+}
+.community-hero-compact .community-brand-panel{
+ min-height:220px;
+ padding:22px;
+}
+.community-brand-caption{margin-top:18px}
+.community-brand-note{margin-top:12px}
+.community-integrity-compact{
+ margin:12px 0 20px;
+ padding:14px 18px;
+}
+.community-follow-compact{padding-top:17px}
+body[data-theme="navy"] .community-section{background:#f1f4f8}
+body[data-theme="forest"] .community-section{background:#eaf2ee}
+body[data-theme="charcoal"] .community-section{background:#edf0f2}
+body[data-theme="burgundy"] .community-section{background:#f5edef}
+body[data-theme="slate"] .community-section{background:#eaf0f5}
+@media(max-width:620px){
+ .community-section{padding:0!important}
+ .community-section>.section-wrap{padding:34px 18px 32px}
+ .community-hero-compact{margin:10px 0 16px;gap:16px}
+ .community-hero-compact .community-brand-panel{min-height:170px;padding:16px}
+ .community-brand-caption{margin-top:12px}
+ .community-brand-note{margin-top:8px}
+ .community-integrity-compact{margin:10px 0 16px;padding:12px 14px}
+ .community-follow-compact{padding-top:14px}
+}
