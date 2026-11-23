@@ -10,7 +10,9 @@ create table if not exists public.site_content (
 alter table public.site_content enable row level security;
 grant select on public.site_content to anon, authenticated;
 grant insert, update, delete on public.site_content to authenticated;
-create policy "Public reads site content" on public.site_content for select to anon, authenticated using (true);
+drop policy if exists "Public reads site content" on public.site_content;
+create policy "Public reads site content" on public.site_content for select to anon using (true);
+drop policy if exists "Owner manages site content" on public.site_content;
 create policy "Owner manages site content" on public.site_content for all to authenticated
 using (((select auth.jwt())->>'email')='edcarsky@gmail.com')
 with check (((select auth.jwt())->>'email')='edcarsky@gmail.com');
@@ -27,8 +29,10 @@ create table if not exists public.visitor_events (
 alter table public.visitor_events enable row level security;
 grant insert on public.visitor_events to anon, authenticated;
 grant select on public.visitor_events to authenticated;
+drop policy if exists "Visitors log page views" on public.visitor_events;
 create policy "Visitors log page views" on public.visitor_events for insert to anon, authenticated
 with check (event_type in ('page_view','account_connected','consent_updated'));
+drop policy if exists "Owner reads visitor events" on public.visitor_events;
 create policy "Owner reads visitor events" on public.visitor_events for select to authenticated
 using (((select auth.jwt())->>'email')='edcarsky@gmail.com');
 create index if not exists visitor_events_created_at_idx on public.visitor_events(created_at desc);
@@ -37,7 +41,7 @@ create index if not exists visitor_events_visitor_id_idx on public.visitor_event
 drop policy if exists "Public reads profile photo setting" on public.site_settings;
 drop policy if exists "Portfolio owner only site settings select" on public.site_settings;
 create policy "Public reads published portfolio asset settings" on public.site_settings
-for select to anon, authenticated using (key in ('profile_photo','asset_team_logo','asset_hero_background','asset_watermark','asset_video_thumbnail'));
+for select to anon using (key in ('profile_photo','asset_team_logo','asset_hero_background','asset_watermark','asset_video_thumbnail'));
 create policy "Portfolio owner only site settings select" on public.site_settings as restrictive
 for select to anon, authenticated using (
  (key in ('profile_photo','asset_team_logo','asset_hero_background','asset_watermark','asset_video_thumbnail'))
