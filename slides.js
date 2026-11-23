@@ -31,7 +31,7 @@
  controls.setAttribute("aria-label","Introduction slide controls");
  controls.innerHTML='<button type="button" class="deck-arrow" data-direction="-1" aria-label="Previous slide">‹</button>'+[1,2,3,4,5].map(n=>'<button type="button" class="deck-dot" data-index="'+(n-1)+'" aria-label="Go to slide '+n+'">'+String(n).padStart(2,"0")+'</button>').join("")+'<span class="deck-status" aria-live="polite">01 / 05</span><button type="button" class="deck-arrow" data-direction="1" aria-label="Next slide">›</button>';
  deck.append(controls);
- main.insertBefore(deck,hero.nextSibling);
+ main.insertBefore(deck,main.firstElementChild);
  let active=0;
  const all=[...deck.querySelectorAll(".deck-slide")];
  const dots=[...controls.querySelectorAll(".deck-dot")];
