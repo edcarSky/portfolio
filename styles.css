@@ -474,3 +474,5 @@ body[data-theme="slate"] .community-section{background:#eaf0f5}
 .analytics-consent button+button{background:#fff;color:#172b4d}
 body.modal-open{overflow:hidden}
 @media(max-width:620px){.testimonial-list{grid-template-columns:1fr}.testimonial-modal-panel{padding:23px 18px}.analytics-consent{left:8px;right:8px;bottom:8px;display:block}.analytics-consent div{margin-top:10px}.team-watermark-logo{width:42vw;right:2%;top:5%}.community-logo-image{width:86px;height:86px}}
+
+.team-section:after{content:"";position:absolute;right:3%;bottom:5%;width:min(34vw,360px);aspect-ratio:1;background-image:var(--team-watermark-image);background-size:contain;background-repeat:no-repeat;background-position:center;opacity:.12;pointer-events:none;z-index:-1}
