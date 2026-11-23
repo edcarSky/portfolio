@@ -443,3 +443,34 @@ body[data-theme="slate"] .community-section{background:#eaf0f5}
  .community-integrity-compact{margin:10px 0 16px;padding:12px 14px}
  .community-follow-compact{padding-top:14px}
 }
+
+/* Brand identity and responsive testimonial popup */
+.profile-placeholder{overflow:hidden}
+.profile-placeholder img{width:100%;height:100%;object-fit:cover;object-position:center 38%;border-radius:inherit}
+.community-brand-panel{position:relative;overflow:hidden}
+.community-logo-image{display:block;width:112px;height:112px;object-fit:contain;margin:0 auto 8px;position:relative;z-index:1}
+.team-section{position:relative;isolation:isolate;overflow:hidden}
+.team-section:before{content:"";position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(13,24,42,.94),rgba(13,24,42,.84)),url("assets/edcar-profile.webp");background-size:cover;background-position:center 35%;z-index:-2}
+.team-watermark-logo{position:absolute;right:4%;top:10%;width:min(25vw,260px);height:auto;opacity:.10;pointer-events:none}
+.intro-deck .hero:first-child .hero-panel{background-image:linear-gradient(rgba(12,24,42,.72),rgba(12,24,42,.94)),url("assets/edcar-profile.webp");background-size:cover;background-position:center 34%}
+.testimonial-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.testimonial-card{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:20px;border:1px solid #dce3ec;border-radius:12px;background:#fff;color:#34445b;min-width:0}
+.testimonial-card blockquote{margin:0;font-size:13px;line-height:1.75}
+.testimonial-card b{font-size:12px}
+.testimonial-card small{font-size:11px;color:#718096}
+.testimonial-read{margin-top:auto;border:0;border-radius:20px;background:#172b4d;color:#fff;padding:9px 14px;font-size:11px;cursor:pointer}
+.testimonial-modal[hidden],.analytics-consent[hidden]{display:none}
+.testimonial-modal{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:20px}
+.testimonial-modal-backdrop{position:absolute;inset:0;background:rgba(8,15,28,.72)}
+.testimonial-modal-panel{position:relative;z-index:1;width:min(680px,100%);max-height:85vh;overflow:auto;padding:30px;background:#fff;border-radius:16px;box-shadow:0 25px 80px rgba(0,0,0,.28)}
+.testimonial-modal-panel h2{margin:10px 0 18px}
+.testimonial-modal-panel blockquote{margin:0;font-size:16px;line-height:1.85;color:#26364b;white-space:pre-wrap}
+.testimonial-modal-panel p{margin-top:22px;font-weight:700}
+.testimonial-modal-close{position:absolute;right:14px;top:10px;border:0;background:transparent;font-size:28px;cursor:pointer}
+.analytics-consent{position:fixed;z-index:9998;left:16px;right:16px;bottom:16px;max-width:720px;margin:auto;padding:15px 18px;background:#fff;color:#26364b;border:1px solid #dce3ec;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.2);display:flex;gap:18px;align-items:center;justify-content:space-between}
+.analytics-consent p{margin:0;font-size:12px;line-height:1.6}
+.analytics-consent div{display:flex;gap:8px;flex-shrink:0}
+.analytics-consent button{border:1px solid #172b4d;border-radius:20px;padding:8px 12px;background:#172b4d;color:#fff;font-size:11px;cursor:pointer}
+.analytics-consent button+button{background:#fff;color:#172b4d}
+body.modal-open{overflow:hidden}
+@media(max-width:620px){.testimonial-list{grid-template-columns:1fr}.testimonial-modal-panel{padding:23px 18px}.analytics-consent{left:8px;right:8px;bottom:8px;display:block}.analytics-consent div{margin-top:10px}.team-watermark-logo{width:42vw;right:2%;top:5%}.community-logo-image{width:86px;height:86px}}
