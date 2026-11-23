@@ -45,7 +45,9 @@
    }
   }else{host.textContent="Recommendations will appear here after the approved, consented records are connected. Read the original LinkedIn recommendations in the meantime.";}
 
-  setDoc("cv","cv.html","Edcar-Tenedero-CV","Updated 23 November 2026");\n  setDoc("letter","cover-letter.html","Edcar-Tenedero-Cover-Letter","Updated 23 November 2026");\n  if(!client){$("#formMessage").textContent="Inquiry form setup is pending. Please contact me through WhatsApp, Messenger or email for now.";return;}
+  setDoc("cv","cv.html","Edcar-Tenedero-CV","Updated 23 November 2026");
+  setDoc("letter","cover-letter.html","Edcar-Tenedero-Cover-Letter","Updated 23 November 2026");
+  if(!client){$("#formMessage").textContent="Inquiry form setup is pending. Please contact me through WhatsApp, Messenger or email for now.";return;}
   const {data:docs}=await client.from("public_documents").select("document_type,public_url,display_name").eq("is_published",true);
   (docs||[]).forEach(doc=>{if(doc.document_type==="cv")setDoc("cv",doc.public_url,doc.display_name,"Latest published PDF");if(doc.document_type==="cover_letter")setDoc("letter",doc.public_url,doc.display_name,"Latest published PDF");});
   const {data:settings}=await client.from("site_settings").select("value").eq("key","profile_photo").maybeSingle();
