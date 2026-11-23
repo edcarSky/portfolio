@@ -55,10 +55,10 @@
   const {data:assets}=await client.from("site_settings").select("key,value").in("key",["asset_team_logo","asset_hero_background","asset_watermark","asset_video_thumbnail"]);
   const assetMap=Object.fromEntries((assets||[]).map(x=>[x.key,x.value]));
   const icon=document.querySelector('link[rel="icon"]');if(icon&&settings?.value)icon.href=settings.value;
-  if(assetMap.asset_team_logo){document.querySelectorAll(".community-logo-image").forEach(img=>img.src=assetMap.asset_team_logo);document.querySelectorAll(".team-watermark-logo").forEach(img=>img.src=assetMap.asset_team_logo);}
+  if(assetMap.asset_team_logo){document.querySelectorAll(".community-logo-image").forEach(img=>img.src=assetMap.asset_team_logo);document.querySelectorAll(".team-watermark-logo").forEach(img=>img.src=assetMap.asset_team_logo);}else{document.querySelectorAll(".community-logo-image,.team-watermark-logo").forEach(img=>img.hidden=true);}
   if(assetMap.asset_video_thumbnail){const thumb=document.querySelector(".video-thumb img");if(thumb)thumb.src=assetMap.asset_video_thumbnail;}
-  if(assetMap.asset_hero_background){document.querySelectorAll(".intro-deck .hero-panel,.team-section").forEach(el=>el.style.backgroundImage='linear-gradient(rgba(12,24,42,.78),rgba(12,24,42,.92)),url("'+assetMap.asset_hero_background+'")');}
-  if(assetMap.asset_watermark){document.querySelectorAll(".team-section").forEach(el=>el.style.setProperty("--team-watermark-image",'url("'+assetMap.asset_watermark+'")'));}
+  {const bg=assetMap.asset_hero_background||settings?.value;if(bg)document.querySelectorAll(".intro-deck .hero-panel,.team-section").forEach(el=>el.style.backgroundImage='linear-gradient(rgba(12,24,42,.78),rgba(12,24,42,.92)),url("'+bg+'")');}
+  {const mark=assetMap.asset_watermark||settings?.value;if(mark)document.querySelectorAll(".team-section").forEach(el=>el.style.setProperty("--team-watermark-image",'url("'+mark+'")'));}
   if(settings?.value){document.querySelectorAll(".profile-placeholder img").forEach(img=>img.src=settings.value);}
 
  }
