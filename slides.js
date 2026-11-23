@@ -53,6 +53,20 @@
  deck.addEventListener("touchstart",e=>{touchX=e.changedTouches[0].clientX},{passive:true});
  deck.addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-touchX;if(Math.abs(dx)>65)show(active+(dx<0?1:-1))},{passive:true});
  show(0);
+ const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ const deckInterval=6000;
+ let autoSlide=null;
+ const stopAuto=()=>{if(autoSlide){clearInterval(autoSlide);autoSlide=null;}};
+ const startAuto=()=>{if(reduceMotion||autoSlide)return;autoSlide=setInterval(()=>show(active+1),deckInterval);};
+ const restartAuto=()=>{stopAuto();startAuto();};
+ controls.addEventListener("click",e=>{if(e.target.closest("[data-index],[data-direction]"))restartAuto();});
+ deck.addEventListener("mouseenter",stopAuto);
+ deck.addEventListener("mouseleave",startAuto);
+ deck.addEventListener("focusin",stopAuto);
+ deck.addEventListener("focusout",e=>{if(!deck.contains(e.relatedTarget))startAuto();});
+ deck.addEventListener("touchstart",stopAuto,{passive:true});
+ deck.addEventListener("touchend",()=>{stopAuto();startAuto();},{passive:true});
+ startAuto();
  const nav=document.querySelector("#mainNav");
  if(nav&&!nav.querySelector('a[href="#team-edcarsky"]')){const a=document.createElement("a");a.href="#team-edcarsky";a.textContent="Team edcarSky";nav.insertBefore(a,nav.querySelector(".nav-cta"));}
  if(!document.querySelector("#team-edcarsky")){
