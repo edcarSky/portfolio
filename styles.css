@@ -357,3 +357,38 @@ body[data-theme="slate"] .section-kicker{color:#647f9b}
 .community-section .community-featured-videos span{
  color:#a92f40;
 }
+
+
+/* November 23 refinement: compact contact form, readable feedback panel and
+   consistent Community heading scale. */
+.inquiry-expand{
+ display:flex;align-items:center;justify-content:space-between;width:100%;
+ margin:4px 0 0;padding:12px 13px;border:1px solid #dce3ed;border-radius:7px;
+ background:#f5f7fa;color:#344761;font-size:11px;font-weight:800;cursor:pointer;
+}
+.inquiry-expand:hover{background:#edf2f8;border-color:#aebed2}
+.inquiry-extra{margin-top:14px}
+.inquiry-extra[hidden]{display:none!important}
+.inquiry-primary label{margin-bottom:13px}
+.inquiry-primary textarea{min-height:86px;resize:vertical}
+.testimonial-inner{align-items:start;gap:44px}
+.testimonial-list{align-content:start;min-width:0}
+.testimonial-empty{
+ display:flex;flex-direction:column;gap:8px;width:100%;padding:19px 21px;
+ border:1px solid #dce3ec;border-radius:10px;background:#fff;color:#34445b;
+ font-size:12px;line-height:1.7;
+}
+.testimonial-empty strong{font:800 13px Manrope,sans-serif;color:#172b4d}
+.testimonial-empty span{color:#68768b}
+.testimonial-section .section-wrap{padding-top:58px;padding-bottom:64px}
+.community-hero-compact .community-intro h2{
+ font-size:clamp(38px,5vw,58px);line-height:1.12;letter-spacing:-2px;
+}
+@media(max-width:620px){
+ .testimonial-inner{gap:18px}
+ .testimonial-section .section-wrap{padding-top:44px;padding-bottom:48px}
+ .testimonial-empty{padding:16px;font-size:11px}
+ .community-hero-compact .community-intro h2{
+  font-size:clamp(36px,9vw,46px);line-height:1.12;letter-spacing:-1.5px;
+ }
+}
