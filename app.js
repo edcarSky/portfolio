@@ -51,7 +51,7 @@
   const {data:docs}=await client.from("public_documents").select("document_type,public_url,display_name").eq("is_published",true);
   (docs||[]).forEach(doc=>{if(doc.document_type==="cv")setDoc("cv",doc.public_url,doc.display_name,"Latest published PDF");if(doc.document_type==="cover_letter")setDoc("letter",doc.public_url,doc.display_name,"Latest published PDF");});
   const {data:settings}=await client.from("site_settings").select("value").eq("key","profile_photo").maybeSingle();
-  if(settings?.value){const hero=$("#heroPhoto");hero.innerHTML="";const img=document.createElement("img");img.src=settings.value;img.alt="Edcar Aguirre Tenedero";img.style.cssText="width:100%;height:100%;object-fit:cover;border-radius:inherit";hero.append(img);}
+  {const hero=$("#heroPhoto");hero.innerHTML="";const img=document.createElement("img");img.src=settings?.value||"assets/edcar-profile.webp";img.alt="Edcar Aguirre Tenedero";img.style.cssText="width:100%;height:100%;object-fit:cover;border-radius:inherit";hero.append(img);}
 
  }
  
@@ -102,5 +102,50 @@
  }
  $("#inquiryForm").addEventListener("submit",async e=>{e.preventDefault();const form=e.currentTarget,msg=$("#formMessage");if(!client){msg.textContent="This form is not connected yet. Use WhatsApp, Messenger or email until backend setup is complete.";return;}const fd=new FormData(form);const payload={full_name:fd.get("full_name").trim(),company:fd.get("company").trim()||null,affiliation:fd.get("affiliation").trim()||null,email:fd.get("email").trim(),phone:fd.get("phone").trim()||null,inquiry_type:fd.get("inquiry_type"),message:fd.get("message").trim(),consent:fd.get("consent")==="on"};const {error}=await client.from("inquiries").insert(payload);if(error){msg.textContent="Your inquiry was not sent. Please use WhatsApp, Messenger or email.";return;}form.reset();msg.textContent="Thank you. Your inquiry was submitted privately.";});
  document.querySelectorAll(".video-thumb img").forEach(img=>img.addEventListener("error",()=>img.closest(".video-thumb")?.classList.add("is-fallback"),{once:true}));
- loadPublicContent();
+ loadPublicContent().then(renderTestimonials);\n applyEditableContent();\n
+ async function renderTestimonials(){
+  const host=$("#testimonials");if(!host)return;
+  if(!client){host.textContent="Testimonials are temporarily unavailable.";return;}
+  const {data,error}=await client.from("testimonials").select("display_name,affiliation,company,message").eq("status","approved").eq("publication_consent",true).order("created_at",{ascending:false});
+  if(error){host.textContent="Testimonials are temporarily unavailable.";return;}
+  if(!data?.length){host.innerHTML='<div class="testimonial-empty"><strong>Testimonials are being prepared.</strong><span>Approved recommendations will appear here after publication permission is confirmed.</span></div>';return;}
+  host.innerHTML=data.map((q,i)=>'<article class="testimonial-card"><div class="testimonial-label">TESTIMONIAL '+String(i+1).padStart(2,"0")+'</div><blockquote>'+escText(q.message.slice(0,210))+(q.message.length>210?'…':'')+'</blockquote><b>— '+escText(q.display_name)+'</b><small>'+escText([q.affiliation,q.company].filter(Boolean).join(" · "))+'</small><button type="button" class="testimonial-read" data-testimonial-index="'+i+'">Read full testimonial</button></article>').join("");
+  host.querySelectorAll("[data-testimonial-index]").forEach(btn=>btn.addEventListener("click",()=>{
+   const q=data[Number(btn.dataset.testimonialIndex)],modal=$("#testimonialModal");
+   $("#testimonialModalQuote").textContent="“"+q.message+"”";
+   $("#testimonialModalAuthor").textContent="— "+q.display_name+([q.affiliation,q.company].filter(Boolean).length?" · "+[q.affiliation,q.company].filter(Boolean).join(" · "):"");
+   modal.hidden=false;document.body.classList.add("modal-open");$("#testimonialModalTitle").focus();
+  }));
+ }
+ function escText(value){return String(value??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+ document.querySelectorAll("[data-close-testimonial]").forEach(x=>x.addEventListener("click",()=>{$("#testimonialModal").hidden=true;document.body.classList.remove("modal-open");}));
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#testimonialModal")&&!$("#testimonialModal").hidden){$("#testimonialModal").hidden=true;document.body.classList.remove("modal-open");}});
+ async function applyEditableContent(){
+  if(!client)return;
+  const {data}=await client.from("site_content").select("content_key,content");
+  (data||[]).forEach(item=>{
+   const target=document.querySelector('[data-content-key="'+item.content_key+'"]');
+   if(target&&item.content)target.textContent=item.content;
+  });
+ }
+ function visitorId(){
+  try{let id=localStorage.getItem("edcarsky-visitor-id");if(!id){id=crypto.randomUUID();localStorage.setItem("edcarsky-visitor-id",id);}return id;}catch(e){return null;}
+ }
+ async function logConsentedVisit(){
+  if(!client||localStorage.getItem("edcarsky-analytics-consent")!=="accepted")return;
+  const id=visitorId();if(!id)return;
+  const marker="edcarsky-logged-"+location.pathname;
+  if(sessionStorage.getItem(marker))return;
+  const {error}=await client.from("visitor_events").insert({visitor_id:id,page_path:location.pathname,referrer:document.referrer||null,user_agent:navigator.userAgent,event_type:"page_view"});
+  if(!error)sessionStorage.setItem(marker,"1");
+ }
+ const consent=$("#analyticsConsent");
+ if(consent&&client){
+  const choice=localStorage.getItem("edcarsky-analytics-consent");
+  if(!choice)consent.hidden=false;
+  $("#acceptAnalytics")?.addEventListener("click",()=>{localStorage.setItem("edcarsky-analytics-consent","accepted");consent.hidden=true;logConsentedVisit();});
+  $("#rejectAnalytics")?.addEventListener("click",()=>{localStorage.setItem("edcarsky-analytics-consent","rejected");consent.hidden=true;});
+  if(choice==="accepted")logConsentedVisit();
+ }
+
 })();
