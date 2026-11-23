@@ -333,3 +333,33 @@ GitHub Pages workflow run 45119044525 was PENDING at 05:38:28 UTC. Recheck befor
 - Instagram/X/TikTok OAuth: unavailable.
 - Desktop and mobile visual QA: not performed in a real browser in this session.
 - Offline ZIP matching latest commit: not yet created or verified.
+
+
+## 14. COMMUNITY SECTION UPDATE — 23 NOVEMBER 2026
+Add and preserve the top navigation order: Creator, Professional, My Journey, Community, Contact, followed by the CV & Cover Letter CTA. Community is positioned after My Journey and before Contact in the navigation, and its full section is placed before Contact in the page.
+
+The Community section introduces Team edcarSky with the exact brand statement “100% LEGIT, SAFE & ORGANIC”. Explain AA+ as a channel analytics and content-review framework, including topic opportunity, audience fit, title/thumbnail packaging, first 30 seconds, retention, engagement, satisfaction, traffic sources, new/returning viewers, SEO, promotion readiness and follow-on-view analysis. Explain SSP+ as promotion planning for up to 30 selected videos, with campaign allocations, audience discovery, paid/organic separation and post-promotion review.
+
+Never state or imply that YouTube, Meta, TikTok, Instagram or another platform officially endorses, certifies or guarantees the programs. Do not promise monetization approval, revenue, views, watch hours, subscribers, followers, engagement, retention or permanent results. Explain that platforms control their own policy enforcement, validation, retention, recommendations and monetization decisions. State that the programs do not use bots, fake accounts or artificial views, subscribers, followers, watch time, likes, comments or engagement. Distinguish legitimate promotion and genuine audience discovery from artificial engagement.
+
+Public historical milestones may be displayed only with qualification: “200+ Monetized YouTube channels”, “3,000+ Channels assisted”, “~500 Active and former members”, “Service since 2021”. Label these team-reported historical figures, not independently audited, not individual guarantees and not platform endorsements. AA+ is documented as a 30-day analytics review framework. SSP+ is documented as promotion for up to 30 selected videos. Recorded package examples (30 videos × 1,000 push units = PHP 8,000; 30 videos × 500 push units = PHP 5,000) are campaign allocations, never guaranteed views/watch time/subscribers.
+
+Official social links:
+- YouTube: https://www.youtube.com/channel/UCoz2lfYpVjxYmBp2Z9MZ25g/
+- Facebook: https://www.facebook.com/edcarSkyglive
+- TikTok: https://www.tiktok.com/@edcarsky
+- Instagram: https://www.instagram.com/edcarsky/
+- Messenger: https://www.m.me/edcarSkyglive
+- WhatsApp: https://wa.me/639177832874
+- Daily LIVE: https://youtu.be/Lr1EhZJfoXM
+- Team intro: https://www.youtube.com/watch?v=JRnKG9kY1cI
+- SSP+ tactics: https://www.youtube.com/watch?v=XAaHeeI-HCg
+- SSP+/APP+ overview: https://www.youtube.com/watch?v=sDT89IbMLt0
+
+The Community section source and responsive CSS were added in commits 28b7301235dbd70100c8b2e4ff99a1007f4d44da and 828c7d9cda2639f48ecae391afd7c39b2dd96bb1. A separate PROJECT_DOSSIER_2026-11-23.md records the feature audit and remaining blockers.
+
+IMPORTANT BRAND ASSET STATUS: the original red “edcarSky g! live” logo is still not installed. The prior reference https://prnt.sc/ITN3TEzNoex- was not retrievable in this session. The Community section currently uses a temporary large text brand lockup, explicitly not the official logo. The repository has no supplied logo/profile photo asset. Do not mark logo complete or generate a substitute. Recover the exact owner-supplied image asset.
+
+The previous deployment run 45121627787 completed successfully for commit 8fad24a489e2ad50476e9c18d868deb127ea8fba, before the Community changes. Verify a new GitHub Pages run for the latest commit before reporting the new section live. Source-level checks do not equal desktop/mobile browser QA. Keep the verification matrix in PROJECT_DOSSIER_2026-11-23.md current, with PASS/FAIL/BLOCKED/NOT TESTED statuses and evidence.
+
+OFFLINE ZIP: do not provide a ZIP link until an archive of the exact latest deployed commit has been created, inspected and verified.
