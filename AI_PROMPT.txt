@@ -363,3 +363,7 @@ IMPORTANT BRAND ASSET STATUS: the original red “edcarSky g! live” logo is st
 The previous deployment run 45121627787 completed successfully for commit 8fad24a489e2ad50476e9c18d868deb127ea8fba, before the Community changes. Verify a new GitHub Pages run for the latest commit before reporting the new section live. Source-level checks do not equal desktop/mobile browser QA. Keep the verification matrix in PROJECT_DOSSIER_2026-11-23.md current, with PASS/FAIL/BLOCKED/NOT TESTED statuses and evidence.
 
 OFFLINE ZIP: do not provide a ZIP link until an archive of the exact latest deployed commit has been created, inspected and verified.
+
+
+## 15. COMMUNITY TEASER UX REVISION — 23 NOVEMBER 2026
+Keep the Community section brief at first view. Present only short SEO-friendly teaser copy for AA+ Programs, SSP+ Programs and Connect & Learn. Put longer program explanations, scope, milestones and qualifications inside native expandable “Click for more” details. Do not dump the full service description in the initial page view. Direct visitors with questions to the Facebook Page Messenger automated AI assistant at https://www.m.me/edcarSkyglive. The owner confirms the assistant is configured to answer inquiries; do not claim the bot has been technically tested unless an end-to-end test is performed. Preserve platform-policy clarity and no-guarantee qualifications in the expandable details and concise commitment note. The source update is in commits b3d2607d88ed1af74ed899fcd9a852fffe738c81 and 22e0c6dac59bfbfa44db514a66de5ba7e4cd4bb3.
