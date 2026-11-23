@@ -273,3 +273,63 @@ CURRENT PRIORITY ORDER
 9. Synchronize the offline source archive with the verified live commit.
 
 The goal is a working, secure, compact, polished edcarSky™ website where the owner manages documents, profile assets, content and testimonials directly from the site's private admin dashboard.
+
+
+
+PROJECT DOSSIER UPDATE — 23 NOVEMBER 2026, 05:40 UTC
+OWNER'S LATEST CORRECTIONS AND REQUIRED ACCEPTANCE CRITERIA
+
+1. FIVE-SLIDE INTRODUCTION
+The intro is exactly five slides. The first slide headline is “Work. Create. Connect.” The remaining slides are Professional, Content Creator, Family, and Team edcarSky. Preserve the supplied Team edcarSky headline “100% LEGIT, SAFE & ORGANIC.” Do not substitute a different deck or reduce the slide count.
+
+2. BRAND ASSETS
+The actual owner-supplied profile photograph and logo are still not present in the repository. The current assets directory contains only a placeholder text file, not the photo/logo. Do not treat the ET initials placeholder or favicon as the supplied logo. Locate and reuse the original supplied asset from the project attachments or owner-provided source. If the original is unavailable to the active tool session, explicitly report BLOCKED and request only that exact file again. Do not generate or substitute a face/logo.
+
+3. SELECTED WORK / VIDEO THUMBNAILS
+The current HTML contains six video cards and YouTube thumbnail URL patterns. The owner reports that a previously supplied thumbnail for a video on the main channel is still missing. Verify each thumbnail image and target URL independently. The main channel card must use channel artwork or the exact owner-supplied thumbnail, not reuse an unrelated portfolio-video thumbnail. Add an image error fallback. The current repo has no custom thumbnail asset. Do not mark thumbnail QA PASS based on URL patterns alone.
+
+4. SOCIAL PLATFORMS STORY
+Section “Different platforms. One connected story.” must include a short creator backstory, explaining the owner's ongoing publishing across professional, creator and family content, with an invitation to follow, engage, comment and share feedback. This was added to the public section on this update.
+
+5. CREDENTIALS
+The public CV and cover-letter View/Download controls depend on published Supabase document records. Current controls remain disabled until the owner uploads and publishes documents. The owner has no known Admin password and the Admin page currently states the owner account must first exist in Supabase Auth. Do not claim credentials work until a real document is published and the logged-out public links are tested. The user expects the website's own Admin workflow to manage documents.
+
+6. SOCIAL ACCOUNT PREFILL
+Google and Facebook are the only configured Supabase OAuth buttons. Social login is optional. Prefill name and email when available; other extracted fields are optional and must not block submission merely because a provider omits them. The UI now includes Instagram and X icon-only controls as disabled/unavailable until a supported OAuth integration is configured. TikTok remains disabled. Do not imply Instagram/X/TikTok authentication works.
+
+7. CONTACT ENGAGEMENT
+The Let's connect professionally section should invite employers, clients, creators and professional contacts to send a role, project, idea, feedback, question or collaboration proposal. This engagement copy was updated.
+
+8. TESTIMONIAL DISPLAY
+The public section must show one testimonial bubble/card at a time, labeled “TESTIMONIAL”, with the original wording and author attribution. Randomly rotate every 5 seconds, with Pause/Play and Next controls. The implementation now queries only Supabase rows where status = approved AND publication_consent = true. It no longer publishes the public-root testimonials.json archive. If no consented approved database rows exist, show a clean empty state. Do not publish the 29 static LinkedIn excerpts merely because LinkedIn visibility is On. Preserve the master archive separately and keep duplicate/truncated records marked.
+
+9. VISITOR COUNTER
+Footer currently uses GoatCounter visit_count with path TOTAL. The live footer displays “Counter unavailable” per owner's report. Verify GoatCounter's “Allow adding visitor counts on your website” setting and actual TOTAL count endpoint. Do not fabricate a count. Current code's retry loop alone does not prove service availability.
+
+10. ADMIN / SUPABASE PASSWORD DISTINCTION
+The Supabase SQL Editor/database password is not the same as the website Admin user's Auth password. Never invent or place a password in the repository. Confirm whether the user is blocked at Supabase Dashboard login, database password prompt, or the portfolio Admin sign-in. The website Admin account must exist in Supabase Authentication with the authorized email edcarsky@gmail.com. If it does not exist, an authorized project owner must create it or use the Supabase password recovery flow. Never expose the database password or service-role key.
+
+11. MOBILE AND DESKTOP QA
+Owner requires browser verification on desktop and mobile. Report each feature PASS/FAIL/BLOCKED/NOT TESTED with evidence. GitHub Pages workflow success is deployment evidence only, not proof of browser rendering, OAuth, database, document links, counter, or mobile visual correctness. Do not claim browser QA complete without real browser screenshots or automation.
+
+12. CHANGE LOG FOR THIS BATCH
+Repository: edcarSky/portfolio
+Commits in this batch:
+- c5d1ccc1f759f0de5b3c5e7b00b1048216f62996 — testimonial loader changed to consent-filtered Supabase carousel, 5-second random rotation, Pause/Next controls.
+- ab543072a8cf3627f3da9dace5b946207e66a44d — creator platform backstory, contact engagement copy, cache-busting asset references and social sign-in explanation.
+- bdd5f5a11a5bc56d338371bff8c8772426fbaa61 — testimonial card and compact icon row styling.
+- 6c73e267e28aa2e89b8a1ce3504c41ad20239998 — Instagram and X disabled icon-only provider controls.
+Latest known commit at time of dossier update: 6c73e267e28aa2e89b8a1ce3504c41ad20239998.
+GitHub Pages workflow run 45119044525 was PENDING at 05:38:28 UTC. Recheck before reporting deployment complete.
+
+13. STILL BLOCKED / NOT VERIFIED
+- Supplied logo and profile photo: missing from repository assets.
+- Exact missing main-channel thumbnail: no custom asset in repository; requires matching supplied file or confirmed YouTube thumbnail.
+- Admin account/password: account existence and recovery status not confirmed.
+- CV and cover letter: no proof of published documents.
+- Testimonials: carousel code updated, but public output depends on consented approved rows in Supabase.
+- GoatCounter: live total still unavailable per owner report.
+- Google/Facebook OAuth provider credentials and callback configuration: not end-to-end verified.
+- Instagram/X/TikTok OAuth: unavailable.
+- Desktop and mobile visual QA: not performed in a real browser in this session.
+- Offline ZIP matching latest commit: not yet created or verified.
