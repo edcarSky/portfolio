@@ -288,3 +288,72 @@ body[data-theme="slate"] .section-kicker{color:#647f9b}
  .community-integrity-compact{padding:14px;margin:12px 0 22px}
  .community-social-links{grid-template-columns:repeat(2,1fr)}
 }
+
+/* Correct section alternation: Community follows the dark Documents section,
+   so its outer canvas uses the light treatment. Keep the brand panel dark. */
+.community-section{
+ background:#f1f4f8;
+ color:#172033;
+}
+.community-section>.section-wrap>.section-kicker{
+ color:#7185a2;
+}
+.community-section .community-intro h2,
+.community-section .community-follow h3{
+ color:#172033;
+}
+.community-section .community-intro h2 em{
+ color:#b83c4c;
+}
+.community-section .community-intro p{
+ color:#586579;
+}
+.community-section .community-ai-invite{
+ color:#24344d!important;
+}
+.community-section .community-teaser{
+ background:#fff;
+ border:1px solid #dfe5ed;
+ box-shadow:0 8px 24px #1720330a;
+}
+.community-section .community-teaser h3{
+ color:#172033;
+}
+.community-section .community-teaser>p,
+.community-section .community-more-content p{
+ color:#657286;
+}
+.community-section .community-more{
+ border-top-color:#e4e9f0;
+}
+.community-section .community-more summary{
+ color:#a92f40;
+}
+.community-section .community-integrity-compact{
+ background:#fff;
+ border:1px solid #e2d5b7;
+}
+.community-section .community-integrity-compact strong{
+ color:#26364d;
+}
+.community-section .community-integrity-compact span{
+ color:#697589;
+}
+.community-section .community-follow{
+ border-top-color:#dce3ec;
+}
+.community-section .community-social-links a,
+.community-section .community-featured-videos a{
+ color:#25364e;
+ border-color:#dce3ec;
+ background:#fff;
+}
+.community-section .community-social-links a:hover,
+.community-section .community-featured-videos a:hover{
+ background:#f8fafc;
+ border-color:#b83c4c;
+}
+.community-section .community-social-links span,
+.community-section .community-featured-videos span{
+ color:#a92f40;
+}
