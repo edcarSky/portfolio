@@ -12,7 +12,7 @@
  let current="navy";try{current=localStorage.getItem("edcarsky-theme")||"navy";}catch(e){}
  applyTheme(current);
  $("#themeRefresh").addEventListener("click",()=>{const choices=themes.filter(x=>x!==document.body.dataset.theme);applyTheme(choices[Math.floor(Math.random()*choices.length)]);});
- function setDoc(prefix,url,name){if(!url)return;const v=$("#"+prefix+"View"),d=$("#"+prefix+"Download");v.href=url;d.href=url;d.setAttribute("download",name||"");v.classList.remove("disabled");d.classList.remove("disabled");$("#"+prefix+"Status").textContent="Latest published version";}
+ function setDoc(prefix,url,name,status){if(!url)return;const v=$("#"+prefix+"View"),d=$("#"+prefix+"Download");v.href=url;d.href=url;d.removeAttribute("download");v.classList.remove("disabled");d.classList.remove("disabled");if(status)$("#"+prefix+"Status").textContent=status;}
  async function loadPublicContent(){
   const host=$("#testimonials");
   if(client){
@@ -45,9 +45,9 @@
    }
   }else{host.textContent="Recommendations will appear here after the approved, consented records are connected. Read the original LinkedIn recommendations in the meantime.";}
 
-  if(!client){$("#formMessage").textContent="Inquiry form setup is pending. Please contact me through WhatsApp, Messenger or email for now.";return;}
+  setDoc("cv","cv.html","Edcar-Tenedero-CV","Updated 23 November 2026");\n  setDoc("letter","cover-letter.html","Edcar-Tenedero-Cover-Letter","Updated 23 November 2026");\n  if(!client){$("#formMessage").textContent="Inquiry form setup is pending. Please contact me through WhatsApp, Messenger or email for now.";return;}
   const {data:docs}=await client.from("public_documents").select("document_type,public_url,display_name").eq("is_published",true);
-  (docs||[]).forEach(doc=>{if(doc.document_type==="cv")setDoc("cv",doc.public_url,doc.display_name);if(doc.document_type==="cover_letter")setDoc("letter",doc.public_url,doc.display_name);});
+  (docs||[]).forEach(doc=>{if(doc.document_type==="cv")setDoc("cv",doc.public_url,doc.display_name,"Latest published PDF");if(doc.document_type==="cover_letter")setDoc("letter",doc.public_url,doc.display_name,"Latest published PDF");});
   const {data:settings}=await client.from("site_settings").select("value").eq("key","profile_photo").maybeSingle();
   if(settings?.value){const hero=$("#heroPhoto");hero.innerHTML="";const img=document.createElement("img");img.src=settings.value;img.alt="Edcar Aguirre Tenedero";img.style.cssText="width:100%;height:100%;object-fit:cover;border-radius:inherit";hero.append(img);}
 
