@@ -19,8 +19,25 @@
   (docs||[]).forEach(doc=>{if(doc.document_type==="cv")setDoc("cv",doc.public_url,doc.display_name);if(doc.document_type==="cover_letter")setDoc("letter",doc.public_url,doc.display_name);});
   const {data:settings}=await client.from("site_settings").select("value").eq("key","profile_photo").maybeSingle();
   if(settings?.value){const hero=$("#heroPhoto");hero.innerHTML="";const img=document.createElement("img");img.src=settings.value;img.alt="Edcar Aguirre Tenedero";img.style.cssText="width:100%;height:100%;object-fit:cover;border-radius:inherit";hero.append(img);}
-  const {data:quotes}=await client.from("testimonials").select("display_name,affiliation,company,message").eq("status","approved").order("created_at",{ascending:false}).limit(6);
-  if(quotes?.length){const host=$("#testimonials");let current=-1;const render=()=>{let next=Math.floor(Math.random()*quotes.length);if(quotes.length>1&&next===current)next=(next+1)%quotes.length;current=next;const q=quotes[current],card=document.createElement("article");card.className="testimonial-card";const quote=document.createElement("blockquote");quote.textContent="“"+q.message+"”";const name=document.createElement("b");name.textContent=q.display_name;const meta=document.createElement("small");meta.textContent=[q.affiliation,q.company].filter(Boolean).join(" · ");card.append(quote,name,meta);host.replaceChildren(card);};render();if(quotes.length>1){const rotate=()=>setTimeout(()=>{render();rotate();},10000+Math.floor(Math.random()*5001));rotate();}}
+  try {
+   const response=await fetch("testimonials.json",{cache:"no-store"});
+   if(!response.ok)throw new Error("Testimonials archive unavailable");
+   const quotes=await response.json();
+   const host=$("#testimonials");
+   const visible=quotes.filter(q=>q.visibility==="On");
+   visible.forEach(q=>{
+    const card=document.createElement("article");card.className="testimonial-card";
+    const heading=document.createElement("div");heading.className="testimonial-label";heading.textContent="TESTIMONIAL";
+    const quote=document.createElement("blockquote");quote.textContent="“"+q.text+"”";
+    const name=document.createElement("b");name.textContent="— "+q.name;
+    const meta=document.createElement("small");meta.textContent=[q.role,q.date,q.relationship].filter(Boolean).join(" · ");
+    card.append(heading,quote,name,meta);
+    if(q.truncated){const note=document.createElement("small");note.className="testimonial-note";note.textContent="LinkedIn excerpt supplied; full text is marked for verification.";card.append(note);}
+    host.append(card);
+   });
+  } catch(error) {
+   const host=$("#testimonials");host.textContent="Recommendations archive is temporarily unavailable. View the original LinkedIn recommendations.";
+  }
  }
  
  const inquiryForm=$("#inquiryForm");
