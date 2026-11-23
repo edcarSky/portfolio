@@ -130,3 +130,13 @@ body[data-theme="slate"] .section-kicker{color:#647f9b}
 .brand-lockup{display:flex;flex-direction:column;gap:3px;line-height:1.05}
 .brand-descriptor{font:700 8px "DM Sans",sans-serif;letter-spacing:1.35px;text-transform:uppercase;color:#778398}
 @media(max-width:620px){.brand-descriptor{font-size:7px;letter-spacing:1.15px}}
+
+
+/* Received LinkedIn recommendations archive */
+.testimonial-list{align-content:start;max-height:900px;overflow-y:auto;padding-right:5px}
+.testimonial-label{font:800 10px Manrope,sans-serif;letter-spacing:2px;color:#6784ad;margin-bottom:12px}
+.testimonial-card blockquote{white-space:pre-line;line-height:1.75}
+.testimonial-card>b{display:block;margin-top:12px;color:#172b4d}
+.testimonial-card small{line-height:1.55;margin-top:5px}
+.testimonial-card .testimonial-note{color:#9a6b24;font-style:italic}
+@media(max-width:620px){.testimonial-list{max-height:none;overflow:visible;padding:0}.testimonial-card{padding:16px}.testimonial-card blockquote{font-size:12px;line-height:1.7}}
