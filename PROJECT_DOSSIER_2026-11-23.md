@@ -73,3 +73,15 @@ The exact owner-supplied red “edcarSky g! live” logo has not been recovered 
 5. Finish Supabase owner Auth account setup through Supabase Authentication, then test Admin login, document upload, publish flow and public CV/cover-letter fallback.
 6. Test inquiry submission, approved/consented testimonials, OAuth providers and GoatCounter.
 7. Generate the offline ZIP from the exact deployed commit, inspect archive contents and verify the download path before sharing.
+
+
+## Community copy revision — 23 November 2026, 06:10 UTC
+The Community section was shortened into three scan-friendly teaser cards: AA+ Programs, SSP+ Programs, and Connect & Learn. Each card uses native expandable “Click for more” details, so the page shows a short SEO-friendly introduction first and reveals program details only when a visitor opens the disclosure. The top introduction now invites visitors to follow the community and directs questions to the automated AI assistant on the Facebook Page Messenger.
+
+Messenger CTA: https://www.m.me/edcarSkyglive. The owner confirms the Facebook Page Messenger AI assistant is configured to answer inquiries. The page copy identifies it as the automated assistant, but end-to-end Messenger bot behavior was not tested in this source update.
+
+Latest Community commits:
+- b3d2607d88ed1af74ed899fcd9a852fffe738c81 — shorten Community copy and add expandable details plus Messenger AI CTA.
+- 22e0c6dac59bfbfa44db514a66de5ba7e4cd4bb3 — compact card and responsive disclosure styling.
+
+Verification: source fetched after update; confirmed three teaser cards, three native details/summary controls, Messenger CTA and social links. Browser interaction and mobile rendering remain NOT TESTED. Existing platform policy and no-guarantee qualifications remain inside expandable details and compact commitment note.
