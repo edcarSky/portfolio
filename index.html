@@ -223,35 +223,41 @@
     </div>
     <form id="inquiryForm" class="inquiry-form">
       <div class="form-heading"><span>EMPLOYER & CLIENT INQUIRY</span><small>Private submission</small></div>
-      <div class="social-connect">
-        <p class="social-connect-title">CONNECT WITH AN ACCOUNT</p>
-        <p class="social-connect-copy">Connect to prefill available name and email details. Missing profile fields are optional. Review the details before sending your inquiry.</p>
-        <div class="social-connect-buttons">
-          <button type="button" class="social-auth-button google-auth" data-oauth-provider="google" aria-label="Continue with Google" title="Continue with Google"><span class="auth-mark">G</span></button>
-          <button type="button" class="social-auth-button facebook-auth" data-oauth-provider="facebook" aria-label="Continue with Facebook" title="Continue with Facebook"><span class="auth-mark">f</span></button>
-          <button type="button" class="social-auth-button tiktok-auth" disabled aria-label="TikTok coming soon" title="TikTok coming soon" aria-describedby="tiktokAuthNote"><span class="auth-mark">♪</span></button>
-          <button type="button" class="social-auth-button instagram-auth" disabled aria-label="Instagram sign-in unavailable" title="Instagram sign-in unavailable"><span class="auth-mark">◎</span></button>
-          <button type="button" class="social-auth-button x-auth" disabled aria-label="X sign-in unavailable" title="X sign-in unavailable"><span class="auth-mark">𝕏</span></button>
-        </div>
-        <small id="tiktokAuthNote" class="social-auth-note">Google and Facebook sign-in are supported when enabled in Supabase. TikTok, Instagram and X are shown as unavailable until their supported OAuth integrations are configured. Social sign-in is optional.</small>
-        <p id="socialAuthMessage" class="social-auth-message" aria-live="polite">You may also complete the form manually below.</p>
+      <div class="inquiry-primary">
+        <label>Full name<input name="full_name" required maxlength="120" autocomplete="name" placeholder="Your full name"></label>
+        <label>Email address<input name="email" type="email" required maxlength="254" autocomplete="email" placeholder="name@company.com"></label>
+        <label>Brief message<textarea name="message" required maxlength="3000" rows="3" placeholder="How may we connect?"></textarea></label>
       </div>
-      <div class="manual-entry-label">OR ENTER YOUR DETAILS MANUALLY</div>
-      <label>Full name<input name="full_name" required maxlength="120" autocomplete="name" placeholder="Your full name"></label>
-      <label>Company / organization<input name="company" maxlength="160" autocomplete="organization" placeholder="Company or organization"></label>
-      <label>Professional affiliation / position<input name="affiliation" maxlength="120" placeholder="HR Manager, Recruiter, Client, etc."></label>
-      <div class="form-two"><label>Email address<input name="email" type="email" required maxlength="254" autocomplete="email" placeholder="name@company.com"></label><label>Contact number<input name="phone" type="tel" maxlength="40" autocomplete="tel" placeholder="+63"></label></div>
-      <label>Inquiry type<select name="inquiry_type" required><option value="">Select one</option><option>Employment opportunity</option><option>Client / business inquiry</option><option>Professional collaboration</option><option>Portfolio feedback</option><option>Other</option></select></label>
-      <label>Brief message<textarea name="message" required maxlength="3000" rows="4" placeholder="How may we connect?"></textarea></label>
-      <label class="consent"><input type="checkbox" name="consent" required><span>I have read the <a href="privacy.html" target="_blank">Privacy Notice</a> and consent to the processing of my information to respond to this inquiry.</span></label>
-      <button class="button button-dark submit-button" type="submit">Send private inquiry ↗</button>
-      <p id="formMessage" class="form-message" aria-live="polite">Your inquiry is private and will not appear publicly.</p>
+      <button type="button" class="inquiry-expand" id="inquiryExpand" aria-expanded="false" aria-controls="inquiryExtra">Add details or connect an account <span aria-hidden="true">＋</span></button>
+      <div class="inquiry-extra" id="inquiryExtra" hidden>
+        <div class="social-connect">
+          <p class="social-connect-title">CONNECT WITH AN ACCOUNT</p>
+          <p class="social-connect-copy">Connect to prefill available name and email details. Review the details before sending your inquiry.</p>
+          <div class="social-connect-buttons">
+            <button type="button" class="social-auth-button google-auth" data-oauth-provider="google" aria-label="Continue with Google" title="Continue with Google"><span class="auth-mark">G</span></button>
+            <button type="button" class="social-auth-button facebook-auth" data-oauth-provider="facebook" aria-label="Continue with Facebook" title="Continue with Facebook"><span class="auth-mark">f</span></button>
+            <button type="button" class="social-auth-button tiktok-auth" disabled aria-label="TikTok coming soon" title="TikTok coming soon" aria-describedby="tiktokAuthNote"><span class="auth-mark">♪</span></button>
+            <button type="button" class="social-auth-button instagram-auth" disabled aria-label="Instagram sign-in unavailable" title="Instagram sign-in unavailable"><span class="auth-mark">◎</span></button>
+            <button type="button" class="social-auth-button x-auth" disabled aria-label="X sign-in unavailable" title="X sign-in unavailable"><span class="auth-mark">𝕏</span></button>
+          </div>
+          <small id="tiktokAuthNote" class="social-auth-note">Google and Facebook sign-in are supported when enabled in Supabase. TikTok, Instagram and X remain unavailable until their OAuth integrations are configured. Social sign-in is optional.</small>
+          <p id="socialAuthMessage" class="social-auth-message" aria-live="polite">You may also complete the form manually below.</p>
+        </div>
+        <div class="manual-entry-label">OPTIONAL DETAILS</div>
+        <label>Company / organization<input name="company" maxlength="160" autocomplete="organization" placeholder="Company or organization"></label>
+        <label>Professional affiliation / position<input name="affiliation" maxlength="120" placeholder="HR Manager, Recruiter, Client, etc."></label>
+        <label>Contact number<input name="phone" type="tel" maxlength="40" autocomplete="tel" placeholder="+63"></label>
+        <label>Inquiry type<select name="inquiry_type" required><option value="">Select one</option><option>Employment opportunity</option><option>Client / business inquiry</option><option>Professional collaboration</option><option>Portfolio feedback</option><option>Other</option></select></label>
+        <label class="consent"><input type="checkbox" name="consent" required><span>I have read the <a href="privacy.html" target="_blank">Privacy Notice</a> and consent to the processing of my information to respond to this inquiry.</span></label>
+        <button class="button button-dark submit-button" type="submit">Send private inquiry ↗</button>
+        <p id="formMessage" class="form-message" aria-live="polite">Your inquiry is private and will not appear publicly.</p>
+      </div>
     </form>
   </div>
 </section>
 
 <section class="testimonial-section">
- <div class="section-wrap testimonial-inner"><div><div class="section-kicker">08 / PROFESSIONAL FEEDBACK</div><h2>Words from<br><em>people I've worked with.</em></h2><p>Read the recommendations published by my colleagues on LinkedIn. The original recommendations open on LinkedIn, with their authors and wording preserved.</p><a class="button button-dark" href="https://www.linkedin.com/in/edcarsky/details/recommendations/?detailScreenTabIndex=2" target="_blank" rel="noopener noreferrer">Read LinkedIn Recommendations <span aria-hidden="true">↗</span></a></div><div id="testimonials" class="testimonial-list" aria-live="polite"></div></div>
+ <div class="section-wrap testimonial-inner"><div><div class="section-kicker">09 / PROFESSIONAL FEEDBACK</div><h2>Words from<br><em>people I've worked with.</em></h2><p>Read the recommendations published by my colleagues on LinkedIn. The original recommendations open on LinkedIn, with their authors and wording preserved.</p><a class="button button-dark" href="https://www.linkedin.com/in/edcarsky/details/recommendations/?detailScreenTabIndex=2" target="_blank" rel="noopener noreferrer">Read LinkedIn Recommendations <span aria-hidden="true">↗</span></a></div><div id="testimonials" class="testimonial-list" aria-live="polite"></div></div>
 </section>
 </main>
 
