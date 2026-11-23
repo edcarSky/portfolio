@@ -110,3 +110,24 @@ Verification: source fetched after update; confirmed three teaser cards, three n
 - CV and cover-letter fallback pages exist in repository. Supabase PDF records do not exist yet.
 - Only placeholder asset currently exists under assets/: PUT_PROFILE_PHOTO_HERE.txt. No supplied profile photo, watermark, logo artwork or custom icon artwork has been added.
 - The favicon is still the generic ET SVG; official profile/icon/logo artwork remains pending user upload.
+
+
+## Live deployment and offline package update — 23 November 2026, 06:42 UTC
+
+### User direction on Community background #7
+- User clarified: if the red/touch-of-red treatment is already present, do not make another color change before the user has personally viewed the live site.
+- Preserve the current Community/theme background styling pending the user's visual review. The existing Community brand panel already contains red accents (red glow, red brand text, and red-highlighted headings/labels). The theme-specific Community outer backgrounds remain the five light variants in styles.css.
+- No additional red background change was made in this update. Do not describe background #7 as newly changed.
+
+### Latest verified public deployment before this dossier update
+- Main branch commit: 5b6df7d45e84e7c63bbdf0b44332024ee6c0780b.
+- GitHub Pages run: 45125009149.
+- Result: completed, conclusion success, 23 November 2026 06:35 UTC.
+- This deployment includes the public contact address correction and Community theme-aware background/compact spacing changes.
+- Public URL: https://edcarsky.github.io/portfolio/
+- Browser visual QA remains NOT TESTED. User has not yet confirmed the rendered live appearance.
+
+### Current user-requested package work
+- Update this dossier to reflect the deployment and the user's instruction not to change red styling again until visual review.
+- Prepare a fresh offline ZIP from the same latest source revision after dossier commit, verify archive integrity and record the exact commit SHA.
+- Do not label the offline ZIP current until it is generated from the final updated repository revision and verified.
