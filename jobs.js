@@ -148,16 +148,17 @@
  $("#saveApplication").addEventListener("click", async () => {
    if (!owner || !selectedJob) return;
    const msg = $("#prepareMessage");
-   const { error } = await sb.from("job_applications").upsert({
-     owner_id: owner.id, source: "remotive", external_job_id: String(selectedJob.id),
+   const sourceKey = String(selectedJob.source || "job_source").toLowerCase().replace(/[^a-z0-9_-]/g, "_").slice(0, 40);
+   const { error } = await sb.from("job_applications").insert({
+     owner_id: owner.id, source: sourceKey, external_job_id: String(selectedJob.id),
      job_title: selectedJob.title, company_name: selectedJob.company, job_location: selectedJob.location,
      job_url: selectedJob.url, job_description: selectedJob.description, salary: selectedJob.salary || null,
      employment_type: selectedJob.employment_type || null, status: "saved",
      cv_document_id: $("#applicationCv").value || null,
      cover_letter_document_id: $("#applicationCover").value || null,
      private_notes: $("#applicationNotes").value.trim() || null, updated_at: new Date().toISOString()
-   }, { onConflict: "owner_id,source,external_job_id" });
-   if (error) { msg.textContent = error.message; return; }
+   });
+   if (error) { msg.textContent = error.code === "23505" ? "This job is already in your tracker. Update its existing status below." : error.message; return; }
    msg.textContent = "Job saved to your private application tracker.";
    loadApplications();
  });
