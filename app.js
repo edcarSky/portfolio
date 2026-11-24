@@ -51,12 +51,16 @@
   const {data:docs}=await client.from("public_documents").select("document_type,public_url,display_name").eq("is_published",true);
   (docs||[]).forEach(doc=>{if(doc.document_type==="cv")setDoc("cv",doc.public_url,doc.display_name,"Latest published PDF");if(doc.document_type==="cover_letter")setDoc("letter",doc.public_url,doc.display_name,"Latest published PDF");});
   const {data:settings}=await client.from("site_settings").select("value").eq("key","profile_photo").maybeSingle();
-  {const hero=$("#heroPhoto");hero.innerHTML="";const img=document.createElement("img");img.src=settings?.value||"assets/edcar-profile.webp";img.alt="Edcar Aguirre Tenedero";img.style.cssText="width:100%;height:100%;object-fit:cover;border-radius:inherit";hero.append(img);}
+  {const hero=$("#heroPhoto");if(hero){hero.innerHTML="";const img=document.createElement("img");img.src=settings?.value||"assets/edcar-profile.webp";img.alt="Edcar Aguirre Tenedero";img.style.cssText="width:100%;height:100%;object-fit:cover;border-radius:inherit";hero.append(img);}}
+  if(settings?.value){
+   const headerIcon=$("#headerProfileIcon");
+   if(headerIcon)headerIcon.innerHTML='<img src="'+escText(settings.value)+'" alt="Edcar profile" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">';
+  }
   const {data:assets}=await client.from("site_settings").select("key,value").in("key",["asset_team_logo","asset_hero_background","asset_watermark","asset_video_thumbnail"]);
   const assetMap=Object.fromEntries((assets||[]).map(x=>[x.key,x.value]));
-  const icon=document.querySelector('link[rel="icon"]');if(icon&&settings?.value)icon.href=settings.value;
+  if(settings?.value){document.querySelectorAll('link[rel="icon"],link[rel="apple-touch-icon"]').forEach(icon=>{icon.href=settings.value;icon.type="image/png";});}
   if(assetMap.asset_team_logo){document.querySelectorAll(".community-logo-image").forEach(img=>img.src=assetMap.asset_team_logo);document.querySelectorAll(".team-watermark-logo").forEach(img=>img.src=assetMap.asset_team_logo);}else{document.querySelectorAll(".community-logo-image,.team-watermark-logo").forEach(img=>img.hidden=true);}
-  if(assetMap.asset_video_thumbnail){const thumb=document.querySelector(".video-thumb img");if(thumb)thumb.src=assetMap.asset_video_thumbnail;}
+  {const thumb=document.querySelector(".featured-video .video-thumb img");if(thumb)thumb.src=assetMap.asset_video_thumbnail||"https://img.youtube.com/vi/3TjTSFc8TnQ/hqdefault.jpg";}
   {const bg=assetMap.asset_hero_background||settings?.value;if(bg)document.querySelectorAll(".intro-deck .hero-panel,.team-section").forEach(el=>el.style.backgroundImage='linear-gradient(rgba(12,24,42,.78),rgba(12,24,42,.92)),url("'+bg+'")');}
   {const mark=assetMap.asset_watermark||settings?.value;if(mark)document.querySelectorAll(".team-section").forEach(el=>el.style.setProperty("--team-watermark-image",'url("'+mark+'")'));}
   if(settings?.value){document.querySelectorAll(".profile-placeholder img").forEach(img=>img.src=settings.value);}
