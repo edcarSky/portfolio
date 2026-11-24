@@ -77,13 +77,14 @@
    button.disabled = true; button.textContent = "Searching...";
    $("#searchMessage").textContent = "Checking current listings from connected job sources...";
    $("#resultsHeading").textContent = "Results for " + query;
-   jobs = []; renderJobs();
+   jobs = []; allJobs = []; renderJobs();
    if (!sb) { $("#searchMessage").textContent = "Search service is not configured. Use the external job-board links below."; button.disabled = false; button.textContent = "Search jobs →"; return; }
    const { data, error } = await sb.functions.invoke("jobs-search", { body: { query, location: "", limit: 50 } });
    button.disabled = false; button.textContent = "Search jobs →";
    if (error || data?.error) { $("#searchMessage").textContent = data?.error || "The job search service is unavailable. Use the external job-board links."; return; }
    allJobs = data.jobs || [];
-   applyFilters();
+   if (allJobs.length) applyFilters();
+   else { jobs = []; renderJobs(); $("#searchMessage").textContent = "No listings were returned by the connected providers for this keyword. Try a broader title or use the external job-board links."; }
    const sourceNames = Object.entries(data.sources || {}).filter(([,status]) => status === "available").map(([name]) => name).join(", ");
    if (sourceNames) $("#searchMessage").textContent += " Sources: " + sourceNames + ".";
  }
