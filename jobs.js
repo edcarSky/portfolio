@@ -35,7 +35,7 @@
    if (query.length < 2) { $("#searchMessage").textContent = "Enter at least two characters."; return; }
    const button = $("#searchButton");
    button.disabled = true; button.textContent = "Searching...";
-   $("#searchMessage").textContent = "Checking current listings from the remote-jobs source...";
+   $("#searchMessage").textContent = "Checking current listings from connected job sources...";
    $("#resultsHeading").textContent = "Results for " + query;
    jobs = []; renderJobs();
    if (!sb) { $("#searchMessage").textContent = "Search service is not configured. Use the external job-board links below."; button.disabled = false; button.textContent = "Search jobs →"; return; }
@@ -93,7 +93,7 @@
    const path = owner.id + "/cv/imported-" + Date.now() + "-" + safeName;
    const { error: uploadError } = await sb.storage.from("job-application-private").upload(path, file, { contentType: "application/pdf", upsert: false });
    if (uploadError) { msg.textContent = uploadError.message; return; }
-   const { error } = await sb.from("job_documents").insert({ owner_id: owner.id, label: publicCv.display_name, document_type: "cv", storage_path: path, original_filename: publicCv.display_name, mime_type: "application/pdf", file_size: file.size, is_default: true });
+   const makeDefault = !documents.some(d => d.document_type === "cv" && d.is_default);\n   const { error } = await sb.from("job_documents").insert({ owner_id: owner.id, label: publicCv.display_name, document_type: "cv", storage_path: path, original_filename: publicCv.display_name, mime_type: "application/pdf", file_size: file.size, is_default: makeDefault });
    if (error) { await sb.storage.from("job-application-private").remove([path]); msg.textContent = error.message; return; }
    msg.textContent = "Existing CV copied into your private application library. The public portfolio copy remains unchanged.";
    loadDocuments();
