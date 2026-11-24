@@ -13,7 +13,10 @@
  let publicCv = null;
 
  function updateExternalLinks() {
-   const q = encodeURIComponent([$("#jobQuery").value.trim(), $("#jobLocation").value.trim()].filter(Boolean).join(" "));
+   const include = splitTerms($("#includeJobTerms")?.value).join(" ");
+   const excludeJobs = splitTerms($("#excludeJobTerms")?.value).map(x => "-" + x).join(" ");
+   const excludePlaces = splitTerms($("#excludeCountries")?.value).map(x => "-" + x).join(" ");
+   const q = encodeURIComponent([$("#jobQuery").value.trim(), include, $("#jobLocation").value.trim(), excludeJobs, excludePlaces].filter(Boolean).join(" "));
    const urls = {
      google: "https://www.google.com/search?ibp=htl;jobs&q=" + q,
      linkedin: "https://www.linkedin.com/jobs/search/?keywords=" + q,
@@ -68,7 +71,6 @@
  async function searchJobs(event) {
    event?.preventDefault();
    const query = $("#jobQuery").value.trim();
-   const location = $("#jobLocation").value.trim();
    updateExternalLinks();
    if (query.length < 2) { $("#searchMessage").textContent = "Enter at least two characters."; return; }
    const button = $("#searchButton");
