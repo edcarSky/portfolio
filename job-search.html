@@ -28,9 +28,29 @@
   <section class="search-panel" aria-label="Job search">
     <form id="searchForm">
       <label>Position, skill or keyword<input id="jobQuery" required minlength="2" maxlength="100" placeholder="e.g. Executive Assistant, IT Support, Administrator"></label>
-      <label>Country or location<input id="jobLocation" maxlength="80" placeholder="e.g. Saudi Arabia, Philippines, Worldwide"></label>
+      <label>Include country or location<input id="jobLocation" maxlength="120" placeholder="e.g. Saudi Arabia, Philippines, Australia"></label>
       <button class="primary-button" id="searchButton" type="submit">Search jobs <span>→</span></button>
     </form>
+    <div class="job-filter-grid" aria-label="Advanced job filters">
+      <label>Region
+        <select id="jobRegion">
+          <option value="">All regions</option>
+          <option value="southeast-asia">Southeast Asia</option>
+          <option value="east-asia">East Asia</option>
+          <option value="south-asia">South Asia</option>
+          <option value="middle-east">Middle East</option>
+          <option value="europe">Europe</option>
+          <option value="north-america">North America</option>
+          <option value="south-america">South America</option>
+          <option value="africa">Africa</option>
+          <option value="oceania">Oceania</option>
+        </select>
+      </label>
+      <label>Exclude countries<input id="excludeCountries" maxlength="180" placeholder="e.g. India, United States"></label>
+      <label>Include job titles or skills<input id="includeJobTerms" maxlength="180" placeholder="e.g. visa sponsorship, administrator"></label>
+      <label>Exclude jobs or keywords<input id="excludeJobTerms" maxlength="180" placeholder="e.g. unpaid, internship, commission only"></label>
+      <div class="filter-actions"><button type="button" id="clearJobFilters" class="quiet-button">Clear filters</button><span>Separate multiple entries with commas.</span></div>
+    </div>
     <div class="quick-searches"><span>Popular searches</span><button type="button" data-query="Executive Assistant">Executive Assistant</button><button type="button" data-query="Administrative Assistant">Administration</button><button type="button" data-query="IT Support">IT Support</button><button type="button" data-query="Operations Coordinator">Operations</button></div>
   </section>
 
@@ -97,6 +117,6 @@
 </dialog>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
-<script src="jobs.js?v=20261124-1"></script>
+<script src="jobs.js?v=20261124-2"></script>
 </body>
 </html>
