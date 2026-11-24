@@ -173,3 +173,17 @@ Configuration selected by owner: worldwide coverage, public job discovery, hybri
 | Global onsite vacancy coverage | PARTIAL | Current live API coverage is worldwide remote plus Europe and UK regional listings. Add further providers for other local markets. |
 
 Source is merged and the GitHub Pages deployment succeeded. Public browser rendering and owner-session workflows still need a direct device test. Do not claim exhaustive global onsite coverage or automatic submission to external employer systems.
+
+
+## Follow-up repair — Job filters, header profile icon, slides and YouTube thumbnail (24 November 2026)
+- Job Search Center now includes region selection for Southeast Asia, East Asia, South Asia, Middle East, Europe, North America, South America, Africa and Oceania.
+- Added include-country, exclude-country, include-job-keyword and exclude-job-keyword filters. Multiple values are comma- or semicolon-separated.
+- Filters operate on the provider results returned for the current search. The initial provider result pool is capped at 50 and still does not represent all local/onsite jobs worldwide.
+- Fixed two literal escaped newline sequences in `jobs.js` that would otherwise cause a JavaScript parse error.
+- Main homepage previously linked `slides.css` but did not load `slides.js`. Added the script, restoring the five-slide intro controller, auto-advance every six seconds, arrows, dots and touch swipe.
+- Updated the creator slide's secondary CTA to open the user's main YouTube channel: `https://www.youtube.com/channel/UCoz2lfYpVjxYmBp2Z9MZ25g/`.
+- Supabase `site_settings.profile_photo` contains a published profile image URL. Homepage now applies this image to the header icon, favicon/apple-touch icon and intro profile panels.
+- The local featured thumbnail asset was missing from GitHub. Replaced it with the official YouTube thumbnail fallback for the existing featured video ID `3TjTSFc8TnQ`.
+- Located the original composite brand upload in public Supabase Storage: `profile/1795471858442-icon_logo_profile_photo_bg_watermarks.jpg`. Added an Admin button to load that existing image into the cropper. Owner selects the desired target type and crop position, then publishes a separate 1:1 profile/logo/watermark or 16:9 background/video thumbnail.
+- Current `site_settings` has `profile_photo` only. Separate Team logo, hero background, watermark and custom video thumbnail values are not yet published. The existing YouTube thumbnail is the safe fallback.
+- Syntax validation passed for `jobs.js`, `app.js`, `slides.js` and `admin.js`. Latest GitHub Pages deployment is pending verification.
