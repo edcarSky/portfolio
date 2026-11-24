@@ -131,3 +131,45 @@ Verification: source fetched after update; confirmed three teaser cards, three n
 - Update this dossier to reflect the deployment and the user's instruction not to change red styling again until visual review.
 - Prepare a fresh offline ZIP from the same latest source revision after dossier commit, verify archive integrity and record the exact commit SHA.
 - Do not label the offline ZIP current until it is generated from the final updated repository revision and verified.
+
+
+## Job Search & Application Center — 24 November 2026
+Configuration selected by owner: worldwide coverage, public job discovery, hybrid application preparation and external apply links.
+
+### Source and backend changes
+- Feature branch: `feature/job-search-application-center`.
+- New public page: `job-search.html`, responsive stylesheet `jobs.css`, client logic `jobs.js`.
+- Main portfolio navigation and owner Admin header link to the Job Search Center.
+- Supabase Edge Function `jobs-search` is ACTIVE, version 2, with JWT verification disabled for public read-only search. It validates keyword input, fetches providers server-side, normalizes descriptions, validates HTTPS application URLs, deduplicates results and returns provider availability.
+- Current API sources: Remotive worldwide remote listings, Arbeitnow Europe and Arbeitnow UK. Arbeitnow attribution links are displayed. The provider set does not represent all local/on-site vacancies worldwide.
+- External search shortcuts: Google Jobs, LinkedIn, Indeed and Jooble.
+- The public page never exposes CV files or application history. The owner-only area uses Supabase Auth and checks the owner email before showing private functions.
+
+### Database and privacy
+- Added `job_documents` and `job_applications`, both with RLS enabled and owner_id = auth.uid() policies.
+- Added private Storage bucket `job-application-private`, 15 MB PDF limit, owner-folder policies for select/insert/update/delete.
+- Revoked anon table privileges on both new tables. Verified authenticated SELECT grants remain and anon SELECT grants are false.
+- Existing public CV record in `public_documents` was not changed. The Job Center includes an owner-only action to copy the published CV into the private application bucket.
+- Existing public portfolio document bucket and profile assets were not modified.
+- Migration versions: `20261124090149`, `20261124090250`, `20261124090301`.
+- Security advisor after initial migration: no new table or storage policy findings; existing warning remains for leaked-password protection disabled. Performance advisor showed the existing inquiry multiple-permissive-policy warning plus two unindexed application-document foreign keys; indexes were added in migration `20261124090301`.
+
+### Verification matrix
+| Item | Status | Evidence |
+|---|---|---|
+| Existing GitHub repo audited | PASS | Source and project tree inspected on main. |
+| Existing Supabase project | PASS | ACTIVE_HEALTHY, PostgreSQL 17. |
+| New database tables | PASS | Both tables present with RLS enabled. |
+| Anonymous table access | PASS | anon SELECT privilege false for both tables. |
+| Private PDF bucket | PASS | Bucket exists, public=false, PDF-only, 15 MB. |
+| Owner RLS policies | PASS | Policies verified against auth.uid() and owner folder prefix. |
+| Edge Function deployment | PASS | jobs-search ACTIVE, version 2, verify_jwt=false. |
+| Existing public CV preserved | PASS | Existing published CV row remains unchanged. |
+| Existing CV import action | SOURCE ADDED | Browser upload/import still needs owner session test. |
+| Live API responses in browser | NOT TESTED | Edge Function source/deployment verified; no browser invocation performed. |
+| Owner login and PDF upload | NOT TESTED | Requires browser session and owner password. |
+| Application save/status workflow | NOT TESTED | Requires browser end-to-end test. |
+| GitHub Pages deployment | PENDING | Feature branch not merged to main. |
+| Global onsite vacancy coverage | PARTIAL | Current live API coverage is worldwide remote plus Europe and UK regional listings. Add further providers for other local markets. |
+
+Do not report the feature as live on the public site until the feature branch is merged to main and the GitHub Pages deployment succeeds. Do not claim full global vacancy coverage or end-to-end application submission.
