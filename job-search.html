@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Search worldwide remote vacancies, review employer details and prepare applications with your private edcarSky document library.">
+<meta name="theme-color" content="#101827">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Job Search & Application Center | edcarSky</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="jobs.css?v=20261124-1">
+</head>
+<body>
+<header class="jobs-header">
+  <a class="brand" href="index.html"><span class="brand-mark">ET</span><span>edcar<span>Sky™</span><small>JOB SEARCH CENTER</small></span></a>
+  <a class="back-link" href="index.html">← Portfolio</a>
+</header>
+<main class="jobs-shell">
+  <section class="jobs-hero">
+    <p class="eyebrow">WORLDWIDE JOB SEARCH</p>
+    <h1>Find your next<br><em>opportunity.</em></h1>
+    <p class="hero-copy">Search remote vacancies from employers worldwide. Review the role, employer, location and original listing before applying.</p>
+    <div class="source-note"><span class="live-dot"></span> Live listings via Remotive · Worldwide remote roles</div>
+  </section>
+
+  <section class="search-panel" aria-label="Job search">
+    <form id="searchForm">
+      <label>Position, skill or keyword<input id="jobQuery" required minlength="2" maxlength="100" placeholder="e.g. Executive Assistant, IT Support, Administrator"></label>
+      <label>Country or location<input id="jobLocation" maxlength="80" placeholder="e.g. Saudi Arabia, Philippines, Worldwide"></label>
+      <button class="primary-button" id="searchButton" type="submit">Search jobs <span>→</span></button>
+    </form>
+    <div class="quick-searches"><span>Popular searches</span><button type="button" data-query="Executive Assistant">Executive Assistant</button><button type="button" data-query="Administrative Assistant">Administration</button><button type="button" data-query="IT Support">IT Support</button><button type="button" data-query="Operations Coordinator">Operations</button></div>
+  </section>
+
+  <section class="external-sources" aria-label="Other job search sites">
+    <div><b>Search more job boards</b><small>Open a search on another platform. Results and applications stay on that platform.</small></div>
+    <div class="source-links" id="sourceLinks">
+      <a data-source="google" target="_blank" rel="noopener">Google Jobs ↗</a>
+      <a data-source="linkedin" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a data-source="indeed" target="_blank" rel="noopener">Indeed ↗</a>
+      <a data-source="jooble" target="_blank" rel="noopener">Jooble ↗</a>
+    </div>
+  </section>
+
+  <section class="results-section">
+    <div class="section-title"><div><p class="eyebrow">JOB RESULTS</p><h2 id="resultsHeading">Search worldwide vacancies</h2></div><span id="resultCount" class="result-count"></span></div>
+    <p id="searchMessage" class="message" aria-live="polite">Enter a job title or skill to start searching. Use the country field to narrow the location.</p>
+    <div id="jobResults" class="job-results"></div>
+  </section>
+
+  <section class="owner-section" id="ownerArea">
+    <div class="owner-intro"><p class="eyebrow">PRIVATE OWNER WORKSPACE</p><h2>Prepare and track<br><em>your applications.</em></h2><p>Your CVs, cover letters and application notes are private. Visitors can search jobs, but they cannot access your personal documents or application history.</p></div>
+    <div id="ownerLogin" class="owner-card">
+      <h3>Owner sign in</h3>
+      <p>Sign in with the portfolio owner account to access your private CV library and application tracker.</p>
+      <label>Email<input id="ownerEmail" type="email" autocomplete="username" value="edcarsky@gmail.com"></label>
+      <label>Password<input id="ownerPassword" type="password" autocomplete="current-password"></label>
+      <button class="primary-button" id="ownerSignIn" type="button">Sign in</button>
+      <p id="ownerMessage" class="message" aria-live="polite"></p>
+    </div>
+    <div id="ownerWorkspace" class="hidden">
+      <div class="workspace-head"><div><span class="owner-badge">OWNER ACCESS</span><h3 id="ownerWelcome">Application workspace</h3></div><button id="ownerSignOut" class="quiet-button" type="button">Sign out</button></div>
+      <div class="workspace-grid">
+        <section class="owner-card">
+          <h3>Private CV & cover letter library</h3>
+          <p>PDF files are stored in a private bucket. Only your signed-in account has access.</p>
+          <label>Document type<select id="documentType"><option value="cv">Curriculum Vitae</option><option value="cover_letter">Cover Letter</option><option value="certificate">Certificate</option><option value="other">Other</option></select></label>
+          <label>Display name<input id="documentLabel" maxlength="140" placeholder="e.g. Executive Assistant CV 2026"></label>
+          <label>Choose PDF<input id="documentFile" type="file" accept="application/pdf"></label>
+          <label class="check-label"><input id="documentDefault" type="checkbox"> Set as default for this document type</label>
+          <button class="primary-button" id="uploadDocument" type="button">Upload private PDF</button>
+          <p id="documentMessage" class="message" aria-live="polite"></p>
+          <div id="documentList" class="document-list">Loading private documents...</div>
+        </section>
+        <section class="owner-card">
+          <h3>Application tracker</h3>
+          <p>Save a job, attach the CV and cover letter you intend to use, then track the outcome.</p>
+          <div class="tracker-summary" id="trackerSummary"></div>
+          <div id="applicationList" class="application-list">Loading applications...</div>
+        </section>
+      </div>
+    </div>
+  </section>
+  <footer class="jobs-footer"><span>edcarSky™ · Job Search & Application Center</span><a href="privacy.html">Privacy</a><a href="index.html">Return to portfolio</a></footer>
+</main>
+
+<dialog id="prepareDialog" class="prepare-dialog">
+  <form method="dialog" class="dialog-top"><div><p class="eyebrow">APPLICATION PREPARATION</p><h2 id="prepareTitle">Prepare application</h2></div><button class="close-dialog" aria-label="Close">×</button></form>
+  <div id="prepareJobMeta" class="dialog-meta"></div>
+  <label>CV to use<select id="applicationCv"><option value="">No CV selected</option></select></label>
+  <label>Cover letter to use<select id="applicationCover"><option value="">No cover letter selected</option></select></label>
+  <label>Private notes<textarea id="applicationNotes" rows="4" maxlength="5000" placeholder="Recruiter contact, requirements, follow-up date..."></textarea></label>
+  <button id="saveApplication" class="primary-button" type="button">Save to application tracker</button>
+  <p id="prepareMessage" class="message" aria-live="polite"></p>
+</dialog>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="jobs.js?v=20261124-1"></script>
+</body>
+</html>
