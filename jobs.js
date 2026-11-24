@@ -6,9 +6,11 @@
  const ownerEmail = "edcarsky@gmail.com";
  const esc = (v) => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
  let jobs = [];
+ let allJobs = [];
  let documents = [];
  let selectedJob = null;
- let owner = null;\n let publicCv = null;
+ let owner = null;
+ let publicCv = null;
 
  function updateExternalLinks() {
    const q = encodeURIComponent([$("#jobQuery").value.trim(), $("#jobLocation").value.trim()].filter(Boolean).join(" "));
@@ -20,9 +22,45 @@
    };
    document.querySelectorAll("[data-source]").forEach(a => a.href = urls[a.dataset.source]);
  }
+ const regionCountries = {
+   "southeast-asia": ["philippines","indonesia","malaysia","singapore","thailand","vietnam","brunei","cambodia","laos","myanmar","timor-leste"],
+   "east-asia": ["china","japan","south korea","korea","taiwan","hong kong","mongolia","macau"],
+   "south-asia": ["india","pakistan","bangladesh","sri lanka","nepal","bhutan","maldives","afghanistan"],
+   "middle-east": ["saudi arabia","united arab emirates","uae","qatar","kuwait","bahrain","oman","jordan","israel","iraq","iran","lebanon","yemen","syria","turkey","türkiye"],
+   "europe": ["europe","united kingdom","uk","england","scotland","wales","ireland","germany","france","netherlands","belgium","luxembourg","switzerland","austria","italy","spain","portugal","poland","czechia","czech republic","slovakia","hungary","romania","bulgaria","greece","sweden","norway","denmark","finland","iceland","estonia","latvia","lithuania","ukraine","serbia","croatia","slovenia","albania","cyprus","malta"],
+   "north-america": ["united states","usa","u.s.","canada","mexico","puerto rico"],
+   "south-america": ["brazil","argentina","chile","colombia","peru","ecuador","uruguay","paraguay","bolivia","venezuela","guyana","suriname"],
+   "africa": ["south africa","nigeria","kenya","egypt","ghana","morocco","algeria","tunisia","ethiopia","uganda","tanzania","rwanda","senegal","ivory coast","cote d'ivoire","cameroon","zambia","zimbabwe","botswana"],
+   "oceania": ["australia","new zealand","fiji","papua new guinea","samoa","tonga","vanuatu"]
+ };
+ const splitTerms = value => String(value || "").split(/[,;\n]/).map(x => x.trim().toLowerCase()).filter(Boolean);
+ const normalize = value => String(value || "").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+ function applyFilters() {
+   const includeCountries = splitTerms($("#jobLocation").value).map(normalize);
+   const excludeCountries = splitTerms($("#excludeCountries").value).map(normalize);
+   const includeTerms = splitTerms($("#includeJobTerms").value).map(normalize);
+   const excludeTerms = splitTerms($("#excludeJobTerms").value).map(normalize);
+   const region = $("#jobRegion").value;
+   jobs = allJobs.filter(job => {
+     const place = normalize(job.location);
+     const searchable = normalize([job.title,job.company,job.description,job.category,job.employment_type,...(job.tags||[])].join(" "));
+     if (includeCountries.length && !includeCountries.some(country => place.includes(country))) return false;
+     if (excludeCountries.some(country => place.includes(country))) return false;
+     if (region && !(regionCountries[region]||[]).some(country => place.includes(normalize(country)))) return false;
+     if (includeTerms.length && !includeTerms.some(term => searchable.includes(term))) return false;
+     if (excludeTerms.some(term => searchable.includes(term))) return false;
+     return true;
+   });
+   renderJobs();
+   if (allJobs.length) {
+     $("#searchMessage").textContent = jobs.length
+       ? "Showing " + jobs.length + " matching listings after your region, country and job-keyword filters. Open the original listing to confirm requirements and application details."
+       : "No listings match the selected filters. Remove an exclusion or choose a broader region, country or keyword.";
+   }
+ }
  function renderJobs() {
    const host = $("#jobResults");
-   $("#resultCount").textContent = jobs.length ? jobs.length + " listings" : "";
+   $("#resultCount").textContent = jobs.length ? jobs.length + " matching / " + allJobs.length + " fetched" : (allJobs.length ? "0 matching" : "");
    if (!jobs.length) { host.innerHTML = ""; return; }
    host.innerHTML = jobs.map((j, i) => '<article class="job-card"><div class="job-company">' + esc(j.company) + '</div><h3>' + esc(j.title) + '</h3><div class="job-meta"><span>' + esc(j.location) + '</span>' + (j.employment_type ? '<span>' + esc(j.employment_type) + '</span>' : '') + (j.salary ? '<span>' + esc(j.salary) + '</span>' : '') + '</div><p class="job-description">' + esc(j.description || "Open the original listing to review the full role description and requirements.") + '</p><div class="job-meta"><span>Source: ' + esc(j.source) + '</span>' + (j.published_at ? '<span>Posted ' + esc(new Date(j.published_at).toLocaleDateString()) + '</span>' : '') + '</div><div class="job-actions"><a class="apply-link" href="' + esc(j.url) + '" target="_blank" rel="noopener noreferrer">View job & apply ↗</a>' + (owner ? '<button class="save-job" type="button" data-prepare="' + i + '">Save & prepare</button>' : '') + '</div></article>').join("");
    host.querySelectorAll("[data-prepare]").forEach(b => b.addEventListener("click", () => openPrepare(jobs[Number(b.dataset.prepare)])));
@@ -39,16 +77,26 @@
    $("#resultsHeading").textContent = "Results for " + query;
    jobs = []; renderJobs();
    if (!sb) { $("#searchMessage").textContent = "Search service is not configured. Use the external job-board links below."; button.disabled = false; button.textContent = "Search jobs →"; return; }
-   const { data, error } = await sb.functions.invoke("jobs-search", { body: { query, location, limit: 40 } });
+   const { data, error } = await sb.functions.invoke("jobs-search", { body: { query, location: "", limit: 50 } });
    button.disabled = false; button.textContent = "Search jobs →";
    if (error || data?.error) { $("#searchMessage").textContent = data?.error || "The job search service is unavailable. Use the external job-board links."; return; }
-   jobs = data.jobs || [];
-   $("#searchMessage").textContent = jobs.length ? "Showing live remote vacancies. Open the original listing to confirm the employer's requirements, closing date and application method." : "No matching remote listings were returned. Try a broader keyword or search another job board.";
-   renderJobs();
+   allJobs = data.jobs || [];
+   applyFilters();
+   const sourceNames = Object.entries(data.sources || {}).filter(([,status]) => status === "available").map(([name]) => name).join(", ");
+   if (sourceNames) $("#searchMessage").textContent += " Sources: " + sourceNames + ".";
  }
  $("#searchForm").addEventListener("submit", searchJobs);
  $("#jobQuery").addEventListener("input", updateExternalLinks);
  $("#jobLocation").addEventListener("input", updateExternalLinks);
+ ["#jobRegion","#excludeCountries","#includeJobTerms","#excludeJobTerms"].forEach(selector => {
+   $(selector).addEventListener("input", applyFilters);
+   $(selector).addEventListener("change", applyFilters);
+ });
+ $("#jobLocation").addEventListener("change", applyFilters);
+ $("#clearJobFilters").addEventListener("click", () => {
+   ["#jobRegion","#jobLocation","#excludeCountries","#includeJobTerms","#excludeJobTerms"].forEach(selector => $(selector).value = "");
+   updateExternalLinks(); applyFilters();
+ });
  document.querySelectorAll("[data-query]").forEach(b => b.addEventListener("click", () => { $("#jobQuery").value = b.dataset.query; searchJobs(); }));
  updateExternalLinks();
 
@@ -93,7 +141,8 @@
    const path = owner.id + "/cv/imported-" + Date.now() + "-" + safeName;
    const { error: uploadError } = await sb.storage.from("job-application-private").upload(path, file, { contentType: "application/pdf", upsert: false });
    if (uploadError) { msg.textContent = uploadError.message; return; }
-   const makeDefault = !documents.some(d => d.document_type === "cv" && d.is_default);\n   const { error } = await sb.from("job_documents").insert({ owner_id: owner.id, label: publicCv.display_name, document_type: "cv", storage_path: path, original_filename: publicCv.display_name, mime_type: "application/pdf", file_size: file.size, is_default: makeDefault });
+   const makeDefault = !documents.some(d => d.document_type === "cv" && d.is_default);
+   const { error } = await sb.from("job_documents").insert({ owner_id: owner.id, label: publicCv.display_name, document_type: "cv", storage_path: path, original_filename: publicCv.display_name, mime_type: "application/pdf", file_size: file.size, is_default: makeDefault });
    if (error) { await sb.storage.from("job-application-private").remove([path]); msg.textContent = error.message; return; }
    msg.textContent = "Existing CV copied into your private application library. The public portfolio copy remains unchanged.";
    loadDocuments();
