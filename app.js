@@ -14,37 +14,6 @@
  $("#themeRefresh").addEventListener("click",()=>{const choices=themes.filter(x=>x!==document.body.dataset.theme);applyTheme(choices[Math.floor(Math.random()*choices.length)]);});
  function setDoc(prefix,url,name,status){if(!url)return;const v=$("#"+prefix+"View"),d=$("#"+prefix+"Download");v.href=url;d.href=url;d.removeAttribute("download");v.classList.remove("disabled");d.classList.remove("disabled");if(status)$("#"+prefix+"Status").textContent=status;}
  async function loadPublicContent(){
-  const host=$("#testimonials");
-  if(client){
-   const {data:quotes,error}=await client.from("testimonials").select("display_name,affiliation,company,message").eq("status","approved").eq("publication_consent",true);
-   if(error){host.textContent="Testimonials are temporarily unavailable. Read the original LinkedIn recommendations."; }
-   else if(!quotes?.length){host.innerHTML='<div class="testimonial-empty"><strong>LinkedIn recommendations</strong><span>Read the original recommendations using the LinkedIn button beside this panel. Additional recommendations will appear here after publication approval.</span></div>';}
-   else{
-    let current=-1;
-    const render=(index)=>{
-     if(!quotes.length)return;
-     let next=index;
-     if(quotes.length>1){while(next===current)next=Math.floor(Math.random()*quotes.length);}
-     current=next;
-     const q=quotes[current];host.replaceChildren();
-     const card=document.createElement("article");card.className="testimonial-card";card.setAttribute("aria-live","polite");
-     const heading=document.createElement("div");heading.className="testimonial-label";heading.textContent="TESTIMONIAL";
-     const quote=document.createElement("blockquote");quote.textContent="“"+q.message+"”";
-     const name=document.createElement("b");name.textContent="— "+q.display_name;
-     const meta=document.createElement("small");meta.textContent=[q.affiliation,q.company].filter(Boolean).join(" · ");
-     card.append(heading,quote,name,meta);
-     const controls=document.createElement("div");controls.className="testimonial-controls";
-     const pause=document.createElement("button");pause.type="button";pause.textContent="Pause";pause.setAttribute("aria-pressed","false");
-     const nextButton=document.createElement("button");nextButton.type="button";nextButton.textContent="Next";
-     controls.append(pause,nextButton);card.append(controls);host.append(card);
-     pause.onclick=()=>{if(rotation){clearInterval(rotation);rotation=null;pause.textContent="Play";pause.setAttribute("aria-pressed","true");}else{rotation=setInterval(()=>render(Math.floor(Math.random()*quotes.length)),5000);pause.textContent="Pause";pause.setAttribute("aria-pressed","false");}};
-     nextButton.onclick=()=>render(Math.floor(Math.random()*quotes.length));
-    };
-    render(0);
-    let rotation=quotes.length>1?setInterval(()=>render(Math.floor(Math.random()*quotes.length)),5000):null;
-   }
-  }else{host.textContent="Recommendations will appear here after the approved, consented records are connected. Read the original LinkedIn recommendations in the meantime.";}
-
   setDoc("cv","cv.html","Edcar-Tenedero-CV","Updated 23 November 2026");
   setDoc("letter","cover-letter.html","Edcar-Tenedero-Cover-Letter","Updated 23 November 2026");
   if(!client){$("#formMessage").textContent="Inquiry form setup is pending. Please contact me through WhatsApp, Messenger or email for now.";return;}
@@ -114,22 +83,130 @@
  }
  $("#inquiryForm").addEventListener("submit",async e=>{e.preventDefault();const form=e.currentTarget,msg=$("#formMessage");if(!client){msg.textContent="This form is not connected yet. Use WhatsApp, Messenger or email until backend setup is complete.";return;}const fd=new FormData(form);const payload={full_name:fd.get("full_name").trim(),company:fd.get("company").trim()||null,affiliation:fd.get("affiliation").trim()||null,email:fd.get("email").trim(),phone:fd.get("phone").trim()||null,inquiry_type:fd.get("inquiry_type"),message:fd.get("message").trim(),consent:fd.get("consent")==="on"};const {error}=await client.from("inquiries").insert(payload);if(error){msg.textContent="Your inquiry was not sent. Please use WhatsApp, Messenger or email.";return;}form.reset();msg.textContent="Thank you. Your inquiry was submitted privately.";});
  document.querySelectorAll(".video-thumb img").forEach(img=>img.addEventListener("error",()=>img.closest(".video-thumb")?.classList.add("is-fallback"),{once:true}));
- loadPublicContent().then(renderTestimonials);
+ loadPublicContent();
+ renderTestimonials();
  applyEditableContent();
 
  async function renderTestimonials(){
-  const host=$("#testimonials");if(!host)return;
-  if(!client){host.textContent="Testimonials are temporarily unavailable.";return;}
-  const {data,error}=await client.from("testimonials").select("display_name,affiliation,company,message").eq("status","approved").eq("publication_consent",true).order("created_at",{ascending:false});
-  if(error){host.textContent="Testimonials are temporarily unavailable.";return;}
-  if(!data?.length){host.innerHTML='<div class="testimonial-empty"><strong>Testimonials are being prepared.</strong><span>Approved recommendations will appear here after publication permission is confirmed.</span></div>';return;}
-  host.innerHTML=data.map((q,i)=>'<article class="testimonial-card"><div class="testimonial-label">TESTIMONIAL '+String(i+1).padStart(2,"0")+'</div><blockquote>'+escText(q.message.slice(0,210))+(q.message.length>210?'…':'')+'</blockquote><b>— '+escText(q.display_name)+'</b><small>'+escText([q.affiliation,q.company].filter(Boolean).join(" · "))+'</small><button type="button" class="testimonial-read" data-testimonial-index="'+i+'">Read full testimonial</button></article>').join("");
-  host.querySelectorAll("[data-testimonial-index]").forEach(btn=>btn.addEventListener("click",()=>{
-   const q=data[Number(btn.dataset.testimonialIndex)],modal=$("#testimonialModal");
-   $("#testimonialModalQuote").textContent="“"+q.message+"”";
-   $("#testimonialModalAuthor").textContent="— "+q.display_name+([q.affiliation,q.company].filter(Boolean).length?" · "+[q.affiliation,q.company].filter(Boolean).join(" · "):"");
-   modal.hidden=false;document.body.classList.add("modal-open");$("#testimonialModalTitle").focus();
-  }));
+  const host=$("#testimonials");
+  if(!host)return;
+  const linkedinUrl="https://www.linkedin.com/in/edcarsky/details/recommendations/?detailScreenTabIndex=2";
+  let archived=[];
+  try{
+   const response=await fetch("testimonials.json?v=20261124-1",{cache:"no-store"});
+   if(response.ok){
+    const rows=await response.json();
+    archived=(Array.isArray(rows)?rows:[]).filter(q=>q.visibility==="On"&&q.name&&q.text).map(q=>({
+     display_name:q.name,
+     affiliation:q.role||"",
+     company:"",
+     message:q.text,
+     date:q.date||"",
+     truncated:!!q.truncated,
+     source:"LinkedIn"
+    }));
+   }
+  }catch(error){console.warn("LinkedIn recommendation archive unavailable",error);}
+  let approved=[];
+  if(client){
+   const {data,error}=await client.from("testimonials")
+    .select("display_name,affiliation,company,message,created_at")
+    .eq("status","approved").eq("publication_consent",true)
+    .order("created_at",{ascending:false});
+   if(!error&&Array.isArray(data)){
+    approved=data.filter(q=>q.display_name&&q.message).map(q=>({
+     display_name:q.display_name,
+     affiliation:q.affiliation||"",
+     company:q.company||"",
+     message:q.message,
+     date:"",
+     truncated:false,
+     source:"Website"
+    }));
+   }
+  }
+  const seen=new Set();
+  const quotes=[...archived,...approved].filter(q=>{
+   const key=(q.display_name+"|"+q.message).toLowerCase();
+   if(seen.has(key))return false;
+   seen.add(key);return true;
+  });
+  if(!quotes.length){
+   host.innerHTML='<div class="testimonial-empty"><strong>Professional recommendations</strong><span>The saved LinkedIn recommendation archive is temporarily unavailable. Please use the original LinkedIn recommendations page.</span><a href="'+linkedinUrl+'" target="_blank" rel="noopener">Open LinkedIn recommendations ↗</a></div>';
+   return;
+  }
+  let deck=[],lastIndex=-1,rotationTimer=null,paused=false;
+  const refillDeck=()=>{
+   deck=quotes.map((_,i)=>i).filter(i=>i!==lastIndex);
+   for(let i=deck.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [deck[i],deck[j]]=[deck[j],deck[i]];
+   }
+  };
+  const nextIndex=()=>{
+   if(!deck.length)refillDeck();
+   return deck.pop();
+  };
+  const schedule=()=>{
+   if(paused||quotes.length<2)return;
+   clearTimeout(rotationTimer);
+   rotationTimer=setTimeout(()=>render(nextIndex()),5000+Math.floor(Math.random()*2001));
+  };
+  const render=(index)=>{
+   clearTimeout(rotationTimer);
+   lastIndex=index;
+   const q=quotes[index];
+   const card=document.createElement("article");
+   card.className="testimonial-card";
+   card.setAttribute("aria-live","polite");
+   const heading=document.createElement("div");
+   heading.className="testimonial-label";
+   heading.textContent=q.truncated?"LINKEDIN RECOMMENDATION EXCERPT":"PROFESSIONAL TESTIMONIAL";
+   const quote=document.createElement("blockquote");
+   quote.textContent="“"+q.message+"”";
+   const name=document.createElement("b");
+   name.textContent="— "+q.display_name;
+   const meta=document.createElement("small");
+   meta.textContent=[q.affiliation,q.company,q.date].filter(Boolean).join(" · ");
+   const controls=document.createElement("div");
+   controls.className="testimonial-controls";
+   const pauseButton=document.createElement("button");
+   pauseButton.type="button";
+   pauseButton.textContent=paused?"Play":"Pause";
+   pauseButton.setAttribute("aria-pressed",String(paused));
+   pauseButton.addEventListener("click",()=>{
+    paused=!paused;
+    pauseButton.textContent=paused?"Play":"Pause";
+    pauseButton.setAttribute("aria-pressed",String(paused));
+    if(paused)clearTimeout(rotationTimer);else schedule();
+   });
+   const nextButton=document.createElement("button");
+   nextButton.type="button";
+   nextButton.textContent="Next";
+   nextButton.addEventListener("click",()=>render(nextIndex()));
+   const readButton=document.createElement("button");
+   readButton.type="button";
+   readButton.textContent="Read full "+(q.truncated?"excerpt":"recommendation");
+   readButton.className="testimonial-read";
+   readButton.addEventListener("click",()=>{
+    $("#testimonialModalQuote").textContent="“"+q.message+"”";
+    $("#testimonialModalAuthor").textContent="— "+q.display_name+([q.affiliation,q.company,q.date].filter(Boolean).length?" · "+[q.affiliation,q.company,q.date].filter(Boolean).join(" · "):"");
+    $("#testimonialModal").hidden=false;
+    document.body.classList.add("modal-open");
+    $("#testimonialModalTitle").focus();
+   });
+   const sourceLink=document.createElement("a");
+   sourceLink.href=linkedinUrl;
+   sourceLink.target="_blank";
+   sourceLink.rel="noopener";
+   sourceLink.textContent="View original LinkedIn recommendations ↗";
+   sourceLink.className="testimonial-source-link";
+   controls.append(pauseButton,nextButton,readButton,sourceLink);
+   card.append(heading,quote,name,meta,controls);
+   host.replaceChildren(card);
+   schedule();
+  };
+  render(nextIndex());
  }
  function escText(value){return String(value??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
  document.querySelectorAll("[data-close-testimonial]").forEach(x=>x.addEventListener("click",()=>{$("#testimonialModal").hidden=true;document.body.classList.remove("modal-open");}));
