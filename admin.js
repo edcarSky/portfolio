@@ -99,6 +99,21 @@
   stage.style.aspectRatio=String(ratio);
   stage.innerHTML='<img id="cropImage" src="'+assetUrl+'" alt="Crop preview" style="width:100%;height:100%;object-fit:cover;object-position:'+$("#cropX").value+'% '+$("#cropY").value+'%;transform:scale('+($("#cropZoom").value/100)+');transform-origin:center">';
  }
+ $("#loadSavedSource").addEventListener("click",async()=>{
+  const msg=$("#assetMessage");
+  msg.textContent="Loading your previously uploaded brand image...";
+  const sourceUrl="https://cslsyziwxpnmgbatebda.supabase.co/storage/v1/object/public/portfolio-assets/profile/1795471858442-icon_logo_profile_photo_bg_watermarks.jpg";
+  try{
+   const response=await fetch(sourceUrl);
+   if(!response.ok)throw new Error("Saved source image is unavailable ("+response.status+").");
+   const blob=await response.blob();
+   assetFile=new File([blob],"edcarsky-icon-logo-profile-photo-background-watermarks.jpg",{type:blob.type||"image/jpeg"});
+   if(assetUrl)URL.revokeObjectURL(assetUrl);
+   assetUrl=URL.createObjectURL(assetFile);
+   updateCropStage();
+   msg.textContent="Your saved source image is loaded. Select the target asset type above, adjust the crop and publish.";
+  }catch(error){msg.textContent=error.message||"Could not load the saved source image.";}
+ });
  $("#assetFile").addEventListener("change",()=>{
   const file=$("#assetFile").files[0];assetFile=file||null;
   if(assetUrl)URL.revokeObjectURL(assetUrl);
