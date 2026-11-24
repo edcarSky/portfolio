@@ -120,7 +120,7 @@
  function showWorkspace() {
    $("#ownerLogin").classList.add("hidden"); $("#ownerWorkspace").classList.remove("hidden");
    $("#ownerWelcome").textContent = "Signed in as " + owner.email;
-   renderJobs(); loadDocuments(); loadApplications();
+   renderJobs(); loadDocuments(); loadApplications(); loadAtsVersions();
  }
  async function loadDocuments() {
    const { data, error } = await sb.from("job_documents").select("*").order("created_at", { ascending: false });
@@ -128,6 +128,7 @@
    documents = data || [];
    const cv = documents.filter(d => d.document_type === "cv");
    const cover = documents.filter(d => d.document_type === "cover_letter");
+   $("#atsSourcePdf").innerHTML = '<option value="">Select an uploaded private CV</option>' + cv.map(d => '<option value="' + d.id + '">' + esc(d.label) + '</option>').join("");
    $("#applicationCv").innerHTML = '<option value="">No CV selected</option>' + cv.map(d => '<option value="' + d.id + '">' + esc(d.label) + (d.is_default ? " · Default" : "") + '</option>').join("");
    $("#applicationCover").innerHTML = '<option value="">No cover letter selected</option>' + cover.map(d => '<option value="' + d.id + '">' + esc(d.label) + (d.is_default ? " · Default" : "") + '</option>').join("");
    $("#documentList").innerHTML = documents.length ? documents.map(d => '<div class="document-item"><strong>' + esc(d.label) + (d.is_default ? " · Default" : "") + '</strong><small>' + esc(d.document_type.replace("_"," ")) + ' · ' + (d.file_size / 1048576).toFixed(2) + ' MB</small><button type="button" data-download-doc="' + d.id + '">Open private PDF</button> <button type="button" data-default-doc="' + d.id + '">Set as default</button></div>').join("") : '<p class="message">No private documents uploaded yet.</p>';
@@ -214,6 +215,111 @@
    msg.textContent = "Job saved to your private application tracker.";
    loadApplications();
  });
+
+ async function extractAtsPdf() {
+   const doc = documents.find(d => d.id === $("#atsSourcePdf").value);
+   const msg = $("#atsMessage");
+   if (!doc) { msg.textContent = "Select a private CV PDF first."; return; }
+   if (!window.pdfjsLib) { msg.textContent = "PDF text reader did not load. Paste the CV text manually."; return; }
+   msg.textContent = "Opening private PDF and extracting text...";
+   const { data, error } = await sb.storage.from("job-application-private").createSignedUrl(doc.storage_path, 90);
+   if (error) { msg.textContent = error.message; return; }
+   try {
+     pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+     const pdf = await pdfjsLib.getDocument(data.signedUrl).promise;
+     const pages = [];
+     for (let n=1; n<=pdf.numPages; n++) {
+       const page = await pdf.getPage(n);
+       const content = await page.getTextContent();
+       pages.push(content.items.map(item => item.str || "").join(" "));
+     }
+     const text = pages.join("\n\n");
+     if (text.trim().length < 300) throw new Error("This PDF appears scanned or image-only. Use OCR or paste its text manually.");
+     $("#atsSourceText").value = text.slice(0,60000);
+     msg.textContent = "Text extracted from " + doc.label + ". Check the text for missing characters and details before generating.";
+   } catch (e) { msg.textContent = e.message || "Could not extract text from this PDF."; }
+ }
+ $("#atsExtractPdf").addEventListener("click", extractAtsPdf);
+
+ async function runAts(mode) {
+   if (!owner) return;
+   const sourceCv = $("#atsSourceText").value.trim();
+   const targetTitle = $("#atsTargetTitle").value.trim();
+   const jobDescription = $("#atsJobDescription").value.trim();
+   const consent = $("#atsGoogleConsent").checked;
+   const msg = $("#atsMessage");
+   if (sourceCv.length < 300) { msg.textContent = "Load your original CV and check that its extracted text is complete."; return; }
+   if (!targetTitle) { msg.textContent = "Enter the target job title."; return; }
+   if (!consent) { msg.textContent = "Review and tick the Google Gemini Free data-processing consent before sending CV data."; return; }
+   if (mode === "tailor" && jobDescription.length < 80) { msg.textContent = "Paste the full job description before tailoring."; return; }
+   const buttons = [$("#atsRefresh"),$("#atsTailor")];
+   buttons.forEach(b=>b.disabled=true);
+   msg.textContent = "Preparing ATS document with Gemini Free. Your original CV is not overwritten.";
+   try {
+     const { data: profile, error: profileError } = await sb.from("cv_profiles").upsert({
+       owner_id: owner.id, profile_name: "Master CV", source_text: sourceCv,
+       target_title: targetTitle, target_description: jobDescription || null,
+       source_updated_at: new Date().toISOString(), updated_at: new Date().toISOString()
+     }, { onConflict: "owner_id" }).select().single();
+     if (profileError) throw profileError;
+     const { data: sessionData } = await sb.auth.getSession();
+     const { data, error } = await sb.functions.invoke("ats-cv-assistant", {
+       body: { mode, sourceCv, targetTitle, company: $("#atsCompany").value.trim(), jobDescription, updates: $("#atsUpdates").value.trim(), googleAiDataConsent: consent },
+       headers: { Authorization: "Bearer " + sessionData.session.access_token }
+     });
+     if (error) throw new Error(data?.error || error.message);
+     if (data?.error) throw new Error(data.error);
+     $("#atsCvOutput").value = data.cv_text || "";
+     $("#atsCoverOutput").value = data.cover_letter_text || "";
+     $("#atsAnalysis").textContent = JSON.stringify(data.keyword_analysis || {}, null, 2) + (data.notes?.length ? "\n\nNotes to verify:\n" + data.notes.join("\n") : "");
+     $("#atsOutput").classList.remove("hidden");
+     const label = (mode === "tailor" ? "Tailored · " : "ATS refreshed · ") + targetTitle + " · " + new Date().toLocaleDateString();
+     const { error: versionError } = await sb.from("cv_versions").insert({
+       owner_id: owner.id, profile_id: profile.id, version_type: mode === "tailor" ? "job_tailored" : "master_refresh",
+       version_label: label, target_job_title: targetTitle, target_company: $("#atsCompany").value.trim() || null,
+       job_description: mode === "tailor" ? jobDescription : null, cv_text: data.cv_text,
+       cover_letter_text: data.cover_letter_text || null, keyword_analysis: data.keyword_analysis || {}, model_name: data.model || "gemini-3.8-flash"
+     });
+     if (versionError) throw versionError;
+     msg.textContent = "Generated and saved a new version. Review it below. The original CV and previous versions remain unchanged.";
+     loadAtsVersions();
+   } catch (e) {
+     msg.textContent = e.message || "ATS generation failed. No paid fallback was used.";
+   } finally { buttons.forEach(b=>b.disabled=false); }
+ }
+ $("#atsRefresh").addEventListener("click",()=>runAts("refresh"));
+ $("#atsTailor").addEventListener("click",()=>runAts("tailor"));
+ $("#atsDownloadCv").addEventListener("click",()=>{
+   const content = $("#atsCvOutput").value.trim();
+   if (!content) return;
+   const htmlDoc = "<html><head><meta charset='utf-8'><style>body{font-family:Arial,sans-serif;font-size:10.5pt;line-height:1.35;white-space:pre-wrap;margin:0.7in}</style></head><body>" + esc(content).replace(/\n/g,"<br>") + "</body></html>";
+   const blob = new Blob([htmlDoc],{type:"application/msword"});
+   const url = URL.createObjectURL(blob);
+   const a = document.createElement("a"); a.href=url; a.download="Edcar-ATS-CV.doc"; a.click(); URL.revokeObjectURL(url);
+ });
+ async function loadAtsVersions() {
+   if (!owner) return;
+   const { data, error } = await sb.from("cv_versions").select("id,version_label,version_type,created_at").order("created_at",{ascending:false}).limit(20);
+   if (error) { $("#atsVersions").textContent=error.message; return; }
+   $("#atsVersions").innerHTML = (data||[]).map(v=>'<div class="document-item"><strong>'+esc(v.version_label)+'</strong><small>'+esc(v.version_type.replace("_"," "))+' · '+new Date(v.created_at).toLocaleString()+'</small><button type="button" data-ats-version="'+v.id+'">Load version</button></div>').join("") || "No saved ATS versions yet.";
+   $("#atsVersions").querySelectorAll("[data-ats-version]").forEach(b=>b.addEventListener("click",async()=>{
+     const {data:version,error}=await sb.from("cv_versions").select("*").eq("id",b.dataset.atsVersion).single();
+     if(error){$("#atsMessage").textContent=error.message;return;}
+     $("#atsCvOutput").value=version.cv_text||"";$("#atsCoverOutput").value=version.cover_letter_text||"";
+     $("#atsAnalysis").textContent=JSON.stringify(version.keyword_analysis||{},null,2);
+     $("#atsOutput").classList.remove("hidden");$("#atsMessage").textContent="Loaded saved version. The master CV source remains unchanged.";
+   }));
+ }
+ $("#tailorFromJob").addEventListener("click",()=>{
+   if(!selectedJob)return;
+   $("#atsTargetTitle").value=selectedJob.title||"";
+   $("#atsCompany").value=selectedJob.company||"";
+   $("#atsJobDescription").value=selectedJob.description||"";
+   $("#prepareDialog").close();
+   $("#atsStudio").scrollIntoView({behavior:"smooth",block:"start"});
+   $("#atsMessage").textContent="Job details transferred. Confirm the full description and source CV, then select Tailor CV + Cover Letter for This Job.";
+ });
+
  async function loadApplications() {
    const { data, error } = await sb.from("job_applications").select("*").order("updated_at", { ascending: false });
    if (error) { $("#applicationList").textContent = error.message; return; }
