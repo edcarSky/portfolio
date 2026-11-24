@@ -8,7 +8,7 @@
  let jobs = [];
  let documents = [];
  let selectedJob = null;
- let owner = null;
+ let owner = null;\n let publicCv = null;
 
  function updateExternalLinks() {
    const q = encodeURIComponent([$("#jobQuery").value.trim(), $("#jobLocation").value.trim()].filter(Boolean).join(" "));
@@ -83,6 +83,21 @@
    $("#documentList").querySelectorAll("[data-download-doc]").forEach(b => b.addEventListener("click", () => openPrivateDocument(b.dataset.downloadDoc)));
    $("#documentList").querySelectorAll("[data-default-doc]").forEach(b => b.addEventListener("click", () => setDefaultDocument(b.dataset.defaultDoc)));
  }
+ $("#importPublicCv").addEventListener("click", async () => {
+   const msg = $("#documentMessage");
+   if (!owner || !publicCv) return;
+   msg.textContent = "Copying your existing published CV into private storage...";
+   const { data: file, error: downloadError } = await sb.storage.from("portfolio-documents").download(publicCv.storage_path);
+   if (downloadError || !file) { msg.textContent = downloadError?.message || "Could not download the existing CV."; return; }
+   const safeName = (publicCv.display_name || "Existing-CV.pdf").replace(/[^a-zA-Z0-9._-]/g, "_");
+   const path = owner.id + "/cv/imported-" + Date.now() + "-" + safeName;
+   const { error: uploadError } = await sb.storage.from("job-application-private").upload(path, file, { contentType: "application/pdf", upsert: false });
+   if (uploadError) { msg.textContent = uploadError.message; return; }
+   const { error } = await sb.from("job_documents").insert({ owner_id: owner.id, label: publicCv.display_name, document_type: "cv", storage_path: path, original_filename: publicCv.display_name, mime_type: "application/pdf", file_size: file.size, is_default: true });
+   if (error) { await sb.storage.from("job-application-private").remove([path]); msg.textContent = error.message; return; }
+   msg.textContent = "Existing CV copied into your private application library. The public portfolio copy remains unchanged.";
+   loadDocuments();
+ });
  $("#uploadDocument").addEventListener("click", async () => {
    const file = $("#documentFile").files[0], type = $("#documentType").value, label = $("#documentLabel").value.trim() || file?.name || "";
    const msg = $("#documentMessage");
@@ -155,7 +170,7 @@
    $("#applicationList").innerHTML = list.length ? list.map(x => '<div class="application-item"><strong>' + esc(x.job_title) + '</strong><small>' + esc(x.company_name) + ' · ' + esc(x.job_location) + '</small><small><a href="' + esc(x.job_url) + '" target="_blank" rel="noopener">Original listing ↗</a> · Added ' + new Date(x.created_at).toLocaleDateString() + '</small><select data-status-id="' + x.id + '">' + ["saved","preparing","applied","interview","offer","rejected","closed"].map(s => '<option value="' + s + '"' + (x.status === s ? " selected" : "") + '>' + s + '</option>').join("") + '</select></div>').join("") : '<p class="message">No saved jobs yet. Search above and choose Save & prepare.</p>';
    $("#applicationList").querySelectorAll("[data-status-id]").forEach(sel => sel.addEventListener("change", async () => {
      const status = sel.value, id = sel.dataset.statusId;
-     const { error: updateError } = await sb.from("job_applications").update({ status, applied_at: status === "applied" ? new Date().toISOString() : null, updated_at: new Date().toISOString() }).eq("id", id);
+     const patch = { status, updated_at: new Date().toISOString() }; if (status === "applied") patch.applied_at = new Date().toISOString(); const { error: updateError } = await sb.from("job_applications").update(patch).eq("id", id);
      if (updateError) $("#applicationList").insertAdjacentHTML("afterbegin", '<p class="message">' + esc(updateError.message) + '</p>');
      else loadApplications();
    }));
