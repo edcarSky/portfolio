@@ -151,7 +151,7 @@ Configuration selected by owner: worldwide coverage, public job discovery, hybri
 - Revoked anon table privileges on both new tables. Verified authenticated SELECT grants remain and anon SELECT grants are false.
 - Existing public CV record in `public_documents` was not changed. The Job Center includes an owner-only action to copy the published CV into the private application bucket.
 - Existing public portfolio document bucket and profile assets were not modified.
-- Migration versions: `20261124090149`, `20261124090250`, `20261124090301`.
+- Migration versions: `20261124090149`, `20261124090250`, `20261124090301`, `20261124090458`.
 - Security advisor after initial migration: no new table or storage policy findings; existing warning remains for leaked-password protection disabled. Performance advisor showed the existing inquiry multiple-permissive-policy warning plus two unindexed application-document foreign keys; indexes were added in migration `20261124090301`.
 
 ### Verification matrix
