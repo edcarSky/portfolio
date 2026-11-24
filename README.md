@@ -55,3 +55,17 @@ A GitHub commit confirms source was written to main. It does not, by itself, pro
 - Application records store job details, source URL, selected CV/cover letter references, notes and status. The owner must submit applications on the employer's original website unless that employer offers an authorized integration.
 - Owner access is restricted in the UI to `edcarsky@gmail.com`; database RLS is keyed to `auth.uid()`.
 - Browser end-to-end search, sign-in, private upload and application-save tests are still required before marking the feature fully verified.
+
+
+## Job Center and portfolio visual repair (24 November 2026)
+- Added filters for Southeast Asia, East Asia, South Asia, Middle East, Europe, North America, South America, Africa and Oceania.
+- Country/location include and country exclusion accept comma-separated entries.
+- Job title/skill include and job keyword exclusion accept comma-separated entries.
+- Search filters apply to the live provider results. Provider API coverage still limits the initial result pool.
+- Fixed escaped newline characters in `jobs.js` that previously prevented the private application workspace script from parsing.
+- Loaded `slides.js` from the homepage. The five-slide intro now has its actual controller script, 6-second auto-advance, touch swipe, arrows and slide dots.
+- The creator slide now links directly to the official main YouTube channel.
+- The profile photo is already published in Supabase `site_settings.profile_photo`; homepage code now applies it to the header icon, browser icon and all intro profile panels.
+- The featured video thumbnail now falls back to the official YouTube thumbnail for video `3TjTSFc8TnQ`.
+- Found the user's original composite brand image in `portfolio-assets/profile/1795471858442-icon_logo_profile_photo_bg_watermarks.jpg`. Added an Admin action to load that saved source into the cropper, so the user can select and publish the separate Team logo, watermark, background or custom 16:9 thumbnail without uploading the original again.
+- The composite image has not yet been cropped into separate logo and custom-thumbnail assets. The current official YouTube thumbnail is the fallback until that crop is published.
