@@ -82,6 +82,7 @@
     </div>
     <div id="ownerWorkspace" class="hidden">
       <div class="workspace-head"><div><span class="owner-badge">OWNER ACCESS</span><h3 id="ownerWelcome">Application workspace</h3></div><button id="ownerSignOut" class="quiet-button" type="button">Sign out</button></div>
+<section class="owner-card ats-studio" id="atsStudio"><div class="ats-heading"><div><span class="owner-badge">ATS CV STUDIO</span><h3>Master CV and ATS Refresh</h3><p>Keep one verified master CV, then create a separate ATS version for each vacancy. Original source remains unchanged.</p></div><span class="ats-model">Gemini Free · no paid fallback</span></div><label>Load source from your private CV PDF<select id="atsSourcePdf"><option value="">Select an uploaded private CV</option></select></label><button id="atsExtractPdf" class="quiet-button" type="button">Extract text from selected PDF</button><label>Master CV source text<textarea id="atsSourceText" rows="12" maxlength="60000" placeholder="Extract your existing CV PDF above, or paste the complete text from your original CV. Check names, dates, employers and contact details before generating."></textarea></label><div class="ats-fields"><label>Target job title<input id="atsTargetTitle" maxlength="160" placeholder="e.g. Executive Assistant / IT Officer"></label><label>Company (for job-specific version)<input id="atsCompany" maxlength="160" placeholder="Company name"></label></div><label>Job description, required qualifications and responsibilities<textarea id="atsJobDescription" rows="7" maxlength="30000" placeholder="Paste the complete vacancy description here for a job-specific CV and cover letter."></textarea></label><label>Verified new experience or corrections<textarea id="atsUpdates" rows="4" maxlength="8000" placeholder="Optional. Add only factual updates not yet reflected in your original CV. Do not add unverified claims."></textarea></label><label class="check-label"><input id="atsGoogleConsent" type="checkbox"> I understand that the CV and job details I submit are processed by Google Gemini Free. Google's Free Tier terms state that submitted content is used to improve Google products. I have reviewed the privacy implications before sending.</label><div class="ats-actions"><button id="atsRefresh" class="primary-button" type="button">ATS CV Refresh</button><button id="atsTailor" class="primary-button" type="button">Tailor CV + Cover Letter for This Job</button></div><p id="atsMessage" class="message" aria-live="polite">Upload or select your current CV, extract and verify its text, then run ATS CV Refresh.</p><div id="atsOutput" class="ats-output hidden"><div class="ats-output-head"><h4>Generated ATS CV</h4><button id="atsDownloadCv" class="quiet-button" type="button">Download editable CV (.doc)</button></div><textarea id="atsCvOutput" rows="18"></textarea><h4>Job-specific cover letter</h4><textarea id="atsCoverOutput" rows="10"></textarea><h4>Keyword and requirement analysis</h4><pre id="atsAnalysis"></pre><p class="message">Review every detail before using this document. Confirm dates, titles, qualifications and contact information.</p></div><div class="ats-version-list"><h4>Saved CV versions</h4><div id="atsVersions">Sign in to load saved versions.</div></div></section>
       <div class="workspace-grid">
         <section class="owner-card">
           <h3>Private CV & cover letter library</h3>
@@ -112,11 +113,12 @@
   <label>CV to use<select id="applicationCv"><option value="">No CV selected</option></select></label>
   <label>Cover letter to use<select id="applicationCover"><option value="">No cover letter selected</option></select></label>
   <label>Private notes<textarea id="applicationNotes" rows="4" maxlength="5000" placeholder="Recruiter contact, requirements, follow-up date..."></textarea></label>
-  <button id="saveApplication" class="primary-button" type="button">Save to application tracker</button>
+  <button id="tailorFromJob" class="quiet-button" type="button">Tailor CV + cover letter for this job</button><button id="saveApplication" class="primary-button" type="button">Save to application tracker</button>
   <p id="prepareMessage" class="message" aria-live="polite"></p>
 </dialog>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
-<script src="jobs.js?v=20261124-3"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="jobs.js?v=20261124-4"></script>
 </body>
 </html>
