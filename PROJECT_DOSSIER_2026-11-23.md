@@ -137,7 +137,7 @@ Verification: source fetched after update; confirmed three teaser cards, three n
 Configuration selected by owner: worldwide coverage, public job discovery, hybrid application preparation and external apply links.
 
 ### Source and backend changes
-- Feature branch: `feature/job-search-application-center`.
+- GitHub PR #1 merged into `main`; merge commit: `2d8153300c3a6db9d04e1a6231d3739d7b64aac9`.
 - New public page: `job-search.html`, responsive stylesheet `jobs.css`, client logic `jobs.js`.
 - Main portfolio navigation and owner Admin header link to the Job Search Center.
 - Supabase Edge Function `jobs-search` is ACTIVE, version 2, with JWT verification disabled for public read-only search. It validates keyword input, fetches providers server-side, normalizes descriptions, validates HTTPS application URLs, deduplicates results and returns provider availability.
@@ -169,7 +169,7 @@ Configuration selected by owner: worldwide coverage, public job discovery, hybri
 | Live API responses in browser | NOT TESTED | Edge Function source/deployment verified; no browser invocation performed. |
 | Owner login and PDF upload | NOT TESTED | Requires browser session and owner password. |
 | Application save/status workflow | NOT TESTED | Requires browser end-to-end test. |
-| GitHub Pages deployment | PENDING | Feature branch not merged to main. |
+| GitHub Pages deployment | PASS | Pages build and deploy run `45361879058` completed successfully for merge commit `2d8153300c3a6db9d04e1a6231d3739d7b64aac9`. |
 | Global onsite vacancy coverage | PARTIAL | Current live API coverage is worldwide remote plus Europe and UK regional listings. Add further providers for other local markets. |
 
-Do not report the feature as live on the public site until the feature branch is merged to main and the GitHub Pages deployment succeeds. Do not claim full global vacancy coverage or end-to-end application submission.
+Source is merged and the GitHub Pages deployment succeeded. Public browser rendering and owner-session workflows still need a direct device test. Do not claim exhaustive global onsite coverage or automatic submission to external employer systems.
