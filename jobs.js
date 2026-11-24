@@ -299,6 +299,8 @@
  });
  async function loadAtsVersions() {
    if (!owner) return;
+   const { data: masterProfile } = await sb.from("cv_profiles").select("source_text,target_title,target_description").eq("owner_id",owner.id).maybeSingle();
+   if (masterProfile) { $("#atsSourceText").value = masterProfile.source_text || ""; $("#atsTargetTitle").value = masterProfile.target_title || ""; $("#atsJobDescription").value = masterProfile.target_description || ""; }
    const { data, error } = await sb.from("cv_versions").select("id,version_label,version_type,created_at").order("created_at",{ascending:false}).limit(20);
    if (error) { $("#atsVersions").textContent=error.message; return; }
    $("#atsVersions").innerHTML = (data||[]).map(v=>'<div class="document-item"><strong>'+esc(v.version_label)+'</strong><small>'+esc(v.version_type.replace("_"," "))+' · '+new Date(v.created_at).toLocaleString()+'</small><button type="button" data-ats-version="'+v.id+'">Load version</button></div>').join("") || "No saved ATS versions yet.";
