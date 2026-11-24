@@ -49,7 +49,7 @@ A GitHub commit confirms source was written to main. It does not, by itself, pro
 - Live providers: Remotive (worldwide remote vacancies), Arbeitnow Europe and Arbeitnow UK. Coverage depends on each provider's inventory; it is not a complete index of every country's onsite jobs.
 - External search shortcuts: Google Jobs, LinkedIn, Indeed and Jooble. Applications on external platforms remain subject to their own accounts and application steps.
 - Supabase Edge Function: `jobs-search`, public read-only search endpoint. No third-party API secret is stored in browser code.
-- Private tables: `job_documents` and `job_applications`, with RLS ownership checks. Anonymous role has no table privileges.
+- Private tables: `job_documents` and `job_applications`, with RLS ownership checks and restrictive owner-email checks for `edcarsky@gmail.com`. Anonymous role has no table privileges.
 - Private PDF bucket: `job-application-private`, private, 15 MB PDF limit, storage paths begin with the authenticated owner UUID.
 - The existing published CV record remains unchanged in `public_documents`. The Job Center includes an owner-only action to copy it into the private application library.
 - Application records store job details, source URL, selected CV/cover letter references, notes and status. The owner must submit applications on the employer's original website unless that employer offers an authorized integration.
