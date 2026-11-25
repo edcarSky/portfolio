@@ -20,3 +20,51 @@
 .ats-output pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#eef3f8;padding:12px;border-radius:8px}
 .ats-version-list{margin-top:20px;padding-top:16px;border-top:1px solid #d7e0eb}
 @media(max-width:680px){.ats-fields{grid-template-columns:1fr}.ats-actions .primary-button{width:100%}.ats-heading{display:block}}
+
+
+/* Nov 25: WorkAbroad-style compact results with a persistent detail pane */
+.results-section{padding-top:26px}
+.results-section>.message{margin:9px 0 14px}
+.results-layout{display:grid;grid-template-columns:minmax(300px,390px) minmax(0,1fr);gap:16px;align-items:start;margin-top:14px}
+.results-list-column{min-width:0}
+.job-results{display:flex;flex-direction:column;gap:0;margin:0;border:1px solid #dfe5ed;border-radius:10px;background:#fff;overflow:hidden}
+.job-listing{width:100%;display:block;text-align:left;border:0;border-bottom:1px solid #e8edf2;background:#fff;padding:13px 15px;cursor:pointer;color:#172033;transition:background .15s,border-color .15s}
+.job-listing:last-child{border-bottom:0}
+.job-listing:hover{background:#f7f9fc}
+.job-listing[aria-pressed="true"]{background:#edf3fa;box-shadow:inset 3px 0 #b83c4c}
+.job-listing .list-company{font-size:10px;font-weight:700;color:#6d7b90;text-transform:uppercase;letter-spacing:.45px}
+.job-listing h3{font:700 13px/1.4 Manrope,sans-serif;margin:4px 0 6px;color:#1b2a40}
+.job-listing .list-meta{display:flex;flex-wrap:wrap;gap:5px 10px;font-size:10px;line-height:1.4;color:#647187}
+.job-listing .list-bottom{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-top:8px}
+.job-listing .list-source{font-size:9px;color:#8792a2}
+.job-listing .list-type{font-size:9px;color:#465b78;background:#f0f3f7;border-radius:12px;padding:3px 7px}
+.job-detail{position:sticky;top:16px;min-height:330px;max-height:calc(100vh - 32px);overflow:auto;background:#fff;border:1px solid #dfe5ed;border-radius:10px;padding:23px;box-shadow:0 8px 25px #17203308}
+.job-detail-empty{min-height:280px;display:grid;place-items:center;text-align:center;color:#8994a4;font-size:13px;line-height:1.6;padding:28px}
+.job-detail .detail-source{font-size:10px;text-transform:uppercase;letter-spacing:.8px;font-weight:800;color:#9a4350}
+.job-detail h3{font:800 23px/1.25 Manrope,sans-serif;letter-spacing:-.6px;color:#172033;margin:9px 0}
+.job-detail .detail-company{font-size:13px;font-weight:700;color:#4e5d72;margin-bottom:12px}
+.job-detail .detail-meta{display:flex;flex-wrap:wrap;gap:7px;margin:13px 0 17px}
+.job-detail .detail-meta span{font-size:10px;color:#526176;background:#f0f3f7;border-radius:18px;padding:6px 9px}
+.job-detail .detail-description{font-size:12px;line-height:1.8;color:#5d6a7d;white-space:pre-line}
+.job-detail .detail-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:19px;padding-top:15px;border-top:1px solid #e8edf2}
+.job-detail .detail-actions a,.job-detail .detail-actions button{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:7px;padding:10px 13px;font:700 11px "DM Sans";text-decoration:none;cursor:pointer}
+.job-detail .detail-apply{background:#17283e;color:#fff}
+.job-detail .detail-save{background:#eef2f7;color:#26364c}
+.more-jobs-button{display:block;width:100%;margin-top:10px;border:1px solid #d7e0ea;border-radius:8px;padding:11px 14px;background:#fff;color:#26364c;font:700 11px "DM Sans";cursor:pointer}
+.more-jobs-button:hover{background:#f2f5f9}
+.more-jobs-button[hidden]{display:none}
+.result-count{white-space:nowrap}
+@media(max-width:820px){
+ .results-layout{grid-template-columns:minmax(250px,.85fr) minmax(0,1.15fr);gap:10px}
+ .job-detail{padding:17px}
+ .job-detail h3{font-size:19px}
+}
+@media(max-width:620px){
+ .results-layout{grid-template-columns:1fr;gap:10px}
+ .job-detail{position:static;max-height:none;min-height:0;padding:17px}
+ .job-detail-empty{min-height:110px}
+ .job-listing{padding:12px}
+ .job-listing h3{font-size:12px}
+ .job-detail h3{font-size:20px}
+ .results-section{padding-bottom:35px}
+}
