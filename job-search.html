@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="jobs.css?v=20261124-2">
+<link rel="stylesheet" href="jobs.css?v=20261125-1">
 </head>
 <body>
 <header class="jobs-header">
@@ -67,7 +67,7 @@
   <section class="results-section">
     <div class="section-title"><div><p class="eyebrow">JOB RESULTS</p><h2 id="resultsHeading">Search worldwide vacancies</h2></div><span id="resultCount" class="result-count"></span></div>
     <p id="searchMessage" class="message" aria-live="polite">Enter a job title or skill to start searching. Use the country field to narrow the location.</p>
-    <div id="jobResults" class="job-results"></div>
+    <div class="results-layout"><div class="results-list-column"><div id="jobResults" class="job-results" aria-label="Matching jobs"></div><button id="moreJobsButton" class="more-jobs-button" type="button" hidden>More results</button></div><aside id="jobDetail" class="job-detail" aria-live="polite"><div class="job-detail-empty">Select a job from the results to view its details here.</div></aside></div>
   </section>
 
   <section class="owner-section" id="ownerArea">
@@ -119,6 +119,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="jobs.js?v=20261124-5"></script>
+<script src="jobs.js?v=20261125-1"></script>
 </body>
 </html>
