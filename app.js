@@ -152,6 +152,7 @@
    clearTimeout(rotationTimer);
    rotationTimer=setTimeout(()=>render(nextIndex()),5000+Math.floor(Math.random()*2001));
   };
+  document.addEventListener("testimonial-modal-closed",schedule);
   const render=(index)=>{
    clearTimeout(rotationTimer);
    lastIndex=index;
@@ -159,7 +160,7 @@
    const card=document.createElement("article");
    card.className="testimonial-card testimonial-card-selectable";
    card.setAttribute("aria-live","polite");
-   card.setAttribute("role","button");
+   card.setAttribute("role","group");
    card.tabIndex=0;
    const heading=document.createElement("div");
    heading.className="testimonial-label";
