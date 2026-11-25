@@ -646,7 +646,8 @@ body{background:#e8edf3;color:#18263a}
 .channel-card .video-thumb img{object-fit:contain!important;transform:none!important}
 .channel-card:hover .video-thumb img{transform:none!important}
 .professional-section{position:relative;isolation:isolate;overflow:hidden}
-.professional-section:before{content:"";position:absolute;inset:0;z-index:-1;background-image:url("assets/edcar-profile.webp");background-repeat:no-repeat;background-position:left 48%;background-size:min(31vw,390px);opacity:.085;pointer-events:none}
+.professional-section:before,.social-section:before{content:"";position:absolute;inset:0;z-index:-1;background-image:url("assets/edcar-profile.webp");background-repeat:no-repeat;background-position:left 48%;background-size:min(31vw,390px);opacity:.085;pointer-events:none}
+.social-section{position:relative;isolation:isolate;overflow:hidden}
 .professional-section>.section-wrap,.professional-section>*{position:relative}
 @media(max-width:900px){
  .community-milestone-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -660,5 +661,5 @@ body{background:#e8edf3;color:#18263a}
  .community-program-grid{grid-template-columns:1fr}
  .community-mumu-note{padding:18px 16px;margin:16px 0}
  .community-mumu-note h3{font-size:18px}
- .professional-section:before{background-size:65vw;background-position:left 18%;opacity:.075}
+ .professional-section:before,.social-section:before{background-size:65vw;background-position:left 18%;opacity:.075}
 }
