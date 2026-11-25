@@ -663,3 +663,26 @@ body{background:#e8edf3;color:#18263a}
  .community-mumu-note h3{font-size:18px}
  .professional-section:before,.social-section:before{background-size:65vw;background-position:left 18%;opacity:.075}
 }
+
+
+/* Section 09: fixed two-column feedback layout with click-to-read modal. */
+.testimonial-section .testimonial-inner{
+ display:grid!important;
+ grid-template-columns:minmax(250px,.78fr) minmax(0,1.22fr)!important;
+ align-items:start!important;
+ gap:42px!important;
+ max-width:1120px;
+}
+.testimonial-section .testimonial-inner>div:first-child{max-width:100%}
+.testimonial-section .testimonial-inner>div:first-child>p{max-width:440px;font-size:14px;line-height:1.8;color:#c5d2df}
+.testimonial-section .testimonial-list{display:block;width:100%;max-width:none;min-width:0;margin:0}
+.testimonial-section .testimonial-card-selectable{cursor:pointer;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.testimonial-section .testimonial-card-selectable:hover{transform:translateY(-3px);border-color:#e56f7d;box-shadow:0 20px 48px #08132148}
+.testimonial-section .testimonial-card-selectable:focus-visible{outline:3px solid #e56f7d;outline-offset:4px}
+.testimonial-section .testimonial-read-hint{order:5;margin-top:12px;color:#f0a6ae;font-size:11px;font-weight:700;letter-spacing:.2px}
+.testimonial-section .testimonial-controls{order:6}
+.testimonial-section .testimonial-modal[hidden]{display:none}
+@media(max-width:700px){
+ .testimonial-section .testimonial-inner{grid-template-columns:1fr!important;gap:22px!important}
+ .testimonial-section .testimonial-inner>div:first-child>p{max-width:100%}
+}
