@@ -66,3 +66,19 @@
  .team-note{font-size:10px;padding:12px}
 }
 @media(prefers-reduced-motion:reduce){.deck-slide.is-active{animation:none}}
+
+
+/* Owner-requested Team edcarSky contrast and watermark placement. */
+.team-section{background:linear-gradient(135deg,#172a42 0%,#263b52 55%,#342b3b 100%);color:#f5f7fb}
+.team-section .section-kicker{color:#f3a0a8}
+.team-section .team-heading h2{color:#fff}
+.team-section .team-heading h2 em{color:#f39aa3}
+.team-section .team-heading p{color:#d5deea}
+.team-section .team-watermark-logo{position:absolute;z-index:0;right:5%;top:14%;width:clamp(170px,26vw,360px);max-height:65%;object-fit:contain;opacity:.065;pointer-events:none}
+.team-section .team-inner{position:relative;z-index:1}
+.team-section .team-stat,.team-section .team-program{background:#263b53;border-color:#ffffff25}
+.team-section .team-stat b,.team-section .team-program h3{color:#fff}
+.team-section .team-stat span,.team-section .team-program p{color:#c8d4e2}
+.team-section .team-note{background:#202f42;border-left-color:#ed8792;color:#d6dfeb}
+.deck-slide[data-slide="5"] .deck-title em{color:#f39aa3}
+@media(max-width:620px){.team-section .team-watermark-logo{width:65vw;right:0;top:5%;opacity:.055}}
