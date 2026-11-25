@@ -48,10 +48,11 @@
    const region = $("#jobRegion").value;
    jobs = allJobs.filter(job => {
      const place = normalize(job.location);
+     const worldwide = place.includes("worldwide") || place.includes("anywhere");
      const searchable = normalize([job.title,job.company,job.description,job.category,job.employment_type,...(job.tags||[])].join(" "));
-     if (includeCountries.length && !includeCountries.some(country => place.includes(country))) return false;
+     if (includeCountries.length && !worldwide && !includeCountries.some(country => place.includes(country))) return false;
      if (excludeCountries.some(country => place.includes(country))) return false;
-     if (region && !(regionCountries[region]||[]).some(country => place.includes(normalize(country)))) return false;
+     if (region && !worldwide && !(regionCountries[region]||[]).some(country => place.includes(normalize(country)))) return false;
      if (includeTerms.length && !includeTerms.some(term => searchable.includes(term))) return false;
      if (excludeTerms.some(term => searchable.includes(term))) return false;
      return true;
