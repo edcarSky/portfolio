@@ -1,5 +1,5 @@
 # edcarSky Portfolio Project Dossier
-Updated: 23 November 2026, 06:05 UTC
+Updated: 26 November 2026
 Repository: https://github.com/edcarSky/portfolio
 Branch: main
 Live site: https://edcarsky.github.io/portfolio/
@@ -187,3 +187,171 @@ Source is merged and the GitHub Pages deployment succeeded. Public browser rende
 - Located the original composite brand upload in public Supabase Storage: `profile/1795471858442-icon_logo_profile_photo_bg_watermarks.jpg`. Added an Admin button to load that existing image into the cropper. Owner selects the desired target type and crop position, then publishes a separate 1:1 profile/logo/watermark or 16:9 background/video thumbnail.
 - Current `site_settings` has `profile_photo` only. Separate Team logo, hero background, watermark and custom video thumbnail values are not yet published. The existing YouTube thumbnail is the safe fallback.
 - Syntax validation passed for `jobs.js`, `app.js`, `slides.js` and `admin.js`. Latest GitHub Pages deployment is pending verification.
+
+
+## Full project dossier update — 26 November 2026
+
+This section is the current status authority for changes and checks completed after the earlier 23–24 November entries. Older entries below remain as historical records; where an earlier status conflicts with this update, use the newer status here.
+
+### 1. Homepage structure and brand presentation
+
+- The homepage uses the main sections Creator, Professional, My Journey, Community, Find Me Online, Contact and Professional Feedback, with the five-slide hero controller loaded from slides.js.
+- Hero slide controller: source present. It supports automatic slide changes, previous/next controls, dots and touch gestures. The YouTube CTA points to the main edcarSky channel.
+- Main brand line: “100% LEGIT, SAFE & ORGANIC”.
+- The official edcarSky g! live artwork is now present in the repository at assets/edcarsky-glive-logo.webp. This supersedes the earlier note that only a temporary text lockup was available.
+- The profile image is present at assets/edcar-profile.webp. The channel thumbnail asset is present at assets/channel-thumbnail.webp.
+- Profile watermark styling is applied to both Professional and Find Me Online sections, positioned on the left with low opacity. Source confirms the CSS selectors and asset reference. Final appearance still requires browser QA.
+- The YouTube thumbnail uses a contain treatment to preserve the full supplied image and text. Source styling disables hover zoom for the channel thumbnail. Browser rendering still requires visual confirmation.
+
+### 2. Section 05 — FIND ME ONLINE
+
+Heading and subtitle:
+“Different platforms. One connected story.”
+
+Five social icons are arranged in one row on desktop and retained in a five-icon compact row on mobile:
+1. YouTube — https://www.youtube.com/channel/UCoz2lfYpVjxYmBp2Z9MZ25g/
+2. Facebook — https://www.facebook.com/edcarSkyglive
+3. TikTok — https://www.tiktok.com/@edcarsky
+4. Instagram — https://www.instagram.com/edcarsky/
+5. X — https://x.com/edcarSky
+
+Source verification on 26 November confirms five social icon elements and five-column CSS rules at desktop and mobile breakpoints. The latest CSS deployment still needs Pages completion and browser visual QA.
+
+### 3. Section 09 — PROFESSIONAL FEEDBACK
+
+The section is designed as a two-column desktop layout:
+- Left: “09 / PROFESSIONAL FEEDBACK”, “Words from people I've worked with.” and the introduction.
+- Right: one testimonial card at a time.
+
+The introduction now reads:
+“Read professional feedback here without leaving this portfolio. Select a testimonial to open the full comment in a popup.”
+
+Interaction added:
+- Selecting the testimonial card opens the existing modal and displays the stored comment, author, role/company and date where available.
+- Keyboard Enter and Space activate the card.
+- Escape, the close button and the modal backdrop close the popup.
+- Automatic rotation remains randomized every 5–7 seconds and resumes after the popup closes.
+- Pause rotation, Resume rotation, Next recommendation and the LinkedIn source link remain available.
+- Mobile layout stacks the introduction above the testimonial card.
+
+Data source and accuracy:
+- The renderer reads visible LinkedIn recommendation archive entries from testimonials.json and approved website testimonials only when publication_consent=true.
+- Entries marked truncated are explicitly labelled as excerpts. The popup displays the complete text stored in the portfolio archive, but it does not turn an archived excerpt into the full original LinkedIn recommendation.
+- The Supabase site_content row testimonial_intro was checked and already contains the requested new introduction. Static HTML was updated to match it.
+
+Source verification completed:
+- index.html contains the requested introduction and modal fields.
+- app.js contains card click and keyboard activation, modal population, close handlers and rotation-resume event.
+- styles.css contains the desktop two-column layout and mobile stacked breakpoint.
+- Browser interaction and rendered layout remain pending until the Pages deployment and visual QA complete.
+
+Latest Section 09 commits:
+- 6327d0bb92ef0296e6dfb8750667151544495ae9 — update Professional Feedback introduction.
+- 577103a9723672f8d72df2736ef1d219a4cf64ca — fix two-column layout and modal card styling.
+- 812d533339f2ffe48085786820789a9258785093 — resume rotation after popup closes and refine card accessibility.
+
+### 4. Community and creator services
+
+The Community section now presents Team edcarSky as an organic creator-support service across YouTube, Facebook, TikTok and other digital platforms.
+
+Program copy includes:
+- AA+: proprietary analytics and channel-activation framework, channel diagnostics, audience and content performance review, SEO, retention and genuine activity signals.
+- SSP+: organic promotion and social distribution support.
+- APP+: application-based creator tools and program features.
+- Free monetization assistance and channel-readiness guidance.
+- Organic subscriber and watch-hour support through genuine audience development.
+- Support for demonetized channel recovery, including the user-stated 100+ channels fixed/recovered in 2026.
+
+Milestones supplied by the owner:
+- Service since 2021, five years continuous service.
+- 200+ YouTube channels monetized.
+- 3,000+ channels assisted through monetization and organic growth programs.
+- Approximately 500 active and former Team edcarSky members.
+- 100+ demonetized channels fixed/recovered in 2026.
+
+These are owner/team-supplied historical achievements, not independently audited figures. Website copy avoids guarantees of monetization, revenue, reach, ranking or platform approval. The Tagalog “mumu services” note remains a separate warning against cheap artificial or untrusted engagement services.
+
+### 5. Job Search & Application Center
+
+Current source and backend:
+- job-search.html, jobs.css and jobs.js are present.
+- Supabase Edge Function jobs-search is ACTIVE, version 2, public read-only search.
+- Current provider coverage includes worldwide remote listings through Remotive and regional Europe/UK listings through Arbeitnow, plus external search shortcuts.
+- Region filters, include/exclude country and job-keyword filters, external application links and owner-only application tracking are included in source.
+- Private job documents and application records use RLS and owner-folder storage policies as documented in the 24 November section.
+
+Outstanding owner correction:
+- Default search must remain worldwide when no location filter is supplied.
+- Display must be compact only.
+- Initial results must show at least 10 listings, with a More control for additional results.
+- The source contains worldwide default and a More control, but the compact-only display and minimum 10-result initial view have not yet been verified as corrected. Keep this item OPEN / NEXT.
+- Do not claim complete worldwide on-site coverage. Provider coverage is not every country or local job board.
+
+### 6. Supabase and owner administration
+
+- Supabase project: edcarsky-portfolio, project ref cslsyziwxpnmgbatebda, Singapore region, PostgreSQL 17.
+- Existing Edge Functions include ats-cv-assistant and jobs-search. jobs-search is confirmed ACTIVE, version 2.
+- The owner account was subsequently created after the earlier “No owner account yet” screen. This is based on the owner's confirmation. A successful fresh login and full admin session still require browser testing.
+- Admin source includes owner authentication, document upload and profile image upload paths. These functions are not marked operational until an owner login, upload, publish and public-download test completes.
+- Storage assets and public document publication require a full owner-session test.
+- Keep service-role/secret keys server-side. Never commit Gemini or Supabase secret keys to GitHub or public browser JavaScript.
+- Gemini portfolio assistant integration is deferred until the owner resumes the API setup. It is not marked complete.
+
+### 7. Current feature status matrix
+
+| Feature | Current status | Evidence / next action |
+|---|---|---|
+| Homepage section structure | SOURCE VERIFIED | Inspect live layout after deployment. |
+| Five-slide hero | SOURCE PRESENT | Confirm slide behavior in browser. |
+| Official g! live logo asset | SOURCE VERIFIED | assets/edcarsky-glive-logo.webp exists and is referenced by the Community section. |
+| Profile photo asset | SOURCE VERIFIED | assets/edcar-profile.webp exists. |
+| Channel thumbnail asset | SOURCE VERIFIED | assets/channel-thumbnail.webp exists. |
+| Professional watermark | SOURCE VERIFIED | CSS applies profile image watermark to Professional and Find Me Online. |
+| Section 05 five social icons | SOURCE VERIFIED | Five icons and five-column desktop/mobile rules confirmed. |
+| Section 09 left/right layout | SOURCE VERIFIED | Two-column desktop grid; stacked mobile layout. |
+| Section 09 popup | SOURCE VERIFIED | Card click, keyboard activation, modal fields and close handlers confirmed. |
+| Testimonial rotation | SOURCE VERIFIED | 5–7 second randomized rotation; pause/next controls retained; resume after close added. |
+| Testimonial original completeness | PARTIAL | Archive excerpts remain labelled as excerpts; source archive needs complete text if the full original is required. |
+| Community service copy | SOURCE + CMS VERIFIED | HTML and Supabase testimonial intro CMS row checked; Community intro CMS copy updated in earlier work. |
+| Job Search worldwide default | SOURCE PRESENT | Backend provider coverage is limited to connected sources. |
+| Job Search compact-only view | OPEN | Owner specifically requested compact-only layout; not yet confirmed fixed. |
+| Job Search minimum 10 initial results | OPEN | Verify at least 10 initial cards and More behavior. |
+| Job Search region and exclude filters | SOURCE PRESENT | Browser test required. |
+| Owner Auth | ACCOUNT CREATED, LOGIN TEST PENDING | Owner confirmation; perform fresh login test. |
+| Admin uploads and publishing | PENDING | Complete authenticated upload and public download test. |
+| Contact form | PENDING END-TO-END TEST | Test inquiry insert, privacy and owner notification flow. |
+| OAuth providers | NOT VERIFIED | Provider credentials and callback tests remain open. |
+| Visitor counter | NOT VERIFIED | Confirm GoatCounter/API count in live browser. |
+| ATS CV assistant | DEPLOYED SOURCE / FUNCTION PRESENT | Validate current ATS output against a current ATS-readable CV and job description. |
+| Gemini portfolio assistant | DEFERRED | Owner will resume API setup later. |
+| Desktop/mobile visual QA | PENDING | Inspect actual deployed site at desktop and mobile widths. |
+| GitHub Pages deployment for 26 Nov changes | PENDING | Latest workflow runs are queued/in progress; do not call these changes live until a successful run is confirmed. |
+| Offline ZIP | PENDING | Build from the exact successful deployed commit, inspect ZIP integrity and verify the final file path before sharing. |
+
+### 8. Latest GitHub source commits
+
+Section 05 / Find Me Online:
+- cf92ef4eef0248e1d74dbf64cb160cd0d679a640 — add X social link.
+- 9314dc317ee69351ec94ea275bfbc4e22cabca56 — fit five social platform icons in one responsive row.
+
+Section 09 / Professional Feedback:
+- 6327d0bb92ef0296e6dfb8750667151544495ae9 — update feedback introduction.
+- 577103a9723672f8d72df2736ef1d219a4cf64ca — desktop two-column layout, mobile stacking and selectable card styling.
+- 812d533339f2ffe48085786820789a9258785093 — accessible popup activation and rotation resume behavior.
+
+### 9. Deployment and next execution order
+
+At the time of this update, GitHub Actions shows:
+- run 45709523783 for app.js commit 812d533339f2ffe48085786820789a9258785093: queued.
+- run 45709484791 for CSS commit 577103a9723672f8d72df2736ef1d219a4cf64ca: in progress.
+- Earlier social CSS deployment run 45708942898 completed successfully for commit 9314dc317ee69351ec94ea275bfbc4e22cabca56.
+
+Required next actions:
+1. Re-check Actions until the newest Pages deployment completes successfully.
+2. Verify the live Section 05 five-icon row and Section 09 desktop left/right layout, popup, close behavior and mobile stacking.
+3. Fix Job Search compact-only presentation and ensure at least 10 initial results with a working More control.
+4. Run owner login, admin upload/publish, contact form, testimonials and visitor counter end-to-end tests.
+5. Resume Gemini integration only when the owner supplies/authorizes the required API setup.
+6. Build the offline ZIP from the exact deployed commit and verify its integrity before sharing.
+
+Do not claim a live update, working admin, complete testimonial source text, full worldwide vacancy coverage or a verified offline package until each item has its own evidence.
