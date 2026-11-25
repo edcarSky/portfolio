@@ -9,6 +9,8 @@
  let allJobs = [];
  let documents = [];
  let selectedJob = null;
+ let visibleCount = 10;
+ let selectedJobIndex = 0;
  let owner = null;
  let publicCv = null;
 
@@ -54,20 +56,46 @@
      if (excludeTerms.some(term => searchable.includes(term))) return false;
      return true;
    });
+   visibleCount = 10;
+   selectedJobIndex = 0;
    renderJobs();
    if (allJobs.length) {
      $("#searchMessage").textContent = jobs.length
-       ? "Showing " + jobs.length + " matching listings after your region, country and job-keyword filters. Open the original listing to confirm requirements and application details."
+       ? "Worldwide results by default. Showing the first " + Math.min(10,jobs.length) + " of " + jobs.length + " matching listings. Select a listing to read its details on the right."
        : "No listings match the selected filters. Remove an exclusion or choose a broader region, country or keyword.";
    }
  }
  function renderJobs() {
    const host = $("#jobResults");
-   $("#resultCount").textContent = jobs.length ? jobs.length + " matching / " + allJobs.length + " fetched" : (allJobs.length ? "0 matching" : "");
-   if (!jobs.length) { host.innerHTML = ""; return; }
-   host.innerHTML = jobs.map((j, i) => '<article class="job-card"><div class="job-company">' + esc(j.company) + '</div><h3>' + esc(j.title) + '</h3><div class="job-meta"><span>' + esc(j.location) + '</span>' + (j.employment_type ? '<span>' + esc(j.employment_type) + '</span>' : '') + (j.salary ? '<span>' + esc(j.salary) + '</span>' : '') + '</div><p class="job-description">' + esc(j.description || "Open the original listing to review the full role description and requirements.") + '</p><div class="job-meta"><span>Source: ' + esc(j.source) + '</span>' + (j.published_at ? '<span>Posted ' + esc(new Date(j.published_at).toLocaleDateString()) + '</span>' : '') + '</div><div class="job-actions"><a class="apply-link" href="' + esc(j.url) + '" target="_blank" rel="noopener noreferrer">View job & apply ↗</a>' + (owner ? '<button class="save-job" type="button" data-prepare="' + i + '">Save & prepare</button>' : '') + '</div></article>').join("");
-   host.querySelectorAll("[data-prepare]").forEach(b => b.addEventListener("click", () => openPrepare(jobs[Number(b.dataset.prepare)])));
+   const shown = jobs.slice(0,visibleCount);
+   $("#resultCount").textContent = jobs.length ? jobs.length + " matching · " + Math.min(visibleCount,jobs.length) + " shown" : (allJobs.length ? "0 matching" : "");
+   if (!jobs.length) {
+     host.innerHTML = "";
+     $("#jobDetail").innerHTML = '<div class="job-detail-empty">No matching jobs. Clear or broaden your filters to see more listings.</div>';
+     $("#moreJobsButton").hidden = true;
+     return;
+   }
+   if (selectedJobIndex >= jobs.length) selectedJobIndex = 0;
+   const selected = jobs[selectedJobIndex];
+   host.innerHTML = shown.map((j,i) => {
+     const index = jobs.indexOf(j);
+     return '<button type="button" class="job-listing" data-job-index="' + index + '" aria-pressed="' + (index===selectedJobIndex) + '"><div class="list-company">' + esc(j.company) + '</div><h3>' + esc(j.title) + '</h3><div class="list-meta"><span>' + esc(j.location) + '</span>' + (j.salary ? '<span>' + esc(j.salary) + '</span>' : '') + '</div><div class="list-bottom"><span class="list-source">' + esc(j.source) + (j.published_at ? ' · ' + esc(new Date(j.published_at).toLocaleDateString()) : '') + '</span>' + (j.employment_type ? '<span class="list-type">' + esc(j.employment_type) + '</span>' : '') + '</div></button>';
+   }).join("");
+   host.querySelectorAll("[data-job-index]").forEach(b => b.addEventListener("click", () => {
+     selectedJobIndex = Number(b.dataset.jobIndex);
+     renderJobs();
+   }));
+   const detail = $("#jobDetail");
+   detail.innerHTML = '<div class="detail-source">' + esc(selected.source) + '</div><h3>' + esc(selected.title) + '</h3><div class="detail-company">' + esc(selected.company) + '</div><div class="detail-meta"><span>' + esc(selected.location) + '</span>' + (selected.employment_type ? '<span>' + esc(selected.employment_type) + '</span>' : '') + (selected.salary ? '<span>' + esc(selected.salary) + '</span>' : '') + (selected.published_at ? '<span>Posted ' + esc(new Date(selected.published_at).toLocaleDateString()) + '</span>' : '') + (selected.remote ? '<span>Remote</span>' : '') + '</div><div class="detail-description">' + esc(selected.description || "Open the original listing to review the complete role description and requirements.") + '</div><div class="detail-actions"><a class="detail-apply" href="' + esc(selected.url) + '" target="_blank" rel="noopener noreferrer">View job & apply ↗</a>' + (owner ? '<button class="detail-save" type="button" id="detailSaveJob">Save & prepare</button>' : '') + '</div>';
+   const save = $("#detailSaveJob");
+   if (save) save.addEventListener("click", () => openPrepare(selected));
+   $("#moreJobsButton").hidden = jobs.length <= visibleCount;
+   $("#moreJobsButton").textContent = "More results · show next " + Math.min(10,jobs.length-visibleCount);
  }
+ $("#moreJobsButton").addEventListener("click", () => {
+   visibleCount += 10;
+   renderJobs();
+ });
  async function searchJobs(event) {
    event?.preventDefault();
    const query = $("#jobQuery").value.trim();
