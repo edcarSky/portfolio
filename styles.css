@@ -619,3 +619,46 @@ body{background:#e8edf3;color:#18263a}
 .testimonial-section .testimonial-controls button:hover,.testimonial-section .testimonial-controls a:hover{background:#ffffff12}
 .testimonial-section .testimonial-empty{width:100%;max-width:960px;margin:0 auto}
 @media(max-width:620px){.testimonial-section .testimonial-inner{gap:18px}.testimonial-section .testimonial-card{padding:22px 18px 18px;gap:8px}.testimonial-section .testimonial-quote-mark{height:46px;font-size:66px}.testimonial-section .testimonial-card blockquote{font-size:14px;line-height:1.75}.testimonial-section .testimonial-card>b{margin-top:12px;font-size:12px}.testimonial-section .testimonial-controls{gap:6px;margin-top:10px;padding-top:10px}.testimonial-section .testimonial-controls button,.testimonial-section .testimonial-controls a{padding:7px 9px;font-size:9px}.testimonial-section .testimonial-controls .testimonial-source-link{margin-left:0}}
+
+
+/* Team edcarSky brand, services and milestone presentation. */
+.community-brand-panel-clean{min-height:0!important;padding:8px 12px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+.community-brand-panel-clean .community-logo-image{width:min(100%,360px);height:auto;max-height:240px;object-fit:contain;margin:0 auto 12px}
+.community-brand-panel-clean .community-brand-caption{margin-top:8px;color:#526176;font-size:10px;font-weight:800;letter-spacing:1.5px;text-align:center}
+.community-milestone-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:8px 0 22px}
+.community-milestone-grid article{min-height:116px;padding:17px 14px;background:#eaf0ed;border:1px solid #cbd9d3;border-radius:9px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.community-milestone-grid strong{color:#1b3440;font:800 clamp(22px,2.5vw,31px)/1.1 Manrope,sans-serif;letter-spacing:-1px}
+.community-milestone-grid span{color:#52676b;font-size:10px;line-height:1.55}
+.community-milestone-grid .milestone-recovery{background:#f4e9e8;border-color:#e5c9c7}
+.community-milestone-grid .milestone-recovery strong{color:#a92f40}
+.community-program-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.community-program-grid .community-teaser{height:100%;display:flex;flex-direction:column}
+.community-program-grid .community-teaser>p{font-size:12px;line-height:1.7}
+.community-program-grid .community-more{margin-top:auto}
+.community-mumu-note{margin:22px 0 18px;padding:23px 26px;background:#17283c;color:#f5f7fb;border-left:4px solid #b83c4c;border-radius:8px}
+.community-mumu-note .mumu-label{display:block;color:#f0a0a6;font-size:9px;font-weight:800;letter-spacing:1.5px;margin-bottom:8px}
+.community-mumu-note h3{font:800 21px/1.25 Manrope,sans-serif;color:#fff;margin:0 0 8px}
+.community-mumu-note p{font-size:13px;line-height:1.75;color:#d8e0e9;margin:0 0 10px}
+.community-mumu-note strong{font-size:11px;letter-spacing:.3px;color:#f2a1a8}
+.community-integrity-compact{margin-top:16px}
+.community-integrity-compact strong{font-size:13px}
+.community-integrity-compact span{font-size:10px;line-height:1.6}
+.channel-card .video-thumb img{object-fit:contain!important;transform:none!important}
+.channel-card:hover .video-thumb img{transform:none!important}
+.professional-section{position:relative;isolation:isolate;overflow:hidden}
+.professional-section:before{content:"";position:absolute;inset:0;z-index:-1;background-image:url("assets/edcar-profile.webp");background-repeat:no-repeat;background-position:left 48%;background-size:min(31vw,390px);opacity:.085;pointer-events:none}
+.professional-section>.section-wrap,.professional-section>*{position:relative}
+@media(max-width:900px){
+ .community-milestone-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:620px){
+ .community-brand-panel-clean{padding:4px 0!important}
+ .community-brand-panel-clean .community-logo-image{width:min(78vw,270px);max-height:180px}
+ .community-milestone-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .community-milestone-grid article{min-height:98px;padding:13px 11px}
+ .community-milestone-grid strong{font-size:23px}
+ .community-program-grid{grid-template-columns:1fr}
+ .community-mumu-note{padding:18px 16px;margin:16px 0}
+ .community-mumu-note h3{font-size:18px}
+ .professional-section:before{background-size:65vw;background-position:left 18%;opacity:.075}
+}
