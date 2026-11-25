@@ -355,3 +355,9 @@ Required next actions:
 6. Build the offline ZIP from the exact deployed commit and verify its integrity before sharing.
 
 Do not claim a live update, working admin, complete testimonial source text, full worldwide vacancy coverage or a verified offline package until each item has its own evidence.
+
+
+### Cache refresh after Section 09 interaction update — 26 November 2026
+- Updated homepage asset references to styles.css?v=20261126-6 and app.js?v=20261126-3 so returning visitors request the updated two-column layout and popup interaction rather than stale cached files.
+- Source commit: 6b8ba08fdb73dd4308516cf2f334bd843de2817d.
+- GitHub Pages deployment for this cache refresh is queued/pending; live behavior remains unverified.
