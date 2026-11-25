@@ -29,7 +29,7 @@
   const assetMap=Object.fromEntries((assets||[]).map(x=>[x.key,x.value]));
   if(settings?.value){document.querySelectorAll('link[rel="icon"],link[rel="apple-touch-icon"]').forEach(icon=>{icon.href=settings.value;icon.type="image/png";});}
   if(assetMap.asset_team_logo){document.querySelectorAll(".community-logo-image").forEach(img=>img.src=assetMap.asset_team_logo);document.querySelectorAll(".team-watermark-logo").forEach(img=>img.src=assetMap.asset_team_logo);}else{document.querySelectorAll(".community-logo-image,.team-watermark-logo").forEach(img=>img.hidden=true);}
-  {const thumb=document.querySelector(".featured-video .video-thumb img");if(thumb)thumb.src=assetMap.asset_video_thumbnail||"https://img.youtube.com/vi/3TjTSFc8TnQ/hqdefault.jpg";}
+  {const thumb=document.querySelector("#mainChannelThumbnail");if(thumb&&assetMap.asset_video_thumbnail)thumb.src=assetMap.asset_video_thumbnail;}
   {const bg=assetMap.asset_hero_background||settings?.value;if(bg)document.querySelectorAll(".intro-deck .hero-panel,.team-section").forEach(el=>el.style.backgroundImage='linear-gradient(rgba(12,24,42,.78),rgba(12,24,42,.92)),url("'+bg+'")');}
   {const mark=assetMap.asset_watermark||settings?.value;if(mark)document.querySelectorAll(".team-section").forEach(el=>el.style.setProperty("--team-watermark-image",'url("'+mark+'")'));}
   if(settings?.value){document.querySelectorAll(".profile-placeholder img").forEach(img=>img.src=settings.value);}
