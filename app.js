@@ -157,8 +157,10 @@
    lastIndex=index;
    const q=quotes[index];
    const card=document.createElement("article");
-   card.className="testimonial-card";
+   card.className="testimonial-card testimonial-card-selectable";
    card.setAttribute("aria-live","polite");
+   card.setAttribute("role","button");
+   card.tabIndex=0;
    const heading=document.createElement("div");
    heading.className="testimonial-label";
    heading.textContent=q.truncated?"LINKEDIN RECOMMENDATION · EXCERPT":"LINKEDIN RECOMMENDATION";
@@ -172,8 +174,27 @@
    name.textContent=q.display_name;
    const meta=document.createElement("small");
    meta.textContent=[q.affiliation,q.company,q.date].filter(Boolean).join(" · ");
+   const modal=$("#testimonialModal");
+   const openFullComment=()=>{
+    if(!modal)return;
+    clearTimeout(rotationTimer);
+    $("#testimonialModalTitle").textContent="Recommendation from "+q.display_name;
+    $("#testimonialModalQuote").textContent=q.message;
+    $("#testimonialModalAuthor").textContent=[q.display_name,q.affiliation,q.company,q.date,q.truncated?"LinkedIn excerpt":"LinkedIn recommendation"].filter(Boolean).join(" · ");
+    modal.hidden=false;
+    document.body.classList.add("modal-open");
+    modal.querySelector(".testimonial-modal-close")?.focus();
+   };
+   card.setAttribute("aria-label","Open full professional feedback from "+q.display_name);
+   card.addEventListener("click",openFullComment);
+   card.addEventListener("keydown",event=>{
+    if(event.target!==card)return;
+    if(event.key==="Enter"||event.key===" "){event.preventDefault();openFullComment();}
+   });
    const controls=document.createElement("div");
    controls.className="testimonial-controls";
+   controls.addEventListener("click",event=>event.stopPropagation());
+   controls.addEventListener("keydown",event=>event.stopPropagation());
    const pauseButton=document.createElement("button");
    pauseButton.type="button";
    pauseButton.textContent=paused?"Resume rotation":"Pause rotation";
@@ -195,15 +216,26 @@
    sourceLink.textContent="View on LinkedIn ↗";
    sourceLink.className="testimonial-source-link";
    controls.append(pauseButton,nextButton,sourceLink);
-   card.append(heading,quoteMark,quote,name,meta,controls);
+   const readHint=document.createElement("span");
+   readHint.className="testimonial-read-hint";
+   readHint.textContent="Select to read full comment ↗";
+   card.append(heading,quoteMark,quote,name,meta,readHint,controls);
    host.replaceChildren(card);
    schedule();
   };
   render(nextIndex());
  }
  function escText(value){return String(value??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
- document.querySelectorAll("[data-close-testimonial]").forEach(x=>x.addEventListener("click",()=>{$("#testimonialModal").hidden=true;document.body.classList.remove("modal-open");}));
- document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#testimonialModal")&&!$("#testimonialModal").hidden){$("#testimonialModal").hidden=true;document.body.classList.remove("modal-open");}});
+ const closeTestimonialModal=()=>{
+  const modal=$("#testimonialModal");
+  if(modal&&!modal.hidden){
+   modal.hidden=true;
+   document.body.classList.remove("modal-open");
+   document.dispatchEvent(new Event("testimonial-modal-closed"));
+  }
+ };
+ document.querySelectorAll("[data-close-testimonial]").forEach(x=>x.addEventListener("click",closeTestimonialModal));
+ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeTestimonialModal();});
  async function applyEditableContent(){
   if(!client)return;
   const {data}=await client.from("site_content").select("content_key,content");
