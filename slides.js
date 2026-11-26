@@ -2,8 +2,6 @@
  const hero=document.querySelector("main .hero");
  if(!hero)return;
  const main=hero.parentElement;
- const originalGrid=hero.querySelector(".hero-grid");
- const originalBottom=hero.querySelector(".hero-bottom");
  const deck=document.createElement("section");
  deck.className="intro-deck";
  deck.id="welcome";
@@ -15,14 +13,14 @@
   {name:"Professional",kicker:"02 / PROFESSIONAL PROFILE",title:"Lead. Support.<br><em>Deliver.</em>",desc:"Executive administration, operations coordination, IT support and digital operations, backed by international work experience and a practical, service-focused approach.",primary:"Explore professional profile",href:"#professional",secondary:"View CV & documents",href2:"#documents",number:"02"},
   {name:"Content Creator",kicker:"03 / DIGITAL CONTENT CREATOR",title:"Create. Publish.<br><em>Grow.</em>",desc:"A portfolio of creator projects, video production, social platforms, digital promotion programs and channel development work.",primary:"View creator projects",href:"#creator",secondary:"Visit my main YouTube channel",href2:"https://www.youtube.com/channel/UCoz2lfYpVjxYmBp2Z9MZ25g/",number:"03"},
   {name:"Family",kicker:"04 / FAMILY & LIFE",title:"Family. Stories.<br><em>Milestones.</em>",desc:"A personal space for family memories, shared experiences and the Familia Thimawah journey, including our 100K YouTube Creator Award milestone.",primary:"Watch family milestone",href:"https://www.youtube.com/watch?v=XgGOPt9qHso",secondary:"Read our journey",href2:"#journey",number:"04"},
-  {name:"Team edcarSky",kicker:"05 / TEAM EDCARSKY",title:"100% LEGIT,<br><em>SAFE & ORGANIC.</em>",desc:"Since 2021, Team edcarSky has developed creator-support programs and organic digital promotion workflows, with milestones documented in its program terms.",primary:"View Team achievements",href:"#team-edcarsky",secondary:"Ask about the programs",href2:"https://m.me/edcarSkyglive",number:"05"}
+  {name:"Team edcarSky",kicker:"05 / TEAM EDCARSKY",title:"100% LEGIT,<br><em>SAFE & ORGANIC.</em>",desc:"Since 2021, Team edcarSky has developed creator-support programs and organic digital promotion workflows, with milestones documented in its program terms.",primary:"View Team achievements",href:"#community",secondary:"Ask about the programs",href2:"https://m.me/edcarSkyglive",number:"05"}
  ];
  slides.forEach((s,i)=>{
   const panel=document.createElement("section");
   panel.className="hero deck-slide";
   panel.dataset.slide=String(i+2);
   panel.setAttribute("aria-label",s.name+" introduction");
-  panel.innerHTML='<div class="hero-grid"><div class="hero-copy deck-copy"><div class="deck-kicker">'+s.kicker+'</div><h1 class="deck-title" data-content-key="slide_title_'+s.number+'">'+s.title+'</h1><p class="deck-description" data-content-key="slide_desc_'+s.number+'">'+s.desc+'</p><div class="deck-actions"><a class="button button-light" href="'+s.href+'">'+s.primary+' <span>↗</span></a><a class="button button-outline" href="'+s.href2+'">'+s.secondary+'</a></div></div><aside class="hero-panel"><div class="panel-top"><span>EDCARSKY™ PORTFOLIO</span><span class="panel-icon">✳</span></div><div class="profile-placeholder"><img src="assets/edcar-profile.webp" alt="Edcar Aguirre Tenedero"><small>'+s.name+'</small></div><h2>'+s.name+'</h2><p>Edcar Aguirre Tenedero</p><div class="panel-stats"><div><b>'+s.number+'</b><small>Portfolio section</small></div><div><b>2021</b><small>Digital journey</small></div><div><b>PH</b><small>Philippines</small></div></div></aside></div>';
+  panel.innerHTML='<div class="hero-grid"><div class="hero-copy deck-copy"><div class="deck-kicker">'+s.kicker+'</div><h1 class="deck-title" data-content-key="slide_title_'+s.number+'">'+s.title+'</h1><p class="deck-description" data-content-key="slide_desc_'+s.number+'">'+s.desc+'</p><div class="deck-actions"><a class="button button-light" href="'+s.href+'">'+s.primary+' <span>↗</span></a><a class="button button-outline" href="'+s.href2+'">'+s.secondary+'</a></div></div></div>';
   deck.append(panel);
  });
  const controls=document.createElement("div");
@@ -67,14 +65,5 @@
  deck.addEventListener("touchstart",stopAuto,{passive:true});
  deck.addEventListener("touchend",()=>{stopAuto();startAuto();},{passive:true});
  startAuto();
- const nav=document.querySelector("#mainNav");
- if(nav&&!nav.querySelector('a[href="#team-edcarsky"]')){const a=document.createElement("a");a.href="#team-edcarsky";a.textContent="Team edcarSky";nav.insertBefore(a,nav.querySelector(".nav-cta"));}
- if(!document.querySelector("#team-edcarsky")){
-  const team=document.createElement("section");
-  team.id="team-edcarsky";
-  team.className="team-section";
-  team.innerHTML='<div class="team-inner"><img class="team-watermark-logo" src="assets/edcarsky-glive-logo.webp" alt="" aria-hidden="true"><div class="section-kicker">TEAM EDCARSKY™ · SINCE 2021</div><div class="team-heading"><h2>100% LEGIT,<br><em>SAFE & ORGANIC.</em></h2><p data-content-key="team_intro">Creator support, digital promotion and program development built around organic participation, platform policies and sustainable channel activity.</p></div><div class="team-stats"><article class="team-stat"><b>5 Years</b><span>Continuous service since 2021, as stated in the August 2026 program terms</span></article><article class="team-stat"><b>200+</b><span>YouTube channels reported as monetized</span></article><article class="team-stat"><b>3,000+</b><span>Channels reported as assisted through monetization and organic growth programs</span></article><article class="team-stat"><b>~500</b><span>Active and former members reported in the program terms</span></article></div><div class="team-programs"><article class="team-program"><h3>AA+ Programs</h3><p>Creator-support workflows, program operations and digital growth tools.</p></article><article class="team-program"><h3>SSP+ Programs</h3><p>Social sharing and promotional support workflows across digital platforms.</p></article><article class="team-program"><h3>APP+ Programs</h3><p>Application-based creator tools and program features documented in Team edcarSky presentations.</p></article><article class="team-program"><h3>Team edcarSky v5.1.1</h3><p>Program version featured in the Team edcarSky promotional presentation.</p></article></div><div class="team-note">Milestone figures are reproduced from Team edcarSky&#39;s August 2026 program terms and are presented as program-reported figures, not independently audited results. The source describes nearly 500 active and former members, not 500+ active clients. Monetization approval, revenue and platform outcomes are not guaranteed and remain subject to each platform&#39;s decisions and the creator&#39;s activity and policy compliance.</div><div class="deck-actions"><a class="button button-dark" href="https://m.me/edcarSkyglive" target="_blank" rel="noopener">Contact Team edcarSky ↗</a><a class="button button-outline-dark" href="https://www.youtube.com/watch?v=JRnKG9kY1cI" target="_blank" rel="noopener">Watch Team introduction ↗</a></div></div>';
-  const social=document.querySelector("#social");
-  if(social)main.insertBefore(team,social);else main.append(team);
- }
+
 })();
