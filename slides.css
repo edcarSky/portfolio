@@ -82,3 +82,58 @@
 .team-section .team-note{background:#202f42;border-left-color:#ed8792;color:#d6dfeb}
 .deck-slide[data-slide="5"] .deck-title em{color:#f39aa3}
 @media(max-width:620px){.team-section .team-watermark-logo{width:65vw;right:0;top:5%;opacity:.055}}
+
+
+/* 26 November 2026: consistent profile panel across all five introduction slides */
+.intro-deck .deck-slide .hero-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.25fr) minmax(290px,.75fr)!important;
+  gap:clamp(28px,5vw,76px)!important;
+  align-items:center!important;
+  max-width:1160px;
+}
+.intro-deck .deck-slide .hero-copy{max-width:760px;min-width:0}
+.intro-deck .deck-slide .hero-panel{
+  display:block;
+  width:100%;
+  max-width:390px;
+  justify-self:end;
+  padding:clamp(18px,2vw,25px);
+  border:1px solid #e8dfd2;
+  border-radius:16px;
+  background:#fffaf1;
+  color:#172b45;
+  box-shadow:0 18px 44px #07142630;
+}
+.intro-deck .deck-slide .panel-top{color:#52647b}
+.intro-deck .deck-slide .panel-icon{color:#d91f32}
+.intro-deck .deck-slide .profile-placeholder{
+  height:clamp(112px,12vw,154px);
+  margin:15px 0 16px;
+  border-radius:9px;
+  background:#e6eaf0;
+}
+.intro-deck .deck-slide .hero-panel h2{color:#172b45;font-size:clamp(20px,2vw,25px)}
+.intro-deck .deck-slide .hero-panel>p{color:#52647b}
+.intro-deck .deck-slide .panel-stats{border-color:#d9dfe6}
+.intro-deck .deck-slide .panel-stats b{color:#bd2637}
+.intro-deck .deck-slide .panel-stats small{color:#52647b}
+.intro-deck .deck-slide .text-link{color:#244d7b}
+.intro-deck .deck-slide:not(:first-child) .deck-copy{padding:0}
+.intro-deck .deck-slide:not(:first-child) .deck-title{max-width:760px}
+@media(max-width:800px){
+ .intro-deck .deck-slide .hero-grid{grid-template-columns:minmax(0,1fr) minmax(250px,.78fr)!important;gap:24px!important}
+ .intro-deck .deck-slide .hero-panel{max-width:100%;padding:16px}
+ .intro-deck .deck-slide .profile-placeholder{height:112px}
+}
+@media(max-width:620px){
+ .intro-deck .deck-slide .hero-grid{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:16px!important}
+ .intro-deck .deck-slide .hero-copy{max-width:100%;padding:0!important}
+ .intro-deck .deck-slide .hero-panel{margin:4px 0 0;max-width:100%;padding:15px}
+ .intro-deck .deck-slide .profile-placeholder{height:118px;margin:12px 0}
+ .intro-deck .deck-slide .hero-panel h2{font-size:20px}
+ .intro-deck .deck-slide .panel-stats{padding:10px 0}
+ .intro-deck .deck-slide .panel-stats small{font-size:9px}
+ .intro-deck .deck-slide:not(:first-child){padding:38px 19px 100px}
+ .intro-deck .deck-slide:not(:first-child) .deck-title{font-size:clamp(38px,10vw,54px)}
+}
