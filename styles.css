@@ -686,3 +686,55 @@ body{background:#e8edf3;color:#18263a}
  .testimonial-section .testimonial-inner{grid-template-columns:1fr!important;gap:22px!important}
  .testimonial-section .testimonial-inner>div:first-child>p{max-width:100%}
 }
+
+
+/* 26 November 2026: remove repeated slide profile flashcards and enforce clear section color blocks */
+.intro-deck .deck-slide:not(:first-child) .hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  max-width:1160px;
+}
+.intro-deck .deck-slide:not(:first-child) .deck-copy{
+  width:100%;
+  max-width:900px;
+  padding:clamp(18px,3vw,42px) 0;
+}
+.intro-deck .deck-slide:not(:first-child) .deck-title{
+  max-width:900px;
+  font-size:clamp(48px,7.5vw,92px);
+  line-height:1.04;
+}
+.intro-deck .deck-slide:not(:first-child) .deck-description{
+  max-width:760px;
+  font-size:clamp(16px,1.5vw,19px);
+  line-height:1.75;
+}
+.community-brand-caption{
+  margin-top:22px;
+  color:#304b50;
+  font-size:clamp(10px,1vw,12px);
+  font-weight:800;
+  letter-spacing:1.7px;
+  text-align:center;
+}
+.community-promise{
+  border:0;
+  border-left:4px solid #b83c4c;
+  border-radius:0;
+  padding:4px 0 4px 14px;
+  color:#a83243;
+  background:transparent;
+  font-size:clamp(13px,1.2vw,15px);
+  letter-spacing:1.4px;
+  line-height:1.5;
+}
+@media(max-width:620px){
+  .intro-deck .deck-slide:not(:first-child){padding:54px 22px 92px}
+  .intro-deck .deck-slide:not(:first-child) .deck-title{
+    font-size:clamp(39px,11vw,58px);
+    letter-spacing:-1.5px;
+  }
+  .intro-deck .deck-slide:not(:first-child) .deck-description{font-size:15px}
+  .community-brand-caption{letter-spacing:1px;font-size:9px}
+  .community-promise{font-size:12px;letter-spacing:1px}
+}
