@@ -390,7 +390,7 @@ Minimum QA checks:
 ### Status update
 - Section 05 / Find Me Online: source verified and included in successful Pages deployment. Five icons: YouTube, Facebook, TikTok, Instagram and X.
 - Section 09 / Professional Feedback: source verified and included in successful Pages deployment. Two-column desktop layout, stacked mobile layout, full stored comment popup, keyboard activation and rotation resume logic.
-- GitHub Pages deployment for commit 610a4f824cdbd17e6dfb8750667151544495ae9: SUCCESS. (Use the exact run head SHA shown by GitHub Actions: 610a4f824cdbd17e6dfb8750667151544495ae9.)
+- GitHub Pages deployment for commit 610a4f824cdbd17f8d72df2736ef1d219a4cf64ca: SUCCESS. (Use the exact run head SHA shown by GitHub Actions: 610a4f824cdbd17e6dfb8750667151544495ae9.)
 - Live browser visual QA: PENDING.
 - Offline ZIP: PENDING.
 - Job Search compact-only layout and minimum 10 initial results: OPEN / NEXT; source inspection did not establish these acceptance criteria as met.
