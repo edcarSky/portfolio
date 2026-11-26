@@ -361,3 +361,36 @@ Do not claim a live update, working admin, complete testimonial source text, ful
 - Updated homepage asset references to styles.css?v=20261126-6 and app.js?v=20261126-3 so returning visitors request the updated two-column layout and popup interaction rather than stale cached files.
 - Source commit: 6b8ba08fdb73dd4308516cf2f334bd843de2817d.
 - GitHub Pages deployment for this cache refresh is queued/pending; live behavior remains unverified.
+
+
+## Deployment confirmation and cross-device requirement — 26 November 2026, 08:16 PHT
+
+### Live deployment
+- GitHub Pages workflow run: 45709644132.
+- Deployment commit: 610a4f824cdbd17b2583dd657a254f1a7ea04e60.
+- Workflow result: completed successfully.
+- Build job: success.
+- Upload artifact: success.
+- Deploy to GitHub Pages: success.
+- This confirms the Section 05 social link/layout, Section 09 introduction, two-column desktop styling, mobile stacking, popup interaction and cache references were included in the successful Pages deployment.
+- Public URL: https://edcarsky.github.io/portfolio/index.html
+- Source and Pages deployment are confirmed. Independent visual inspection of the public page was not completed in this session because the live URL could not be fetched through the available browser/network path. Do not confuse a successful Pages workflow with a completed visual QA pass.
+
+### Mandatory desktop + mobile quality standard
+Effective immediately, every portfolio change must be reviewed for both desktop and mobile before it is marked complete. This applies to all public sections, Admin, Job Search & Application Center, CV and cover letter pages, forms, cards, menus, modals, image crops, icon rows, tables, and interactive controls.
+
+Minimum QA checks:
+1. Desktop: wide viewport layout, readable hierarchy, spacing, alignment, image sizing/cropping, no overflow, correct columns and hover/focus behavior.
+2. Mobile: narrow viewport layout, readable font sizes, no horizontal scrolling, no clipped text, touch-friendly controls, correct stacking, image scaling and no overlapping fixed/watermark elements.
+3. Interaction parity: navigation, links, forms, modal open/close, keyboard behavior, carousel controls and pagination/load-more behavior.
+4. Content parity: no hidden text, broken assets, clipped labels, duplicated logos or CMS-overwritten copy.
+5. Regression: recheck adjacent sections and page navigation after CSS/HTML changes.
+6. Evidence: record viewport sizes and test results. Mark a feature “Working” only after source review and desktop/mobile browser verification. If browser verification is unavailable, use “Source verified; visual QA pending.”
+
+### Status update
+- Section 05 / Find Me Online: source verified and included in successful Pages deployment. Five icons: YouTube, Facebook, TikTok, Instagram and X.
+- Section 09 / Professional Feedback: source verified and included in successful Pages deployment. Two-column desktop layout, stacked mobile layout, full stored comment popup, keyboard activation and rotation resume logic.
+- GitHub Pages deployment for commit 610a4f824cdbd17e6dfb8750667151544495ae9: SUCCESS. (Use the exact run head SHA shown by GitHub Actions: 610a4f824cdbd17e6dfb8750667151544495ae9.)
+- Live browser visual QA: PENDING.
+- Offline ZIP: PENDING.
+- Job Search compact-only layout and minimum 10 initial results: OPEN / NEXT; source inspection did not establish these acceptance criteria as met.
