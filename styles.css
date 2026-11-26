@@ -738,3 +738,24 @@ body{background:#e8edf3;color:#18263a}
   .community-brand-caption{letter-spacing:1px;font-size:9px}
   .community-promise{font-size:12px;letter-spacing:1px}
 }
+
+
+/* Community palette contrast correction after merging Team edcarSky into Section 07 */
+.community-section .light-kicker{color:#526985}
+.community-section .community-intro h2{color:#203347}
+.community-section .community-intro h2 em{color:#a83243}
+.community-section .community-actions .button-outline{border-color:#526985;color:#344b56}
+.community-section .community-brand-panel-clean{
+  min-height:245px;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  padding:10px 18px;
+}
+.community-section .community-brand-caption{color:#304b50}
+.community-section .community-promise{color:#a83243}
+@media(max-width:620px){
+  .community-section .community-brand-panel-clean{min-height:150px;padding:4px}
+  .community-section .community-logo-image{width:min(72vw,230px);max-height:150px}
+}
