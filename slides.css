@@ -85,7 +85,7 @@
 
 
 /* 26 November 2026: consistent profile panel across all five introduction slides */
-.intro-deck .deck-slide .hero-grid{
+.intro-deck .deck-slide:not(:first-child) .hero-grid{
   display:grid!important;
   grid-template-columns:minmax(0,1.25fr) minmax(290px,.75fr)!important;
   gap:clamp(28px,5vw,76px)!important;
@@ -122,12 +122,12 @@
 .intro-deck .deck-slide:not(:first-child) .deck-copy{padding:0}
 .intro-deck .deck-slide:not(:first-child) .deck-title{max-width:760px}
 @media(max-width:800px){
- .intro-deck .deck-slide .hero-grid{grid-template-columns:minmax(0,1fr) minmax(250px,.78fr)!important;gap:24px!important}
+ .intro-deck .deck-slide:not(:first-child) .hero-grid{grid-template-columns:minmax(0,1fr) minmax(250px,.78fr)!important;gap:24px!important}
  .intro-deck .deck-slide .hero-panel{max-width:100%;padding:16px}
  .intro-deck .deck-slide .profile-placeholder{height:112px}
 }
 @media(max-width:620px){
- .intro-deck .deck-slide .hero-grid{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:16px!important}
+ .intro-deck .deck-slide:not(:first-child) .hero-grid{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:16px!important}
  .intro-deck .deck-slide .hero-copy{max-width:100%;padding:0!important}
  .intro-deck .deck-slide .hero-panel{margin:4px 0 0;max-width:100%;padding:15px}
  .intro-deck .deck-slide .profile-placeholder{height:118px;margin:12px 0}
