@@ -406,3 +406,46 @@ Minimum QA checks:
 - jobs.css renders a compact vertical list and adjacent detail panel on desktop, with a single-column stacked layout at the mobile breakpoint.
 - Include/exclude country, region, include keyword and exclude keyword filters are present.
 - Status: SOURCE VERIFIED. Browser test for actual result count, provider response, desktop rendering and mobile stacking remains PENDING.
+
+
+## Visual cleanup and Community consolidation — 26 November 2026
+
+### Owner-requested corrections
+- Removed the extra Team edcarSky section that slides.js dynamically injected after the Community section. Team edcarSky now has one public home: Section 07 / COMMUNITY.
+- Consolidated the Community branding as:
+  - TEAM EDCARSKY™ · SINCE 2021
+  - 100% LEGIT, SAFE & ORGANIC.
+- Removed the repeated slogan from the lower Community warning panel to reduce repetition.
+- The five-slide introduction retains its Team edcarSky slide, but its headline now reads “Creators. Community. Grow together.” and its CTA points to #community.
+- Removed the repeated profile flashcard from generated Professional, Content Creator, Family and Team slides. These slides now use a single-column text layout with larger headings and readable descriptions.
+- Corrected Community section text contrast for the light background, including the section kicker, heading, emphasis text and outline CTA.
+- Added responsive sizing for the revised slide text and Community logo/brand caption.
+- Updated cache versions in index.html: styles.css?v=20261126-7 and slides.js?v=20261126-4.
+
+### Source validation
+- Re-fetched the updated index.html, slides.js and styles.css from the default branch after commits.
+- Confirmed the Community caption and tagline exist in Section 07.
+- Confirmed the duplicate Team section generator and duplicate Team navigation insertion are absent from slides.js.
+- Confirmed the generated slide profile aside card is absent.
+- Confirmed the Team slide routes to #community.
+- Confirmed no unresolved local anchor targets in the homepage HTML and generated slide links.
+- Confirmed the five-slide navigation controls and six-second auto-advance code remain present.
+- Confirmed mobile breakpoint rules remain present.
+- This is source-level validation only. Live desktop and mobile rendering, visual contrast, tap targets, slide controls and live Supabase/CMS behavior still require browser testing.
+
+### Commit references
+- fa35780113279d5692a956b97a6de5f64c069dbf — remove duplicate Team section and repeated slide profile cards.
+- f5272a2f6cf590e5305dd29fbf93b1445c19e34b — merge Team edcarSky branding into Community.
+- 99b3c677269883ec7e13bbc9a09edf3143239577 — improve slide readability and Community brand styling.
+- 619a50fee79fb7224825823f55fae0ad9174b180 — remove repeated slogan from Team intro slide.
+- e1ad86610cbe5a29ae08689f470cd63a2bb91204 — remove repeated slogan from Community warning block.
+- 810b2dc22d1c3fd84a71a3aca840d96186401e44 — fix Community section background contrast and logo presentation.
+
+### Current status
+- Source corrections: committed and source-verified.
+- GitHub Pages deployment for the final source commit: pending at the time of this entry.
+- Public live URL visual check: pending. The available network/browser path could not load the public site.
+- Desktop QA: pending.
+- Mobile QA: pending.
+- Functional browser QA: pending.
+- Offline ZIP: pending. Build it from the exact successful deployed commit, then inspect ZIP integrity and verify the final file path before sharing.
