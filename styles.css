@@ -759,3 +759,13 @@ body{background:#e8edf3;color:#18263a}
   .community-section .community-brand-panel-clean{min-height:150px;padding:4px}
   .community-section .community-logo-image{width:min(72vw,230px);max-height:150px}
 }
+
+
+/* Header wordmark: exact edcarSky brand colors and descriptor contrast */
+.site-header .brand-lockup>span{color:#fff}
+.site-header .brand-lockup .muted-brand{color:#ff1828;font-weight:900}
+.site-header .brand-descriptor{display:block;color:#fff!important;font-size:8px;font-weight:800;letter-spacing:1.55px;line-height:1.25;text-transform:uppercase}
+.site-header .wordmark{gap:10px}
+@media(max-width:620px){
+ .site-header .brand-descriptor{font-size:7px;letter-spacing:1.15px}
+}
