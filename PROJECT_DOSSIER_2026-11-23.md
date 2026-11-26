@@ -281,10 +281,10 @@ Current source and backend:
 - Private job documents and application records use RLS and owner-folder storage policies as documented in the 24 November section.
 
 Outstanding owner correction:
-- Default search must remain worldwide when no location filter is supplied.
-- Display must be compact only.
-- Initial results must show at least 10 listings, with a More control for additional results.
-- The source contains worldwide default and a More control, but the compact-only display and minimum 10-result initial view have not yet been verified as corrected. Keep this item OPEN / NEXT.
+- Default search is worldwide when the user leaves location and region filters blank.
+- Results use a compact list/detail layout, with a compact vertical list on the left and selected job details on the right on desktop; mobile stacks the list and details.
+- Initial visible count is 10. The More results control reveals the next 10 listings.
+- Source inspection on 26 November confirms these acceptance criteria are implemented. Mark as SOURCE VERIFIED; desktop/mobile browser QA remains pending.
 - Do not claim complete worldwide on-site coverage. Provider coverage is not every country or local job board.
 
 ### 6. Supabase and owner administration
@@ -314,8 +314,8 @@ Outstanding owner correction:
 | Testimonial original completeness | PARTIAL | Archive excerpts remain labelled as excerpts; source archive needs complete text if the full original is required. |
 | Community service copy | SOURCE + CMS VERIFIED | HTML and Supabase testimonial intro CMS row checked; Community intro CMS copy updated in earlier work. |
 | Job Search worldwide default | SOURCE PRESENT | Backend provider coverage is limited to connected sources. |
-| Job Search compact-only view | OPEN | Owner specifically requested compact-only layout; not yet confirmed fixed. |
-| Job Search minimum 10 initial results | OPEN | Verify at least 10 initial cards and More behavior. |
+| Job Search compact list/detail view | SOURCE VERIFIED | Compact list, desktop detail pane, mobile stacking; browser QA pending. |
+| Job Search minimum 10 initial results | SOURCE VERIFIED | visibleCount starts at 10; More increments by 10; browser QA pending. |
 | Job Search region and exclude filters | SOURCE PRESENT | Browser test required. |
 | Owner Auth | ACCOUNT CREATED, LOGIN TEST PENDING | Owner confirmation; perform fresh login test. |
 | Admin uploads and publishing | PENDING | Complete authenticated upload and public download test. |
@@ -394,3 +394,15 @@ Minimum QA checks:
 - Live browser visual QA: PENDING.
 - Offline ZIP: PENDING.
 - Job Search compact-only layout and minimum 10 initial results: OPEN / NEXT; source inspection did not establish these acceptance criteria as met.
+
+
+### Job Search acceptance criteria source verification — 26 November 2026
+- jobs.js initializes visibleCount = 10.
+- The search request asks jobs-search for up to 50 listings.
+- applyFilters() resets visibleCount to 10.
+- renderJobs() renders jobs.slice(0, visibleCount).
+- More results increments visibleCount by 10.
+- Default location and region filters are blank; search sends location: "" and the UI message states worldwide results by default.
+- jobs.css renders a compact vertical list and adjacent detail panel on desktop, with a single-column stacked layout at the mobile breakpoint.
+- Include/exclude country, region, include keyword and exclude keyword filters are present.
+- Status: SOURCE VERIFIED. Browser test for actual result count, provider response, desktop rendering and mobile stacking remains PENDING.
