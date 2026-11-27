@@ -1121,3 +1121,6 @@ body.modal-open{overflow:hidden}
   .document-card{align-items:flex-start}
   .document-card>div:last-child{min-width:0}
 }
+
+.doc-x{background:#111}
+.document-auth-result{display:inline-flex;margin-top:4px;text-decoration:none}
