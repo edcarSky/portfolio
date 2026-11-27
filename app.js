@@ -93,7 +93,7 @@
   if(!documentAuthModal)return;
   const label=type==="cv"?"Curriculum Vitae":"Professional Cover Letter";
   $("#documentAuthTitle").textContent=(action==="download"?"Connect to download your ":"Connect to view your ")+label+".";
-  $("#documentAuthDescription").textContent="Sign in with Google or Facebook for document access. TikTok and Instagram open your public profiles.";
+  $("#documentAuthDescription").textContent="Connect with Google, Facebook, TikTok or Instagram to verify your identity before viewing or downloading this document. Your social account is not displayed publicly.";
   if(documentAuthStatus)documentAuthStatus.textContent="One account is enough. You do not need to connect all platforms.";
   documentAuthModal.hidden=false;
   document.body.classList.add("modal-open");
@@ -111,13 +111,6 @@
  };
  document.querySelectorAll("[data-close-document-auth]").forEach(button=>button.addEventListener("click",closeDocumentAuth));
  document.addEventListener("keydown",event=>{if(event.key==="Escape")closeDocumentAuth();});
- document.querySelectorAll("[data-doc-oauth-pending]").forEach(button=>{
-  button.addEventListener("click",()=>{
-   const provider=button.dataset.docOauthPending;
-   const label=provider==="tiktok"?"TikTok":"Instagram";
-   if(documentAuthStatus)documentAuthStatus.textContent=label+" account sign-in is not active yet. Its developer app and secure OAuth callback must be configured before it is used to verify document access.";
-  });
- });
  document.querySelectorAll("[data-doc-oauth-provider]").forEach(button=>{
   button.addEventListener("click",async()=>{
    const provider=button.dataset.docOauthProvider;
@@ -126,7 +119,7 @@
     if(documentAuthStatus)documentAuthStatus.textContent="Secure social sign-in is not active until Supabase is configured.";
     return;
    }
-   if(!["google","facebook","linkedin_oidc"].includes(provider)){
+   if(!["google","facebook","linkedin_oidc","custom:tiktok","custom:instagram"].includes(provider)){
     if(documentAuthStatus)documentAuthStatus.textContent="This provider is not supported by the current sign-in configuration.";
     return;
    }
