@@ -914,3 +914,47 @@ body{background:#e8edf3;color:#18263a}
  .join-team-side-logo{min-height:90px}
  .join-team-side-logo img{height:90px;width:min(100%,180px)}
 }
+
+
+/* Expanded Team edcarSky program cards, tuned for desktop browser width. */
+.community-section .community-program-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  align-items:stretch;
+}
+.community-section .community-program-grid .community-teaser{
+  min-width:0;
+  padding:18px;
+  height:100%;
+}
+.community-section .community-program-grid .community-teaser h3{
+  font-size:clamp(18px,1.7vw,21px);
+  line-height:1.2;
+  overflow-wrap:anywhere;
+}
+.community-section .community-program-grid .community-teaser>p{
+  min-height:0;
+  font-size:11.5px;
+  line-height:1.65;
+}
+.community-section .community-program-grid .community-more-content p{
+  font-size:11px;
+  line-height:1.65;
+}
+.join-team-program>span{
+  flex-basis:88px;
+  font-size:15px;
+  line-height:1.2;
+  overflow-wrap:anywhere;
+}
+.join-team-program>div{min-width:0}
+@media(max-width:900px){
+  .community-section .community-program-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:620px){
+  .community-section .community-program-grid{grid-template-columns:1fr;gap:10px}
+  .community-section .community-program-grid .community-teaser{padding:16px}
+  .community-section .community-program-grid .community-teaser h3{font-size:20px}
+  .join-team-program>span{flex-basis:76px;font-size:14px}
+}
