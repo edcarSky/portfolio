@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20261127-4">
+<link rel="stylesheet" href="styles.css?v=20261127-5">
 <link rel="stylesheet" href="slides.css?v=20261126-3">
 </head>
 <body>
@@ -41,7 +41,7 @@
       <div class="eyebrow"><span class="live-dot"></span> PERSONAL BRAND · PROFESSIONAL PORTFOLIO</div>
       <h1 data-content-key="hero_title">Work. Create.<br><em>Connect.</em></h1>
       <p class="hero-intro">I'm <strong>Edcar Tenedero</strong>, an executive assistant and administration, operations, logistics, hospitality and general support professional with over 20 years of combined overseas and local work experience.</p>
-      <p class="hero-sub">A place to present my professional experience, share the work I create, and document the journey behind it.</p>
+      <p class="hero-sub">Explore my professional background, selected projects, creator work and the experiences behind them. Browse the sections to see how I work, create and connect.</p>
       <div class="hero-actions">
         <a class="button button-light" href="#professional">Explore my portfolio <span>↗</span></a>
         <a class="button button-outline" href="#creator">Watch featured work</a>
@@ -123,18 +123,36 @@
 
 <section id="documents" class="documents-section">
   <div class="section-wrap document-grid">
-    <div><div class="section-kicker light-kicker">05 / PROFESSIONAL DOCUMENTS</div><h2>My credentials,<br><em>one click away.</em></h2><p data-content-key="documents_intro">Review my updated professional CV and general cover letter. Open either document online, then use Print / Save as PDF to keep a copy. The owner dashboard remains available for publishing replacement PDF files.</p></div>
+    <div><div class="section-kicker light-kicker">05 / PROFESSIONAL DOCUMENTS</div><h2>My credentials,<br><em>one click away.</em></h2><p data-content-key="documents_intro">My professional CV and cover letter are available through a separate access step. Choose View or Download, then connect a social account in the access popup.</p></div>
     <div class="document-cards">
-      <article class="document-card"><div class="doc-icon">CV</div><div><h3>Curriculum Vitae</h3><p id="cvStatus">Updated 23 November 2026</p><a id="cvView" href="cv.html" target="_blank" rel="noopener" class="doc-link">View CV ↗</a><a id="cvDownload" href="cv.html" target="_blank" rel="noopener" class="doc-link">Print / Save PDF ↓</a></div></article>
-      <article class="document-card"><div class="doc-icon">CL</div><div><h3>Professional Cover Letter</h3><p id="letterStatus">Updated 23 November 2026</p><a id="letterView" href="cover-letter.html" target="_blank" rel="noopener" class="doc-link">View letter ↗</a><a id="letterDownload" href="cover-letter.html" target="_blank" rel="noopener" class="doc-link">Print / Save PDF ↓</a></div></article>
+      <article class="document-card"><div class="doc-icon">CV</div><div><h3>Curriculum Vitae</h3><p id="cvStatus">Updated 23 November 2026</p><button id="cvView" type="button" class="doc-link" data-document-action="view" data-document-type="cv">View CV ↗</button><button id="cvDownload" type="button" class="doc-link" data-document-action="download" data-document-type="cv">View / Download CV ↓</button></div></article>
+      <article class="document-card"><div class="doc-icon">CL</div><div><h3>Professional Cover Letter</h3><p id="letterStatus">Updated 23 November 2026</p><button id="letterView" type="button" class="doc-link" data-document-action="view" data-document-type="cover_letter">View Cover Letter ↗</button><button id="letterDownload" type="button" class="doc-link" data-document-action="download" data-document-type="cover_letter">View / Download Cover Letter ↓</button></div></article>
     </div>
+  </div>
+</section>
+
+<section id="social" class="section-wrap social-section">
+  <div class="section-kicker">07 / FIND ME ONLINE</div><div class="section-heading"><div><h2>Different platforms.<br><em>One connected story.</em></h2><p>My online presence grew from years of sharing work, learning new tools, building creator communities and documenting family milestones. Each platform carries a different part of that journey, from professional updates and practical creator tips to short-form videos, behind-the-scenes moments and family stories. Follow along, share a post, leave feedback or send a message to start a conversation.</p></div></div>
+  <div class="social-grid">
+    <a href="https://www.youtube.com/channel/UCoz2lfYpVjxYmBp2Z9MZ25g/" target="_blank" rel="noopener"><span class="social-icon yt">▶</span><span><b>YouTube</b><small>Videos & family vlogs</small></span><i>↗</i></a>
+    <a href="https://www.facebook.com/edcarSkyglive" target="_blank" rel="noopener"><span class="social-icon fb">f</span><span><b>Facebook</b><small>edcarSky g! live</small></span><i>↗</i></a>
+    <a href="https://www.tiktok.com/@edcarsky" target="_blank" rel="noopener"><span class="social-icon tt">♪</span><span><b>TikTok</b><small>@edcarsky</small></span><i>↗</i></a>
+    <a href="https://www.instagram.com/edcarsky/" target="_blank" rel="noopener" aria-label="Instagram, @edcarsky"><span class="social-icon ig">◎</span><span><b>Instagram</b><small>@edcarsky</small></span><i>↗</i></a>
+    <a href="https://x.com/edcarSky" target="_blank" rel="noopener" aria-label="X, @edcarSky"><span class="social-icon x-social">𝕏</span><span><b>X</b><small>@edcarSky</small></span><i>↗</i></a>
+  </div>
+</section>
+
+<section id="certified-creator" class="certified-creator-section">
+  <div class="section-wrap certified-creator-grid">
+    <div><div class="section-kicker">08 / CREATOR LEARNING</div><p class="certified-kicker">BE CERTIFIED CONTENT CREATOR</p><h2>Grow with purpose.<br><em>Start with the knowledge.</em></h2></div>
+    <div class="certified-creator-copy"><p>Build your creator foundation with practical knowledge in content planning, platform policies, channel analytics, audience development and responsible monetization.</p><p>Learn the principles behind sustainable creator work before choosing the tools and programs that fit your goals.</p><a class="button button-dark" href="#join-team">Explore Team edcarSky programs ↗</a><small>Program information, eligibility and requirements are subject to the published terms. No certification or platform endorsement is implied by this invitation.</small></div>
   </div>
 </section>
 
 <section id="join-team" class="join-team-section">
   <div class="section-wrap join-team-wrap">
     <div class="join-team-copy">
-      <div class="section-kicker">06 / JOIN TEAM EDCARSKY™ · MEMBERSHIP & PROGRAMS</div>
+      <div class="section-kicker">09 / JOIN TEAM EDCARSKY™ · MEMBERSHIP & PROGRAMS</div>
       <span class="join-team-kicker">JOIN TEAM EDCARSKY</span>
       <h2>Grow with purpose.<br><em>Start with the full terms.</em></h2>
       <p>Explore the Team edcarSky program lineup: AA+ Analytics, SSP+ Social Sharing & Promotion, SUB+ / FF+ audience development, WH+ watchtime and audience-retention support, plus APP+ creator workflows. Program scope, eligibility and requirements are governed by the published Terms & Conditions.</p>
@@ -172,22 +190,11 @@
   </div>
 </section>
 
-<section id="social" class="section-wrap social-section">
-  <div class="section-kicker">07 / FIND ME ONLINE</div><div class="section-heading"><div><h2>Different platforms.<br><em>One connected story.</em></h2><p>My online presence grew from years of sharing work, learning new tools, building creator communities and documenting family milestones. Each platform carries a different part of that journey, from professional updates and practical creator tips to short-form videos, behind-the-scenes moments and family stories. Follow along, share a post, leave feedback or send a message to start a conversation.</p></div></div>
-  <div class="social-grid">
-    <a href="https://www.youtube.com/channel/UCoz2lfYpVjxYmBp2Z9MZ25g/" target="_blank" rel="noopener"><span class="social-icon yt">▶</span><span><b>YouTube</b><small>Videos & family vlogs</small></span><i>↗</i></a>
-    <a href="https://www.facebook.com/edcarSkyglive" target="_blank" rel="noopener"><span class="social-icon fb">f</span><span><b>Facebook</b><small>edcarSky g! live</small></span><i>↗</i></a>
-    <a href="https://www.tiktok.com/@edcarsky" target="_blank" rel="noopener"><span class="social-icon tt">♪</span><span><b>TikTok</b><small>@edcarsky</small></span><i>↗</i></a>
-    <a href="https://www.instagram.com/edcarsky/" target="_blank" rel="noopener" aria-label="Instagram, @edcarsky"><span class="social-icon ig">◎</span><span><b>Instagram</b><small>@edcarsky</small></span><i>↗</i></a>
-    <a href="https://x.com/edcarSky" target="_blank" rel="noopener" aria-label="X, @edcarSky"><span class="social-icon x-social">𝕏</span><span><b>X</b><small>@edcarSky</small></span><i>↗</i></a>
-  </div>
-</section>
-
 
 
 <section id="community" class="community-section">
   <div class="section-wrap">
-    <div class="section-kicker light-kicker">08 / COMMUNITY</div>
+    <div class="section-kicker light-kicker">10 / COMMUNITY</div>
     <div class="community-hero community-hero-compact">
       <div class="community-brand-panel community-brand-panel-clean" aria-label="Official edcarSky g! live logo">
         <img class="community-logo-image" src="assets/edcarsky-glive-logo.webp" alt="Official edcarSky g! live logo">
@@ -390,8 +397,26 @@
 </section>
 
 <section class="testimonial-section">
- <div class="section-wrap testimonial-inner"><div><div class="section-kicker">09 / PROFESSIONAL FEEDBACK</div><h2>Words from<br><em>people I've worked with.</em></h2><p data-content-key="testimonial_intro">Read professional feedback here without leaving this portfolio. Select a testimonial to open the full comment in a popup.</p></div><div id="testimonials" class="testimonial-list" aria-live="polite"></div></div>
+ <div class="section-wrap testimonial-inner"><div><div class="section-kicker">11 / PROFESSIONAL FEEDBACK</div><h2>Words from<br><em>people I've worked with.</em></h2><p data-content-key="testimonial_intro">Read professional feedback here without leaving this portfolio. Select a testimonial to open the full comment in a popup.</p></div><div id="testimonials" class="testimonial-list" aria-live="polite"></div></div>
 </section>
+<div id="documentAuthModal" class="document-auth-modal" hidden role="dialog" aria-modal="true" aria-labelledby="documentAuthTitle">
+  <div class="document-auth-backdrop" data-close-document-auth></div>
+  <div class="document-auth-panel">
+    <button type="button" class="document-auth-close" data-close-document-auth aria-label="Close document access">×</button>
+    <div class="section-kicker">PROFESSIONAL DOCUMENT ACCESS</div>
+    <h2 id="documentAuthTitle">Connect to continue.</h2>
+    <p id="documentAuthDescription">Choose one social account to continue to the requested professional document. Your selection is used for sign-in, not public display.</p>
+    <div class="document-auth-options">
+      <button type="button" data-doc-oauth-provider="google"><span class="doc-auth-icon doc-google">G</span><span><b>Google / YouTube</b><small>Connect with your Google account</small></span></button>
+      <button type="button" data-doc-oauth-provider="facebook"><span class="doc-auth-icon doc-facebook">f</span><span><b>Facebook</b><small>Connect with your Facebook account</small></span></button>
+      <button type="button" data-doc-oauth-provider="linkedin_oidc"><span class="doc-auth-icon doc-linkedin">in</span><span><b>LinkedIn</b><small>Professional account sign-in, if enabled</small></span></button>
+      <button type="button" data-doc-oauth-provider="tiktok" disabled><span class="doc-auth-icon doc-tiktok">♪</span><span><b>TikTok</b><small>Provider integration pending</small></span></button>
+      <button type="button" data-doc-oauth-provider="instagram" disabled><span class="doc-auth-icon doc-instagram">◎</span><span><b>Instagram</b><small>Provider integration pending</small></span></button>
+    </div>
+    <p id="documentAuthStatus" class="document-auth-status" aria-live="polite">One account is enough. You do not need to connect all platforms.</p>
+    <small class="document-auth-privacy">Your account details are not displayed publicly. Document access will be enabled after private file storage and access rules are configured.</small>
+  </div>
+</div>
 <div id="testimonialModal" class="testimonial-modal" hidden role="dialog" aria-modal="true" aria-labelledby="testimonialModalTitle"><div class="testimonial-modal-backdrop" data-close-testimonial></div><div class="testimonial-modal-panel"><button type="button" class="testimonial-modal-close" data-close-testimonial aria-label="Close testimonial">×</button><div class="section-kicker">PROFESSIONAL TESTIMONIAL</div><h2 id="testimonialModalTitle">Recommendation</h2><blockquote id="testimonialModalQuote"></blockquote><p id="testimonialModalAuthor"></p></div></div>
 </main>
 
@@ -402,5 +427,5 @@
 <script src="config.js"></script>
 <script data-goatcounter="https://edcarsky.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script src="slides.js?v=20261126-5"></script>
-<script src="app.js?v=20261126-3"></script>
+<script src="app.js?v=20261127-2"></script>
 </body></html>
