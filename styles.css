@@ -855,3 +855,62 @@ body{background:#e8edf3;color:#18263a}
   .client-success-card .client-result-tag,.client-success-card p{grid-column:2}
   .client-success-card p{font-size:11px}
 }
+
+
+/* Join Team edcarSky: announcement strip and dedicated membership section. */
+.program-announcement{
+  min-height:34px;padding:7px max(4vw,20px);display:flex;align-items:center;
+  justify-content:center;gap:15px;flex-wrap:wrap;background:#a92f40;color:#fff;
+  font-size:10px;line-height:1.35;letter-spacing:.35px;text-align:center;
+}
+.program-announcement>span{font-weight:900;letter-spacing:1px}
+.program-announcement>strong{font-weight:800}
+.program-announcement>a{color:#fff;text-decoration:underline;text-underline-offset:3px;font-weight:800;white-space:nowrap}
+.join-team-section{background:#edf2f6;color:#203347;border-top:1px solid #d7e0e8;border-bottom:1px solid #d7e0e8}
+.join-team-wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(270px,.8fr);gap:34px;align-items:center}
+.join-team-copy{min-width:0}
+.join-team-kicker{display:inline-block;margin:12px 0 8px;color:#a83243;font-size:10px;font-weight:900;letter-spacing:1.6px}
+.join-team-copy h2{margin:0 0 14px;color:#203347;font:800 clamp(34px,4.4vw,52px)/1.1 Manrope,sans-serif;letter-spacing:-1.8px}
+.join-team-copy h2 em{color:#a83243;font-style:normal}
+.join-team-copy>p{max-width:690px;color:#526675;font-size:14px;line-height:1.8}
+.join-team-reminder{margin:18px 0;padding:17px 19px;background:#fff5f3;border:1px solid #e8c8c6;border-left:4px solid #b83243;border-radius:8px}
+.join-team-reminder strong{color:#a52d3d;font-size:10px;letter-spacing:.8px}
+.join-team-reminder p{margin:7px 0 0;color:#273d4a;font-size:14px;font-weight:800;line-height:1.65}
+.join-team-links{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 19px}
+.join-team-links a{display:inline-flex;align-items:center;min-height:38px;padding:9px 12px;border:1px solid #bdcbd7;border-radius:6px;color:#294b70;background:#fff;font-size:11px;font-weight:800}
+.join-team-links a:hover{border-color:#a83243;color:#a83243}
+.button-join-team{background:#a83243;color:#fff;border-color:#a83243}
+.button-join-team:hover{background:#8e2635}
+.join-team-note{display:block;max-width:650px;margin-top:10px;color:#71818e;font-size:10px;line-height:1.6}
+.join-team-side{padding:22px;background:#fff;border:1px solid #d4dee7;border-radius:13px;box-shadow:0 12px 30px rgba(23,43,65,.07)}
+.join-team-side-logo{display:flex;justify-content:center;align-items:center;min-height:115px;margin-bottom:12px;background:transparent}
+.join-team-side-logo img{display:block;width:min(100%,210px);height:110px;object-fit:contain;background:transparent}
+.join-team-program{display:flex;align-items:center;gap:13px;padding:14px 0;border-top:1px solid #e4eaf0}
+.join-team-program>span{flex:0 0 62px;color:#a83243;font:900 20px/1 Manrope,sans-serif}
+.join-team-program strong,.join-team-program small{display:block}
+.join-team-program strong{color:#23394c;font:800 13px/1.4 Manrope,sans-serif}
+.join-team-program small{margin-top:3px;color:#6b7c89;font-size:10px;line-height:1.5}
+.join-team-side-foot{margin-top:8px;padding-top:13px;border-top:1px solid #e4eaf0;color:#a83243;font-size:9px;font-weight:900;letter-spacing:1.3px;text-align:center}
+@media(max-width:800px){
+ .program-announcement{gap:7px;padding:8px 14px}
+ .program-announcement>span{font-size:9px}
+ .program-announcement>strong{font-size:9px}
+ .join-team-wrap{grid-template-columns:1fr;gap:22px}
+ .join-team-side{max-width:none}
+}
+@media(max-width:620px){
+ .program-announcement{display:grid;gap:3px;padding:8px 12px}
+ .program-announcement>span{font-size:8px}
+ .program-announcement>strong{font-size:9px;line-height:1.4}
+ .program-announcement>a{font-size:9px}
+ .join-team-wrap{gap:18px}
+ .join-team-copy h2{font-size:34px}
+ .join-team-copy>p{font-size:12px;line-height:1.7}
+ .join-team-reminder{padding:14px 13px}
+ .join-team-reminder p{font-size:12px}
+ .join-team-links{display:grid;grid-template-columns:1fr;gap:8px}
+ .join-team-links a{justify-content:center}
+ .join-team-side{padding:16px}
+ .join-team-side-logo{min-height:90px}
+ .join-team-side-logo img{height:90px;width:min(100%,180px)}
+}
