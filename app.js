@@ -12,13 +12,8 @@
  let current="navy";try{current=localStorage.getItem("edcarsky-theme")||"navy";}catch(e){}
  applyTheme(current);
  $("#themeRefresh").addEventListener("click",()=>{const choices=themes.filter(x=>x!==document.body.dataset.theme);applyTheme(choices[Math.floor(Math.random()*choices.length)]);});
- function setDoc(prefix,url,name,status){if(!url)return;const v=$("#"+prefix+"View"),d=$("#"+prefix+"Download");v.href=url;d.href=url;d.removeAttribute("download");v.classList.remove("disabled");d.classList.remove("disabled");if(status)$("#"+prefix+"Status").textContent=status;}
  async function loadPublicContent(){
-  setDoc("cv","cv.html","Edcar-Tenedero-CV","Updated 23 November 2026");
-  setDoc("letter","cover-letter.html","Edcar-Tenedero-Cover-Letter","Updated 23 November 2026");
   if(!client){$("#formMessage").textContent="Inquiry form setup is pending. Please contact me through WhatsApp, Messenger or email for now.";return;}
-  const {data:docs}=await client.from("public_documents").select("document_type,public_url,display_name").eq("is_published",true);
-  (docs||[]).forEach(doc=>{if(doc.document_type==="cv")setDoc("cv",doc.public_url,doc.display_name,"Latest published PDF");if(doc.document_type==="cover_letter")setDoc("letter",doc.public_url,doc.display_name,"Latest published PDF");});
   const {data:settings}=await client.from("site_settings").select("value").eq("key","profile_photo").maybeSingle();
   {const hero=$("#heroPhoto");if(hero){hero.innerHTML="";const img=document.createElement("img");img.src=settings?.value||"assets/edcar-profile.webp";img.alt="Edcar Aguirre Tenedero";img.style.cssText="width:100%;height:100%;object-fit:cover;border-radius:inherit";hero.append(img);}}
   if(settings?.value){
@@ -36,6 +31,53 @@
 
  }
  
+ const documentAuthModal=$("#documentAuthModal");
+ let requestedDocument={type:null,action:null};
+ const documentAuthStatus=$("#documentAuthStatus");
+ const openDocumentAuth=(type,action)=>{
+  requestedDocument={type,action};
+  if(!documentAuthModal)return;
+  const label=type==="cv"?"Curriculum Vitae":"Professional Cover Letter";
+  $("#documentAuthTitle").textContent=(action==="download"?"Connect to download your ":"Connect to view your ")+label+".";
+  $("#documentAuthDescription").textContent="Choose one social account to continue. Your account details will not appear on the public portfolio.";
+  if(documentAuthStatus)documentAuthStatus.textContent="One account is enough. You do not need to connect all platforms.";
+  documentAuthModal.hidden=false;
+  document.body.classList.add("modal-open");
+  documentAuthModal.querySelector(".document-auth-close")?.focus();
+ };
+ document.querySelectorAll("[data-document-action]").forEach(button=>{
+  button.addEventListener("click",()=>openDocumentAuth(button.dataset.documentType,button.dataset.documentAction));
+ });
+ const closeDocumentAuth=()=>{
+  if(documentAuthModal&&!documentAuthModal.hidden){
+   documentAuthModal.hidden=true;
+   document.body.classList.remove("modal-open");
+  }
+ };
+ document.querySelectorAll("[data-close-document-auth]").forEach(button=>button.addEventListener("click",closeDocumentAuth));
+ document.addEventListener("keydown",event=>{if(event.key==="Escape")closeDocumentAuth();});
+ document.querySelectorAll("[data-doc-oauth-provider]").forEach(button=>{
+  button.addEventListener("click",async()=>{
+   const provider=button.dataset.docOauthProvider;
+   if(button.disabled)return;
+   if(!client){
+    if(documentAuthStatus)documentAuthStatus.textContent="Secure social sign-in is not active until Supabase is configured.";
+    return;
+   }
+   if(!["google","facebook","linkedin_oidc"].includes(provider)){
+    if(documentAuthStatus)documentAuthStatus.textContent="This provider is not supported by the current sign-in configuration.";
+    return;
+   }
+   if(documentAuthStatus)documentAuthStatus.textContent="Connecting securely. Complete the sign-in on the provider page.";
+   try{sessionStorage.setItem("edcarsky-document-intent",JSON.stringify(requestedDocument));}catch(e){}
+   const options={redirectTo:window.location.origin+window.location.pathname+"#documents"};
+   if(provider==="google")options.scopes="email profile";
+   if(provider==="facebook")options.scopes="email public_profile";
+   if(provider==="linkedin_oidc")options.scopes="openid profile email";
+   const {error}=await client.auth.signInWithOAuth({provider,options});
+   if(error&&documentAuthStatus)documentAuthStatus.textContent="Sign-in could not start: "+error.message;
+  });
+ });
  const inquiryForm=$("#inquiryForm");
  const socialMessage=$("#socialAuthMessage");
  const inquiryExpand=$("#inquiryExpand");
@@ -65,7 +107,17 @@
  if(client){
   client.auth.getUser().then(({data,error})=>{if(!error)applySocialProfile(data.user);});
   client.auth.onAuthStateChange((event,session)=>{
-   if(event==="SIGNED_IN"&&session?.user)applySocialProfile(session.user);
+   if(event==="SIGNED_IN"&&session?.user){
+    applySocialProfile(session.user);
+    let intent=null;
+    try{intent=JSON.parse(sessionStorage.getItem("edcarsky-document-intent")||"null");sessionStorage.removeItem("edcarsky-document-intent");}catch(e){}
+    if(intent&&documentAuthModal){
+     requestedDocument=intent;
+     documentAuthModal.hidden=false;
+     document.body.classList.add("modal-open");
+     if(documentAuthStatus)documentAuthStatus.textContent="Your account is connected. Private document delivery is not active yet. CV and cover-letter access needs private storage and server-side access rules.";
+    }
+   }
   });
   document.querySelectorAll("[data-oauth-provider]").forEach(button=>{
    button.addEventListener("click",async()=>{
