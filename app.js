@@ -74,6 +74,7 @@
   documentAuthModal.hidden=false;
   document.body.classList.add("modal-open");
   documentAuthModal.querySelector(".document-auth-close")?.focus();
+  if(client)client.auth.getUser().then(({data,error})=>{if(!error&&data?.user)deliverDocument(requestedDocument);});
  };
  document.querySelectorAll("[data-document-action]").forEach(button=>{
   button.addEventListener("click",()=>openDocumentAuth(button.dataset.documentType,button.dataset.documentAction));
