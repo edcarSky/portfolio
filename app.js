@@ -195,10 +195,10 @@
  document.querySelectorAll("[data-copy-message]").forEach(link=>link.addEventListener("click",async()=>{if(await copyStarterMessage())link.title="Message copied. Paste it into the chat if it does not appear automatically.";}));
  const aiToggle=$("#aiDemoToggle"),aiPanel=$("#aiDemoPanel"),shareToggle=$("#sharePortfolioToggle"),sharePanel=$("#sharePortfolioPanel");
  aiToggle?.addEventListener("click",()=>{if(aiPanel)aiPanel.hidden=!aiPanel.hidden;if(sharePanel)sharePanel.hidden=true;});
- shareToggle?.addEventListener("click",async()=>{
-  if(navigator.share){try{await navigator.share({title:"edcarSky Professional Portfolio",text:"Visit Edcar's Professional Online Portfolio.",url:portfolioUrl});return;}catch(e){if(e?.name==="AbortError")return;}}
-  if(sharePanel)sharePanel.hidden=!sharePanel.hidden;if(aiPanel)aiPanel.hidden=true;
- });
+  shareToggle?.addEventListener("click",()=>{
+   if(sharePanel)sharePanel.hidden=!sharePanel.hidden;
+   if(aiPanel)aiPanel.hidden=true;
+  });
  $("#copyPortfolioLink")?.addEventListener("click",async()=>{const button=$("#copyPortfolioLink");try{await navigator.clipboard.writeText(portfolioUrl);button.textContent="Link copied";}catch(e){button.textContent="Copy unavailable in this browser";}});
  document.addEventListener("click",event=>{if(!event.target.closest(".floating-contact")){if(aiPanel)aiPanel.hidden=true;if(sharePanel)sharePanel.hidden=true;}});
  document.querySelectorAll(".video-thumb img").forEach(img=>img.addEventListener("error",()=>img.closest(".video-thumb")?.classList.add("is-fallback"),{once:true}));
