@@ -111,6 +111,13 @@
  };
  document.querySelectorAll("[data-close-document-auth]").forEach(button=>button.addEventListener("click",closeDocumentAuth));
  document.addEventListener("keydown",event=>{if(event.key==="Escape")closeDocumentAuth();});
+ document.querySelectorAll("[data-doc-oauth-pending]").forEach(button=>{
+  button.addEventListener("click",()=>{
+   const provider=button.dataset.docOauthPending;
+   const label=provider==="tiktok"?"TikTok":"Instagram";
+   if(documentAuthStatus)documentAuthStatus.textContent=label+" account sign-in is not active yet. Its developer app and secure OAuth callback must be configured before it is used to verify document access.";
+  });
+ });
  document.querySelectorAll("[data-doc-oauth-provider]").forEach(button=>{
   button.addEventListener("click",async()=>{
    const provider=button.dataset.docOauthProvider;
