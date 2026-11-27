@@ -1286,3 +1286,27 @@ body.modal-open{overflow:hidden}
  .social-section .section-wrap{padding-top:58px;padding-bottom:58px}
  .social-section .social-grid>a{background:#ffffff10!important}
 }
+
+/* Floating quick actions: requested order, mobile-safe and accessible */
+.floating-contact{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:9px;z-index:60}
+.floating-contact>a,.floating-contact>button{width:44px;height:44px;min-width:44px;display:grid;place-items:center;border:0;border-radius:50%;color:#fff;font:800 16px Manrope,sans-serif;box-shadow:0 5px 18px #07142635;cursor:pointer;text-decoration:none}
+.floating-contact .float-ai{background:#172b4d;border:2px solid #fff;font-size:22px}
+.floating-contact .float-messenger{background:#0879ef}.floating-contact .float-whatsapp{background:#1eaa65}.floating-contact .float-viber{background:#665cac}.floating-contact .float-telegram{background:#229ed9}.floating-contact .float-share{background:#b23a4a}
+.floating-contact>a:hover,.floating-contact>button:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.float-ai-panel,.float-share-panel{position:absolute;right:56px;bottom:0;width:min(290px,calc(100vw - 88px));padding:15px;background:#fff;color:#1d2d43;border:1px solid #dce4ed;border-radius:12px;box-shadow:0 12px 38px #07142630}
+.float-ai-panel strong,.float-share-panel strong{display:block;font:800 13px Manrope,sans-serif;margin-bottom:7px}
+.float-ai-panel p{font-size:11px;line-height:1.6;color:#5c6b7f;margin:0 0 8px}
+.float-ai-panel span{font-size:9px;color:#8a4050;font-weight:700}
+.float-share-panel{display:grid;gap:7px}
+.float-share-panel a,.float-share-panel button{display:block;text-align:left;border:1px solid #e0e6ee;border-radius:7px;padding:8px 10px;background:#f8fafc;color:#26374e;font:600 11px 'DM Sans',sans-serif;cursor:pointer}
+.float-share-panel a:hover,.float-share-panel button:hover{background:#edf3f8;border-color:#9bacc2}
+.document-auth-options .document-social-profile-link{display:flex;align-items:center;gap:13px;width:100%;padding:12px 14px;border:1px solid #dce3eb;border-radius:9px;background:#f9fbfd;text-align:left;color:#20344c;text-decoration:none}
+.document-auth-options .document-social-profile-link:hover{border-color:#8da4c0;background:#f0f5fa}
+.document-auth-options .document-social-profile-link>span:nth-child(2){flex:1}
+.document-social-profile-link b,.document-social-profile-link small{display:block}
+.document-social-profile-link b{font-size:12px}
+.document-social-profile-link small{font-size:10px;color:#758397;margin-top:2px}
+.profile-link-arrow{font-size:15px;color:#73859c}
+.social-profile-link{cursor:pointer;text-decoration:none}.social-profile-link:hover{border-color:#8ca3c2;background:#fbfcfe}
+.instagram-auth .auth-mark{background:linear-gradient(135deg,#743ad5,#e34c75,#f7a64b);color:#fff}
+@media(max-width:620px){.floating-contact{right:10px;bottom:calc(10px + env(safe-area-inset-bottom));gap:7px}.floating-contact>a,.floating-contact>button{width:40px;height:40px;min-width:40px}.float-ai-panel,.float-share-panel{right:49px}}
