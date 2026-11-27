@@ -34,6 +34,36 @@
  const documentAuthModal=$("#documentAuthModal");
  let requestedDocument={type:null,action:null};
  const documentAuthStatus=$("#documentAuthStatus");
+ const documentAuthResult=$("#documentAuthResult");
+ const deliverDocument=async(intent)=>{
+  if(!client||!intent?.type||!intent?.action)return;
+  if(documentAuthResult){documentAuthResult.hidden=true;documentAuthResult.removeAttribute("href");}
+  if(documentAuthStatus)documentAuthStatus.textContent="Checking your sign-in and preparing a time-limited document link...";
+  const {data:{user},error:userError}=await client.auth.getUser();
+  if(userError||!user){
+   if(documentAuthStatus)documentAuthStatus.textContent="Please connect one social account to continue.";
+   return;
+  }
+  const {data:doc,error:docError}=await client.from("public_documents")
+   .select("document_type,display_name,storage_path")
+   .eq("document_type",intent.type).eq("is_published",true).maybeSingle();
+  if(docError||!doc){
+   if(documentAuthStatus)documentAuthStatus.textContent=intent.type==="cover_letter"?"The cover letter file is not uploaded to private document storage yet. Please check back after the owner publishes it.":"The requested document is not published yet.";
+   return;
+  }
+  const options=intent.action==="download"?{download:doc.display_name}:undefined;
+  const {data:signed,error:signedError}=await client.storage.from("portfolio-documents").createSignedUrl(doc.storage_path,180,options);
+  if(signedError||!signed?.signedUrl){
+   if(documentAuthStatus)documentAuthStatus.textContent="The document link could not be created. Please try again or contact the portfolio owner.";
+   return;
+  }
+  if(documentAuthResult){
+   documentAuthResult.href=signed.signedUrl;
+   documentAuthResult.textContent=intent.action==="download"?"Download "+(intent.type==="cv"?"CV":"Cover Letter")+" ↓":"Open "+(intent.type==="cv"?"CV":"Cover Letter")+" ↗";
+   documentAuthResult.hidden=false;
+  }
+  if(documentAuthStatus)documentAuthStatus.textContent="Identity verified. This private document link expires in 3 minutes.";
+ };
  const openDocumentAuth=(type,action)=>{
   requestedDocument={type,action};
   if(!documentAuthModal)return;
@@ -115,7 +145,7 @@
      requestedDocument=intent;
      documentAuthModal.hidden=false;
      document.body.classList.add("modal-open");
-     if(documentAuthStatus)documentAuthStatus.textContent="Your account is connected. Private document delivery is not active yet. CV and cover-letter access needs private storage and server-side access rules.";
+     Promise.resolve().then(()=>deliverDocument(intent));
     }
    }
   });
