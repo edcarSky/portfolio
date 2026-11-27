@@ -6,7 +6,7 @@
  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
  async function refresh(){
   const {data:docs,error:docError}=await sb.from("public_documents").select("*").order("updated_at",{ascending:false});
-  $("#docList").innerHTML=docError?esc(docError.message):(docs||[]).map(d=>'<div><b>'+esc(d.display_name||d.document_type)+'</b> · '+(d.is_published?"Published":"Hidden draft")+'<br><a href="'+esc(d.public_url)+'" target="_blank" rel="noopener">View PDF</a> · <a href="'+esc(d.public_url)+'" download>Download</a><br><button class="button button-dark" data-toggle-doc="'+esc(d.id)+'" data-doc-type="'+esc(d.document_type)+'" data-published="'+String(!!d.is_published)+'">'+(d.is_published?"Unpublish":"Publish")+'</button> <button class="button button-outline-dark" data-delete-doc="'+esc(d.id)+'">Delete</button></div>').join("")||"No documents uploaded.";
+  $("#docList").innerHTML=docError?esc(docError.message):(docs||[]).map(d=>'<div><b>'+esc(d.display_name||d.document_type)+'</b> · '+(d.is_published?"Published":"Hidden draft")+'<br><button type="button" data-doc-view="'+esc(d.id)+'">View PDF</button> · <button type="button" data-doc-download="'+esc(d.id)+'">Download PDF</button><br><button class="button button-dark" data-toggle-doc="'+esc(d.id)+'" data-doc-type="'+esc(d.document_type)+'" data-published="'+String(!!d.is_published)+'">'+(d.is_published?"Unpublish":"Publish")+'</button> <button class="button button-outline-dark" data-delete-doc="'+esc(d.id)+'">Delete</button></div>').join("")||"No documents uploaded.";
   const {data:items,error:inboxError}=await sb.from("inquiries").select("*").order("created_at",{ascending:false}).limit(100);
   $("#inbox").innerHTML=inboxError?esc(inboxError.message):items?.length?'<table class="admin-table"><thead><tr><th>Contact</th><th>Inquiry</th><th>Message</th><th>Status</th><th>Action</th></tr></thead><tbody>'+items.map(x=>'<tr><td><b>'+esc(x.full_name)+'</b><br>'+esc(x.company)+'<br>'+esc(x.affiliation)+'<br>'+esc(x.email)+'<br>'+esc(x.phone)+'</td><td>'+esc(x.inquiry_type)+'<br><small>'+new Date(x.created_at).toLocaleString()+'</small></td><td>'+esc(x.message)+'</td><td>'+esc(x.status)+'</td><td><select data-status="'+x.id+'"><option>new</option><option>reviewed</option><option>replied</option><option>archived</option></select><button data-save="'+x.id+'" class="button button-dark">Save</button><button data-testimonial="'+x.id+'" class="button button-outline-dark">Convert to testimonial</button></td></tr>').join("")+'</tbody></table>':"No inquiries received.";
   const {data:quotes,error:quoteError}=await sb.from("testimonials").select("*").order("created_at",{ascending:false}).limit(100);
@@ -56,6 +56,15 @@
  });
  document.addEventListener("click",async e=>{
   const t=e.target;
+  if(t.dataset.docView||t.dataset.docDownload){
+   const id=t.dataset.docView||t.dataset.docDownload;
+   const {data:d,error:readError}=await sb.from("public_documents").select("storage_path,display_name").eq("id",id).maybeSingle();
+   if(readError||!d){alert(readError?.message||"Document not found.");return;}
+   const options=t.dataset.docDownload?{download:d.display_name}:undefined;
+   const {data:link,error}=await sb.storage.from("portfolio-documents").createSignedUrl(d.storage_path,300,options);
+   if(error||!link?.signedUrl){alert(error?.message||"Could not create a secure document link.");return;}
+   window.open(link.signedUrl,"_blank","noopener");
+  }
   if(t.dataset.toggleDoc){const publish=t.dataset.published!=="true";if(publish){const {error:priorError}=await sb.from("public_documents").update({is_published:false,updated_at:new Date().toISOString()}).eq("document_type",t.dataset.docType).eq("is_published",true);if(priorError){alert(priorError.message);return;}}const {error}=await sb.from("public_documents").update({is_published:publish,updated_at:new Date().toISOString()}).eq("id",t.dataset.toggleDoc);if(error)alert(error.message);refresh();}
   if(t.dataset.deleteDoc){if(!confirm("Delete this document and its stored PDF?"))return;const {data:d,error:readError}=await sb.from("public_documents").select("storage_path").eq("id",t.dataset.deleteDoc).maybeSingle();if(readError||!d){alert(readError?.message||"Document not found.");return;}const {error}=await sb.from("public_documents").delete().eq("id",t.dataset.deleteDoc);if(error){alert(error.message);return;}const {error:fileError}=await sb.storage.from("portfolio-documents").remove([d.storage_path]);if(fileError)alert("Record deleted, but storage cleanup failed: "+fileError.message);refresh();}
   if(t.dataset.save){const sel=document.querySelector('[data-status="'+t.dataset.save+'"]');const {error}=await sb.from("inquiries").update({status:sel.value}).eq("id",t.dataset.save);if(error)alert(error.message);refresh();}
