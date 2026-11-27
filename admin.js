@@ -34,8 +34,7 @@
   const path=type+"/"+Date.now()+"-"+file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
   const {error:upErr}=await sb.storage.from("portfolio-documents").upload(path,file,{contentType:"application/pdf",upsert:false});
   if(upErr){$("#docMessage").textContent=upErr.message;return;}
-  const {data:urlData}=sb.storage.from("portfolio-documents").getPublicUrl(path);
-  const {error}=await sb.from("public_documents").insert({document_type:type,display_name:name,storage_path:path,public_url:urlData.publicUrl,is_published:false,updated_at:new Date().toISOString()});
+  const {error}=await sb.from("public_documents").insert({document_type:type,display_name:name,storage_path:path,public_url:"",is_published:false,updated_at:new Date().toISOString()});
   if(error){await sb.storage.from("portfolio-documents").remove([path]);$("#docMessage").textContent=error.message;return;}
   $("#docMessage").textContent="Hidden draft uploaded. Publish it from the document list after review.";
   $("#docFile").value="";$("#docPreview").textContent="Draft uploaded. Use View PDF in the document list to review it.";
