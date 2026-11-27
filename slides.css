@@ -137,3 +137,64 @@
  .intro-deck .deck-slide:not(:first-child){padding:38px 19px 100px}
  .intro-deck .deck-slide:not(:first-child) .deck-title{font-size:clamp(38px,10vw,54px)}
 }
+
+
+/* Final cascade: portfolio introduction deck, light professional blue identity. */
+.intro-deck{background:#eaf1f8!important;color:#1d344f!important}
+.intro-deck .deck-slide{
+ background:linear-gradient(132deg,#edf4fb 0%,#e2ebf5 56%,#d8e4f0 100%)!important;
+ color:#1d344f!important;
+}
+.intro-deck .deck-slide:before{
+ border-color:#28496b12!important;
+ box-shadow:0 0 0 58px #28496b08,0 0 0 116px #28496b05!important;
+}
+.intro-deck .eyebrow,.intro-deck .deck-kicker{color:#557493!important}
+.intro-deck .hero-copy h1,.intro-deck .deck-title{color:#203a57!important}
+.intro-deck .hero-copy h1 em,.intro-deck .deck-title em{color:#547da8!important}
+.intro-deck .hero-intro{color:#344b63!important}
+.intro-deck .hero-intro strong{color:#1d344f!important}
+.intro-deck .hero-sub,.intro-deck .deck-description{color:#536a80!important}
+.intro-deck .hero-socials{color:#50677e!important}
+.intro-deck .hero-socials a:hover{color:#1d344f!important}
+.intro-deck .hero-bottom{border-color:#29486726!important;color:#60768d!important}
+.intro-deck .button-light{background:#203e60!important;color:#fff!important}
+.intro-deck .button-outline{border-color:#8098b2!important;color:#294865!important}
+.intro-deck .deck-slide .hero-panel{
+ display:block!important;position:relative!important;isolation:isolate;
+ width:100%!important;max-width:390px!important;justify-self:end;
+ padding:22px!important;border:1px solid #d6e1ec!important;
+ border-radius:18px!important;background:#fff!important;
+ color:#20364f!important;box-shadow:0 18px 48px rgba(30,57,83,.13)!important;
+}
+.intro-deck .deck-slide .hero-panel:before{display:none!important}
+.intro-deck .deck-slide .hero-panel .panel-top,
+.intro-deck .deck-slide .hero-panel .panel-top span{color:#71869b!important}
+.intro-deck .deck-slide .hero-panel .panel-icon{color:#6b8db3!important}
+.intro-deck .deck-slide .hero-panel .profile-placeholder{
+ display:flex!important;width:100%;height:clamp(190px,20vw,245px)!important;
+ margin:15px 0 17px!important;padding:8px!important;
+ background:#eaf1f8!important;border-radius:12px!important;
+}
+.intro-deck .deck-slide .hero-panel .profile-placeholder img{
+ width:100%!important;height:100%!important;object-fit:contain!important;
+ object-position:center!important;border-radius:8px!important;
+}
+.intro-deck .deck-slide .hero-panel h2{color:#20364f!important;font-size:23px!important}
+.intro-deck .deck-slide .hero-panel>p{color:#61758a!important}
+.intro-deck .deck-slide .hero-panel .panel-stats{border-color:#dbe4ed!important}
+.intro-deck .deck-slide .hero-panel .panel-stats b{color:#41678f!important}
+.intro-deck .deck-slide .hero-panel .panel-stats small{color:#70849a!important}
+.intro-deck .deck-slide .hero-panel .text-link{color:#345f89!important}
+.intro-deck .deck-controls{background:#20354dcc!important;border-color:#ffffff55!important}
+.intro-deck .deck-arrow,.intro-deck .deck-dot{color:#fff!important}
+.intro-deck .deck-dot[aria-current="true"]{background:#ffffff32!important}
+@media(max-width:800px){
+ .intro-deck .deck-slide .hero-panel{max-width:100%!important}
+ .intro-deck .deck-slide .hero-panel .profile-placeholder{height:210px!important}
+}
+@media(max-width:620px){
+ .intro-deck .deck-slide .hero-panel{padding:16px!important}
+ .intro-deck .deck-slide .hero-panel .profile-placeholder{height:190px!important}
+ .intro-deck .deck-slide .hero-panel h2{font-size:21px!important}
+}
