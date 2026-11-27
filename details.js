@@ -52,6 +52,7 @@
   document.addEventListener("keydown", event => {
     if (event.key === "Escape" && !modal.hidden) close();
   });
+  const programKeyByLabel = {"AA+":"AA+ Programs","SSP+":"SSP+ Programs","SUB+ / FF+":"SUB+ / FF+ Programs","WH+":"WH+ Watchtime Program","APP+":"APP+ Programs"};
   const selectors = [
     ".expertise-grid article", ".career-note",
     ".community-milestone-grid article", ".client-success-grid article",
@@ -60,7 +61,8 @@
   document.querySelectorAll(selectors.join(",")).forEach(card => {
     const heading = card.querySelector("h3,strong");
     const title = (heading?.textContent || card.textContent).trim().replace(/\s+/g, " ");
-    const key = Object.keys(descriptions).find(k => title.includes(k));
+    const programLabel = card.querySelector(".join-team-program>span")?.textContent.trim();
+    const key = programKeyByLabel[programLabel] || Object.keys(descriptions).find(k => title.includes(k));
     if (!key) return;
     card.classList.add("detail-clickable");
     card.setAttribute("role", "button");
