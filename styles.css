@@ -1239,3 +1239,50 @@ body.modal-open{overflow:hidden}
  .floating-contact a{width:39px;height:39px}
  .floating-contact a svg{width:20px;height:20px}
 }
+
+
+/* Section sequence update: 05 Documents -> 06 Creator -> 07 Find Me Online. */
+.creator-section{
+  background:linear-gradient(135deg,#eaf1f8 0%,#dfe9f3 52%,#edf3f8 100%)!important;
+  color:#20364f!important;
+}
+.creator-section .light-kicker{color:#607b9a!important}
+.creator-section .light-heading h2{color:#20364f!important}
+.creator-section .light-heading h2 em{color:#5b7fa7!important}
+.creator-section .light-heading p{color:#536a80!important}
+.creator-section .section-heading .button-outline{
+  border-color:#8098b2!important;color:#294865!important;
+}
+.creator-section .video-card{
+  background:#fff!important;border:1px solid #d7e1eb!important;
+  color:#20364f!important;box-shadow:0 8px 24px rgba(31,55,80,.07);
+}
+.creator-section .video-info small{color:#6683a5!important}
+.creator-section .video-info h3{color:#20364f!important}
+.creator-section .video-info p{color:#62768b!important}
+.creator-section .video-label{background:#294968!important;color:#fff!important}
+.creator-section .section-foot{border-color:#cbd8e5!important;color:#60758d!important}
+.creator-section .section-foot a{color:#294968!important}
+.social-section{
+  background:linear-gradient(135deg,#152a43 0%,#1c3653 58%,#172b45 100%)!important;
+  color:#f4f7fb!important;
+}
+.social-section .section-kicker{color:#a9bfdc!important}
+.social-section .section-heading h2{color:#f4f7fb!important}
+.social-section .section-heading h2 em{color:#9bb9df!important}
+.social-section .section-heading p,
+.social-section .section-heading>div>p{color:#c2cede!important}
+.social-section .social-grid>a{
+  background:#ffffff10!important;border-color:#ffffff24!important;color:#f4f7fb!important;
+}
+.social-section .social-grid>a:hover{
+  background:#ffffff18!important;border-color:#9db8d8!important;
+}
+.social-section .social-grid small{color:#c1ccda!important}
+.social-section .social-grid i{color:#b9cbe0!important}
+@media(max-width:620px){
+ .creator-section .section-wrap{padding-top:58px;padding-bottom:58px}
+ .creator-section .section-heading{gap:18px}
+ .social-section .section-wrap{padding-top:58px;padding-bottom:58px}
+ .social-section .social-grid>a{background:#ffffff10!important}
+}
