@@ -3,7 +3,6 @@
 .detail-clickable{cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
 .detail-clickable:hover{transform:translateY(-2px)}
 .detail-clickable:focus-visible{outline:3px solid #7297c2;outline-offset:3px}
-.detail-clickable:after{content:"READ FULL DETAILS ↗";display:block;margin-top:10px;font-size:9px;font-weight:800;letter-spacing:1px;color:#6685a8}
 .detail-modal[hidden]{display:none!important}
 .detail-modal{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:20px}
 .detail-backdrop{position:absolute;inset:0;background:rgba(7,17,31,.76);backdrop-filter:blur(5px)}
@@ -13,4 +12,4 @@
 .detail-dialog h2{margin:0 42px 18px 0;color:#203a57;font:800 clamp(22px,4vw,30px)/1.2 Manrope,sans-serif}
 .detail-modal-body{color:#4d6076;font:400 14px/1.85 'DM Sans',sans-serif;white-space:pre-line}
 body.modal-open{overflow:hidden}
-@media(max-width:620px){.detail-modal{padding:12px}.detail-dialog{max-height:86vh;padding:24px 19px;border-radius:14px}.detail-modal-body{font-size:13px;line-height:1.8}.detail-clickable:after{font-size:8px}}
+@media(max-width:620px){.detail-modal{padding:12px}.detail-dialog{max-height:86vh;padding:24px 19px;border-radius:14px}.detail-modal-body{font-size:13px;line-height:1.8}}
