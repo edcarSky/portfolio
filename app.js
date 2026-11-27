@@ -3,8 +3,32 @@
  const configured=cfg.SUPABASE_URL&&cfg.SUPABASE_ANON_KEY&&!cfg.SUPABASE_URL.includes("PASTE_")&&!cfg.SUPABASE_ANON_KEY.includes("PASTE_");
  const client=configured&&window.supabase?window.supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_ANON_KEY):null;
  $("#year").textContent=new Date().getFullYear();
- const showVisitorCount=()=>{const target=$("#visitorCount");if(window.goatcounter?.visit_count){target.textContent="";window.goatcounter.visit_count({append:"#visitorCount",path:"TOTAL",type:"html",no_branding:true,style:"div{display:inline!important;border:0!important;background:transparent!important;padding:0!important;margin:0!important;color:inherit!important;font:inherit!important} #gcvc-views{font-weight:700}" });return true;}return false;};
- let counterAttempts=0;const counterTimer=setInterval(()=>{counterAttempts++;if(showVisitorCount()){clearInterval(counterTimer);}else if(counterAttempts>=40){clearInterval(counterTimer);$("#visitorCount").textContent="Counter unavailable";}},250);
+ const visitorCounter=$("#visitorCount");
+ const loadVisitorCount=async()=>{
+  if(!visitorCounter)return;
+  visitorCounter.textContent="Loading";
+  try{
+   const response=await fetch("https://edcarsky.goatcounter.com/counter/TOTAL.json",{mode:"cors",cache:"no-store"});
+   if(!response.ok)throw new Error("Public counter endpoint returned "+response.status);
+   const data=await response.json();
+   if(typeof data.count!=="string"&&typeof data.count!=="number")throw new Error("Counter response is missing count");
+   visitorCounter.textContent=String(data.count);
+  }catch(error){
+   let attempts=0;
+   const retry=setInterval(()=>{
+    attempts++;
+    if(window.goatcounter?.visit_count){
+     clearInterval(retry);visitorCounter.replaceChildren();
+     try{window.goatcounter.visit_count({append:"#visitorCount",path:"TOTAL",type:"html",no_branding:true});}
+     catch(e){visitorCounter.textContent="Counter unavailable";}
+    }else if(attempts>=30){
+     clearInterval(retry);visitorCounter.textContent="Enable public counter";
+     visitorCounter.title="In GoatCounter settings, enable Allow adding visitor counts on your website.";
+    }
+   },200);
+  }
+ };
+ loadVisitorCount();
  $("#menuToggle").addEventListener("click",()=>$("#mainNav").classList.toggle("open"));
  document.querySelectorAll("#mainNav a").forEach(a=>a.addEventListener("click",()=>$("#mainNav").classList.remove("open")));
  const themes=["navy","forest","charcoal","burgundy","slate"];
@@ -165,6 +189,18 @@
   socialMessage.textContent="Social account connection is not active until Supabase is configured. You may complete the form manually.";
  }
  $("#inquiryForm").addEventListener("submit",async e=>{e.preventDefault();const form=e.currentTarget,msg=$("#formMessage");if(!client){msg.textContent="This form is not connected yet. Use WhatsApp, Messenger or email until backend setup is complete.";return;}const fd=new FormData(form);const payload={full_name:fd.get("full_name").trim(),company:fd.get("company").trim()||null,affiliation:fd.get("affiliation").trim()||null,email:fd.get("email").trim(),phone:fd.get("phone").trim()||null,inquiry_type:fd.get("inquiry_type"),message:fd.get("message").trim(),consent:fd.get("consent")==="on"};const {error}=await client.from("inquiries").insert(payload);if(error){msg.textContent="Your inquiry was not sent. Please use WhatsApp, Messenger or email.";return;}form.reset();msg.textContent="Thank you. Your inquiry was submitted privately.";});
+ const portfolioUrl="https://edcarsky.github.io/portfolio/";
+ const starterMessage="Hi Edcar, I am here at your Professional Online Portfolio. I have a question to ask.";
+ const copyStarterMessage=async()=>{try{await navigator.clipboard.writeText(starterMessage);return true;}catch(e){return false;}};
+ document.querySelectorAll("[data-copy-message]").forEach(link=>link.addEventListener("click",async()=>{if(await copyStarterMessage())link.title="Message copied. Paste it into the chat if it does not appear automatically.";}));
+ const aiToggle=$("#aiDemoToggle"),aiPanel=$("#aiDemoPanel"),shareToggle=$("#sharePortfolioToggle"),sharePanel=$("#sharePortfolioPanel");
+ aiToggle?.addEventListener("click",()=>{if(aiPanel)aiPanel.hidden=!aiPanel.hidden;if(sharePanel)sharePanel.hidden=true;});
+ shareToggle?.addEventListener("click",async()=>{
+  if(navigator.share){try{await navigator.share({title:"edcarSky Professional Portfolio",text:"Visit Edcar's Professional Online Portfolio.",url:portfolioUrl});return;}catch(e){if(e?.name==="AbortError")return;}}
+  if(sharePanel)sharePanel.hidden=!sharePanel.hidden;if(aiPanel)aiPanel.hidden=true;
+ });
+ $("#copyPortfolioLink")?.addEventListener("click",async()=>{const button=$("#copyPortfolioLink");try{await navigator.clipboard.writeText(portfolioUrl);button.textContent="Link copied";}catch(e){button.textContent="Copy unavailable in this browser";}});
+ document.addEventListener("click",event=>{if(!event.target.closest(".floating-contact")){if(aiPanel)aiPanel.hidden=true;if(sharePanel)sharePanel.hidden=true;}});
  document.querySelectorAll(".video-thumb img").forEach(img=>img.addEventListener("error",()=>img.closest(".video-thumb")?.classList.add("is-fallback"),{once:true}));
  loadPublicContent();
  renderTestimonials();
