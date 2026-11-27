@@ -1316,4 +1316,5 @@ body.modal-open{overflow:hidden}
 /* Brand logo assets for floating contact shortcuts. */
 .floating-contact .brand-icon{display:block;width:23px;height:23px;object-fit:contain}
 .floating-contact .share-icon{display:block;width:22px;height:22px}
+.floating-contact .share-icon{fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:620px){.floating-contact .brand-icon{width:22px;height:22px}}
