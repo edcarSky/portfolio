@@ -65,7 +65,7 @@
   if(documentAuthStatus)documentAuthStatus.textContent="Checking your sign-in and preparing a time-limited document link...";
   const {data:{user},error:userError}=await client.auth.getUser();
   if(userError||!user){
-   if(documentAuthStatus)documentAuthStatus.textContent="Please connect one social account to continue.";
+   if(documentAuthStatus)documentAuthStatus.textContent="Please sign in with Google or Facebook to continue.";
    return;
   }
   const {data:doc,error:docError}=await client.from("public_documents")
@@ -93,7 +93,7 @@
   if(!documentAuthModal)return;
   const label=type==="cv"?"Curriculum Vitae":"Professional Cover Letter";
   $("#documentAuthTitle").textContent=(action==="download"?"Connect to download your ":"Connect to view your ")+label+".";
-  $("#documentAuthDescription").textContent="Choose one social account to continue. Your account details will not appear on the public portfolio.";
+  $("#documentAuthDescription").textContent="Sign in with Google or Facebook for document access. TikTok and Instagram open your public profiles.";
   if(documentAuthStatus)documentAuthStatus.textContent="One account is enough. You do not need to connect all platforms.";
   documentAuthModal.hidden=false;
   document.body.classList.add("modal-open");
