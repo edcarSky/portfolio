@@ -769,3 +769,89 @@ body{background:#e8edf3;color:#18263a}
 @media(max-width:620px){
  .site-header .brand-descriptor{font-size:7px;letter-spacing:1.15px}
 }
+
+
+/* Client success milestones: distinct from Team edcarSky service-volume metrics. */
+.community-milestone-panel,.client-success-panel{
+  margin:18px 0 22px;
+  padding:clamp(16px,2.2vw,26px);
+  background:#f7fafc;
+  border:1px solid #cbd8e2;
+  border-radius:14px;
+  box-shadow:0 10px 28px rgba(22,42,62,.07);
+}
+.community-milestone-heading,.client-success-heading{
+  display:flex;align-items:center;gap:13px;margin-bottom:15px;
+}
+.milestone-trophy{font-size:28px;line-height:1}
+.community-milestone-heading h3,.client-success-heading h3{
+  margin:0;color:#20364b;font:800 clamp(19px,2.2vw,26px)/1.2 Manrope,sans-serif;
+}
+.community-milestone-heading p,.client-success-heading p{
+  margin:4px 0 0;color:#5b6d7b;font-size:12px;line-height:1.6;
+}
+.community-milestone-grid{
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  margin:0;
+}
+.community-milestone-grid article{
+  min-height:105px;background:#eaf0ed;
+}
+.client-success-panel{
+  background:linear-gradient(135deg,#f8fbff 0%,#edf3fa 100%);
+  border-color:#c7d6e7;
+}
+.client-success-heading{
+  display:block;margin-bottom:17px;
+}
+.client-success-kicker{
+  display:block;margin-bottom:7px;color:#a83243;font-size:9px;
+  font-weight:900;letter-spacing:1.5px;
+}
+.client-success-heading h3{max-width:760px}
+.client-success-grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;
+}
+.client-success-card{
+  min-width:0;min-height:190px;padding:19px 17px;
+  display:flex;flex-direction:column;align-items:flex-start;gap:8px;
+  background:#fff;border:1px solid #d6e0eb;border-top:4px solid #2f80c9;
+  border-radius:10px;box-shadow:0 6px 18px rgba(22,42,62,.05);
+}
+.client-success-card .client-success-icon{
+  width:35px;height:35px;display:grid;place-items:center;
+  border-radius:50%;background:#e7f1fc;color:#1266b1;
+  font-size:23px;font-weight:900;
+}
+.client-success-card strong{
+  color:#20364b;font:800 clamp(16px,1.55vw,20px)/1.25 Manrope,sans-serif;
+}
+.client-success-card .client-result-tag{
+  color:#a83243;font-size:9px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;
+}
+.client-success-card p{
+  margin:0;color:#536675;font-size:12px;line-height:1.7;
+}
+.client-success-card.client-views{border-top-color:#e53935}
+.client-success-card.client-views .client-success-icon{background:#ffeded;color:#d51f2a}
+.client-success-card.client-earnings{border-top-color:#279b59}
+.client-success-card.client-earnings .client-success-icon{background:#e9f7ee;color:#168448}
+@media(max-width:900px){
+  .community-milestone-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:620px){
+  .community-milestone-panel,.client-success-panel{margin:13px 0 16px;padding:15px 12px;border-radius:11px}
+  .community-milestone-heading{gap:9px}
+  .community-milestone-heading h3,.client-success-heading h3{font-size:18px}
+  .community-milestone-heading p,.client-success-heading p{font-size:11px}
+  .community-milestone-grid{grid-template-columns:1fr;gap:8px}
+  .community-milestone-grid article{min-height:0;padding:13px 14px}
+  .community-milestone-grid strong{font-size:22px}
+  .community-milestone-grid span{font-size:11px}
+  .client-success-grid{grid-template-columns:1fr;gap:9px}
+  .client-success-card{min-height:0;padding:15px 14px;display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:10px;row-gap:4px}
+  .client-success-card .client-success-icon{grid-row:1 / span 3}
+  .client-success-card strong{font-size:16px}
+  .client-success-card .client-result-tag,.client-success-card p{grid-column:2}
+  .client-success-card p{font-size:11px}
+}
