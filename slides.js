@@ -20,7 +20,10 @@
   panel.className="hero deck-slide";
   panel.dataset.slide=String(i+2);
   panel.setAttribute("aria-label",s.name+" introduction");
-  panel.innerHTML='<div class="hero-grid"><div class="hero-copy deck-copy"><div class="deck-kicker">'+s.kicker+'</div><h1 class="deck-title" data-content-key="slide_title_'+s.number+'">'+s.title+'</h1><p class="deck-description" data-content-key="slide_desc_'+s.number+'">'+s.desc+'</p><div class="deck-actions"><a class="button button-light" href="'+s.href+'">'+s.primary+' <span>↗</span></a><a class="button button-outline" href="'+s.href2+'">'+s.secondary+'</a></div></div><aside class="hero-panel deck-profile-panel"><div class="panel-top"><span>ONE PROFILE, MANY STORIES</span><span class="panel-icon">✳</span></div><div class="profile-placeholder"><img src="assets/edcar-profile.webp" alt="Edcar Aguirre Tenedero"></div><h2>Edcar Tenedero</h2><p>Professional · Digital Creator · Family</p><div class="panel-stats"><div><b>PRO</b><small>Operations & IT</small></div><div><b>CREATE</b><small>Digital content</small></div><div><b>LIFE</b><small>Family stories</small></div></div><a class="text-link" href="#journey">A little more about my journey <span>→</span></a></aside></div>';
+  panel.innerHTML='<div class="hero-grid"><div class="hero-copy deck-copy"><div class="deck-kicker">'+s.kicker+'</div><h1 class="deck-title" data-content-key="slide_title_'+s.number+'">'+s.title+'</h1><p class="deck-description" data-content-key="slide_desc_'+s.number+'">'+s.desc+'</p><div class="deck-actions"><a class="button button-light" href="'+s.href+'">'+s.primary+' <span>↗</span></a><a class="button button-outline" href="'+s.href2+'">'+s.secondary+'</a></div></div></div>';
+  const profileCard=hero.querySelector(".hero-panel").cloneNode(true);
+  profileCard.classList.add("deck-profile-panel");
+  panel.querySelector(".hero-grid").append(profileCard);
   deck.append(panel);
  });
  const controls=document.createElement("div");
