@@ -633,3 +633,85 @@
  .intro-deck .deck-slide .hero-panel .profile-placeholder,
  .intro-deck .deck-slide:first-child .hero-panel .profile-placeholder{aspect-ratio:4/5!important}
 }
+
+
+/* 28 Nov 2026: fixed desktop viewport geometry for all five intro slides. */
+@media(min-width:801px){
+  .intro-deck{position:relative!important;overflow:hidden!important}
+  .intro-deck .deck-slide,
+  .intro-deck .deck-slide:first-child{
+    box-sizing:border-box!important;
+    width:100%!important;
+    height:calc(100svh - 112px)!important;
+    min-height:620px!important;
+    max-height:820px!important;
+    padding:34px clamp(30px,5vw,72px) 76px!important;
+    overflow:hidden!important;
+    align-items:center!important;
+  }
+  .intro-deck .deck-slide .hero-grid{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(250px,300px)!important;
+    align-items:center!important;
+    gap:clamp(24px,4vw,58px)!important;
+    width:100%!important;
+    max-width:1080px!important;
+    height:100%!important;
+    margin:auto!important;
+  }
+  .intro-deck .deck-slide .hero-copy,
+  .intro-deck .deck-slide:first-child .hero-copy{
+    min-width:0!important;
+    max-width:690px!important;
+  }
+  .intro-deck .deck-slide .hero-copy h1,
+  .intro-deck .deck-slide .deck-title,
+  .intro-deck .deck-slide:first-child .hero-copy h1{
+    font-size:clamp(43px,4.5vw,62px)!important;
+    line-height:1.04!important;
+    letter-spacing:-2px!important;
+    margin:13px 0!important;
+  }
+  .intro-deck .deck-slide .hero-intro,
+  .intro-deck .deck-slide .deck-description{
+    max-width:610px!important;
+    font-size:clamp(13px,1.12vw,15px)!important;
+    line-height:1.58!important;
+    margin:10px 0!important;
+  }
+  .intro-deck .deck-slide .hero-sub{font-size:12px!important;line-height:1.55!important}
+  .intro-deck .deck-slide .hero-actions,
+  .intro-deck .deck-slide .deck-actions{margin-top:16px!important;gap:8px!important}
+  .intro-deck .deck-slide .hero-panel,
+  .intro-deck .deck-slide:first-child .hero-panel{
+    width:100%!important;
+    max-width:300px!important;
+    justify-self:end!important;
+    padding:14px!important;
+    box-sizing:border-box!important;
+  }
+  .intro-deck .deck-slide .hero-panel .profile-placeholder,
+  .intro-deck .deck-slide:first-child .hero-panel .profile-placeholder{
+    width:100%!important;
+    aspect-ratio:4/5!important;
+    height:auto!important;
+    max-height:360px!important;
+    margin:9px 0 10px!important;
+    padding:5px!important;
+    box-sizing:border-box!important;
+  }
+  .intro-deck .deck-slide .hero-panel .profile-placeholder img,
+  .intro-deck .deck-slide:first-child .hero-panel .profile-placeholder img{
+    width:100%!important;height:100%!important;max-height:100%!important;
+    object-fit:contain!important;
+  }
+  .intro-deck .deck-slide .hero-panel h2{font-size:19px!important;margin:5px 0!important}
+  .intro-deck .deck-slide .hero-panel>p{font-size:10px!important;margin:4px 0 8px!important}
+  .intro-deck .deck-slide .hero-panel .panel-stats{padding:8px 0!important}
+  .intro-deck .deck-slide .hero-panel .panel-stats b{font-size:10px!important}
+  .intro-deck .deck-slide .hero-panel .panel-stats small{font-size:8px!important}
+  .intro-deck .deck-controls{bottom:12px!important}
+}
+@media(max-width:800px){
+  .intro-deck .deck-slide{height:auto!important;max-height:none!important;min-height:calc(100svh - 65px)!important}
+}
