@@ -115,8 +115,111 @@ a.story-text-link,a.text-link{color:#A94358!important}
 .skills-strip-expanded span{font-size:12px}
 @media(max-width:700px){#community .community-hero-refined{grid-template-columns:1fr;gap:12px;padding:18px}#community .community-logo-inline{width:145px;max-height:110px;object-position:left center;margin:0}#community .community-intro h2{font-size:27px}.community-full-details-body{padding:0 10px 12px}#join-team .join-team-side-compact{padding:16px}#join-team .join-team-logo-inline{width:145px}}
 
+
+/* Preview-only corrections requested 28 Nov 2026 */
+#color-preview-notice.preview-toolbar{position:relative;z-index:9999;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;padding:8px 16px;background:#DCEAF4;color:#263746;border-bottom:1px solid #B9CEDD;font:700 10px/1.35 Arial,sans-serif;letter-spacing:.04em}
+.preview-palette-controls{display:flex;align-items:center;flex-wrap:wrap;gap:5px}
+.preview-palette-controls button{border:1px solid #AFC3D2;border-radius:999px;background:#F7FAFC;color:#263746;padding:5px 9px;font:700 10px/1.2 Arial,sans-serif;cursor:pointer}
+.preview-palette-controls button[aria-pressed="true"]{background:#263746;color:#fff;border-color:#263746}
+.preview-palette-controls #previewPaletteRefresh{background:#fff;color:#263746;border-color:#8099AC}
+.community-achievements-visible{margin:18px 0 20px}
+.community-achievements-visible .community-milestone-heading{margin-bottom:8px}
+.community-achievements-visible .community-milestone-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:8px 0 14px}
+.community-achievements-visible .community-milestone-grid article{min-height:92px;padding:11px 10px;gap:5px;border-radius:8px}
+.community-achievements-visible .community-milestone-grid strong{font-size:clamp(19px,2vw,26px)}
+.community-achievements-visible .community-milestone-grid span{font-size:10px;line-height:1.35}
+.community-achievements-visible .client-success-heading{margin:8px 0 10px}
+.community-achievements-visible .client-success-heading h3{font-size:clamp(17px,2vw,23px);margin:2px 0 4px}
+.community-achievements-visible .client-success-heading p{font-size:11px;margin:0;line-height:1.45}
+.community-achievements-visible .client-success-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.community-achievements-visible .client-success-card{min-height:0;padding:12px;gap:5px;border-radius:8px}
+.community-achievements-visible .client-success-card .client-success-icon{width:26px;height:26px;font-size:17px}
+.community-achievements-visible .client-success-card strong{font-size:14px;line-height:1.2}
+.community-achievements-visible .client-success-card .client-result-tag{font-size:8px}
+.community-achievements-visible .client-success-card p{font-size:10px;line-height:1.4}
+#community .community-full-details{margin-top:12px}
+#community .community-logo-inline{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+#professional .section-story-cta{display:none!important}
+#creator .section-heading p{max-width:780px;font-size:15px;line-height:1.7}
+#creator .video-info{padding:19px}
+#creator .video-info h3{font-size:17px}
+#creator .video-info p{font-size:12px;line-height:1.5}
+#contact .contact-buttons .button-dark,#contact .contact-buttons .button-outline-dark{color:#fff!important}
+#contact .contact-buttons .button-outline-dark{background:#354653!important;border-color:#DCE4EA!important}
+#recommendations .testimonial-inner{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,4vw,48px);align-items:center}
+#recommendations .section-wrap{padding-top:52px;padding-bottom:52px}
+#recommendations .testimonial-inner h2{font-size:clamp(30px,3.6vw,44px);line-height:1.12}
+#recommendations .testimonial-inner p{font-size:12px;line-height:1.55;margin-top:10px}
+#recommendations .testimonial-list{max-width:620px;width:100%;justify-self:stretch}
+#recommendations .testimonial-card{padding:15px}
+#recommendations .testimonial-card blockquote{font-size:12px;line-height:1.55}
+#recommendations .testimonial-controls{gap:7px;flex-wrap:wrap}
+#recommendations .testimonial-controls button,#recommendations .testimonial-source-link{font-size:10px}
+#documentAuthDescription{line-height:1.55}
+.document-auth-options button[data-doc-oauth-provider="google"],.document-auth-options button[data-doc-oauth-provider="facebook"]{display:flex}
+@media(max-width:900px){.community-achievements-visible .community-milestone-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){#color-preview-notice.preview-toolbar{align-items:flex-start;flex-direction:column}.preview-palette-controls{width:100%}.preview-palette-controls button{font-size:9px;padding:5px 7px}.community-achievements-visible .community-milestone-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.community-achievements-visible .client-success-grid{grid-template-columns:1fr}.community-achievements-visible .client-success-card{min-height:0}#recommendations .testimonial-inner{grid-template-columns:1fr;gap:16px}#recommendations .section-wrap{padding-top:38px;padding-bottom:38px}#creator .section-heading p{font-size:14px}}
+/* Four sample batches, three palettes per batch. */
+body[data-preview-palette="b1a"] #professional,body[data-preview-palette="b1a"] #community,body[data-preview-palette="b1a"] #creator,body[data-preview-palette="b1a"] #recommendations{background:#263746!important;color:#F4F6F8!important}
+body[data-preview-palette="b1a"] #journey,body[data-preview-palette="b1a"] #contact{background:#DCE4EA!important;color:#263746!important}
+body[data-preview-palette="b1a"] #join-team{background:#394B5B!important;color:#fff!important}
+body[data-preview-palette="b1a"] .section-kicker,body[data-preview-palette="b1a"] a.story-text-link{color:#D98D9D!important}
+body[data-preview-palette="b1b"] #professional,body[data-preview-palette="b1b"] #creator,body[data-preview-palette="b1b"] #community,body[data-preview-palette="b1b"] #recommendations{background:#394B5B!important;color:#fff!important}
+body[data-preview-palette="b1b"] #journey,body[data-preview-palette="b1b"] #contact{background:#E6EBEF!important;color:#354653!important}
+body[data-preview-palette="b1b"] #join-team{background:#263746!important;color:#fff!important}
+body[data-preview-palette="b1b"] .section-kicker,body[data-preview-palette="b1b"] a.story-text-link{color:#E5A0AD!important}
+body[data-preview-palette="b1c"] #professional,body[data-preview-palette="b1c"] #creator,body[data-preview-palette="b1c"] #community,body[data-preview-palette="b1c"] #recommendations{background:#48515B!important;color:#fff!important}
+body[data-preview-palette="b1c"] #journey,body[data-preview-palette="b1c"] #contact{background:#DCE4EA!important;color:#263746!important}
+body[data-preview-palette="b1c"] #join-team{background:#394B5B!important;color:#fff!important}
+body[data-preview-palette="b1c"] .section-kicker,body[data-preview-palette="b1c"] a.story-text-link{color:#E39AA6!important}
+body[data-preview-palette="b2a"] #professional,body[data-preview-palette="b2a"] #creator,body[data-preview-palette="b2a"] #community,body[data-preview-palette="b2a"] #recommendations{background:#302D33!important;color:#F8F3F4!important}
+body[data-preview-palette="b2a"] #journey,body[data-preview-palette="b2a"] #contact{background:#F0E5E7!important;color:#514047!important}
+body[data-preview-palette="b2a"] #join-team{background:#454047!important;color:#fff!important}
+body[data-preview-palette="b2a"] .section-kicker,body[data-preview-palette="b2a"] a.story-text-link{color:#D98D9D!important}
+body[data-preview-palette="b2b"] #professional,body[data-preview-palette="b2b"] #creator,body[data-preview-palette="b2b"] #community,body[data-preview-palette="b2b"] #recommendations{background:#514047!important;color:#fff!important}
+body[data-preview-palette="b2b"] #journey,body[data-preview-palette="b2b"] #contact{background:#E8DADD!important;color:#424047!important}
+body[data-preview-palette="b2b"] #join-team{background:#302D33!important;color:#fff!important}
+body[data-preview-palette="b2b"] .section-kicker,body[data-preview-palette="b2b"] a.story-text-link{color:#E8B4BE!important}
+body[data-preview-palette="b2c"] #professional,body[data-preview-palette="b2c"] #creator,body[data-preview-palette="b2c"] #community,body[data-preview-palette="b2c"] #recommendations{background:#424047!important;color:#F8F3F4!important}
+body[data-preview-palette="b2c"] #journey,body[data-preview-palette="b2c"] #contact{background:#F0E5E7!important;color:#514047!important}
+body[data-preview-palette="b2c"] #join-team{background:#302D33!important;color:#fff!important}
+body[data-preview-palette="b2c"] .section-kicker,body[data-preview-palette="b2c"] a.story-text-link{color:#963E54!important}
+body[data-preview-palette="b3a"] #professional,body[data-preview-palette="b3a"] #creator,body[data-preview-palette="b3a"] #community,body[data-preview-palette="b3a"] #recommendations{background:#202D39!important;color:#F4F5F6!important}
+body[data-preview-palette="b3a"] #journey,body[data-preview-palette="b3a"] #contact{background:#E6EBEF!important;color:#354653!important}
+body[data-preview-palette="b3a"] #join-team{background:#48515B!important;color:#fff!important}
+body[data-preview-palette="b3a"] .section-kicker,body[data-preview-palette="b3a"] a.story-text-link{color:#C85C6D!important}
+body[data-preview-palette="b3b"] #professional,body[data-preview-palette="b3b"] #creator,body[data-preview-palette="b3b"] #community,body[data-preview-palette="b3b"] #recommendations{background:#354653!important;color:#fff!important}
+body[data-preview-palette="b3b"] #journey,body[data-preview-palette="b3b"] #contact{background:#E6EBEF!important;color:#354653!important}
+body[data-preview-palette="b3b"] #join-team{background:#263746!important;color:#fff!important}
+body[data-preview-palette="b3b"] .section-kicker,body[data-preview-palette="b3b"] a.story-text-link{color:#A94358!important}
+body[data-preview-palette="b3c"] #professional,body[data-preview-palette="b3c"] #creator,body[data-preview-palette="b3c"] #community,body[data-preview-palette="b3c"] #recommendations{background:#48515B!important;color:#fff!important}
+body[data-preview-palette="b3c"] #journey,body[data-preview-palette="b3c"] #contact{background:#DCE4EA!important;color:#263746!important}
+body[data-preview-palette="b3c"] #join-team{background:#302D33!important;color:#fff!important}
+body[data-preview-palette="b3c"] .section-kicker,body[data-preview-palette="b3c"] a.story-text-link{color:#E39AA6!important}
+body[data-preview-palette="b4a"] #professional,body[data-preview-palette="b4a"] #creator,body[data-preview-palette="b4a"] #community,body[data-preview-palette="b4a"] #recommendations{background:#303943!important;color:#F5F6F7!important}
+body[data-preview-palette="b4a"] #journey,body[data-preview-palette="b4a"] #contact{background:#E9EDF0!important;color:#303943!important}
+body[data-preview-palette="b4a"] #join-team{background:#4B5661!important;color:#fff!important}
+body[data-preview-palette="b4a"] .section-kicker,body[data-preview-palette="b4a"] a.story-text-link{color:#B7C4CE!important}
+body[data-preview-palette="b4b"] #professional,body[data-preview-palette="b4b"] #creator,body[data-preview-palette="b4b"] #community,body[data-preview-palette="b4b"] #recommendations{background:#4A525B!important;color:#fff!important}
+body[data-preview-palette="b4b"] #journey,body[data-preview-palette="b4b"] #contact{background:#F3F4F5!important;color:#3D4650!important}
+body[data-preview-palette="b4b"] #join-team{background:#303943!important;color:#fff!important}
+body[data-preview-palette="b4b"] .section-kicker,body[data-preview-palette="b4b"] a.story-text-link{color:#C2CCD4!important}
+body[data-preview-palette="b4c"] #professional,body[data-preview-palette="b4c"] #creator,body[data-preview-palette="b4c"] #community,body[data-preview-palette="b4c"] #recommendations{background:#D9DEE3!important;color:#333B44!important}
+body[data-preview-palette="b4c"] #journey,body[data-preview-palette="b4c"] #contact{background:#F4F5F6!important;color:#333B44!important}
+body[data-preview-palette="b4c"] #join-team{background:#424B55!important;color:#fff!important}
+body[data-preview-palette="b4c"] .section-kicker,body[data-preview-palette="b4c"] a.story-text-link{color:#8A6F78!important}
+
 </style></head>
-<body><div id="color-preview-notice" style="position:relative;z-index:9999;background:#D98D9D;color:#302D33;text-align:center;padding:8px 14px;font:700 11px/1.4 Arial,sans-serif;letter-spacing:.5px">DESIGN PREVIEW ONLY · FULL PORTFOLIO CONTENT PRESERVED · LIVE HOMEPAGE UNCHANGED</div>
+<body><div id="color-preview-notice" class="preview-toolbar">
+  <strong>DESIGN PREVIEW ONLY · MAIN HOMEPAGE UNCHANGED</strong>
+  <div class="preview-palette-controls" role="group" aria-label="Color palette batches">
+    <button type="button" data-palette-batch="1" aria-pressed="true">01 Blue Gray</button>
+    <button type="button" data-palette-batch="2" aria-pressed="false">02 Rose</button>
+    <button type="button" data-palette-batch="3" aria-pressed="false">03 Executive</button>
+    <button type="button" data-palette-batch="4" aria-pressed="false">04 Gray Formal</button>
+    <button type="button" id="previewPaletteRefresh" title="Cycle through the three palettes in the selected batch" aria-label="Refresh palette">↻ Refresh</button>
+  </div>
+</div>
 <div class="program-announcement" role="region" aria-label="Team edcarSky program terms reminder">
   <span>TEAM EDCARSKY™ · PROGRAM TERMS REMINDER</span>
   <strong>30-DAY PROGRAM · STRICTLY NO SELF-WATCHING ON MONETIZED CHANNELS</strong>
@@ -173,7 +276,7 @@ a.story-text-link,a.text-link{color:#A94358!important}
     <article><span>05</span><h3>Logistics & Customer Operations</h3><p>Service support, customer communication, inventory and logistics-related coordination.</p></article>
     <article><span>06</span><h3>Digital Content & Web</h3><p>Content publishing, social media workflows, website administration and digital production.</p></article>
   </div>
-  <a href="#portfolioDetailModal" class="story-text-link section-story-cta" data-detail-story="professional-story">Explore details <span aria-hidden="true">↗</span></a><div class="skills-strip skills-strip-expanded"><b>TOOLS & SKILLS</b><span>Microsoft Office</span><span>Google Workspace</span><span>Windows</span><span>WordPress</span><span>HTML / CSS</span><span>PHP / MySQL</span><span>Python (.py) · Basic scripting</span><span>JavaScript · Basic</span><span>SQL · Database fundamentals</span><span>Java · Programming fundamentals</span><span>Image & Video Editing</span><span>Social Media Management</span><span>Basic AI Knowledge · Image, Video, Web & Programming Tools</span><span>AI-assisted research, prompting & workflow support</span></div>
+<div class="skills-strip skills-strip-expanded"><b>TOOLS & SKILLS</b><span>Microsoft Office</span><span>Google Workspace</span><span>Windows</span><span>WordPress</span><span>HTML / CSS</span><span>PHP / MySQL</span><span>Python (.py) · Basic scripting</span><span>JavaScript · Basic</span><span>SQL · Database fundamentals</span><span>Java · Programming fundamentals</span><span>Image & Video Editing</span><span>Social Media Management</span><span>Basic AI Knowledge · Image, Video, Web & Programming Tools</span><span>AI-assisted research, prompting & workflow support</span></div>
   <div class="career-note"><div class="career-number">20<span>+</span></div><div><h3>Years of combined work experience</h3><p>Including approximately 15 years of employment in Riyadh, Saudi Arabia, across executive support, administration, HR, IT, logistics, hospitality and operations.</p><p><strong>Target roles:</strong> Executive Assistant, Administrative Assistant, Site Administrator, Operations Assistant, Logistics and Warehouse Support, Document Controller, HR Administrative Support, Hospitality, Facilities and General Operations.</p></div></div>
 </section>
 
@@ -204,7 +307,7 @@ a.story-text-link,a.text-link{color:#A94358!important}
 <section id="creator" class="creator-section">
   <div class="section-wrap">
     <div class="section-kicker light-kicker">06 / DIGITAL CREATOR & ONLINE WORK</div>
-    <div class="section-heading light-heading"><div><h2>Selected <em>work.</em></h2><p data-content-key="creator_intro">Digital content, social media operations, creator-support programs and the work behind building an online community since 2021.</p><a href="#portfolioDetailModal" class="story-text-link" data-detail-story="creator-story">Explore details <span aria-hidden="true">↗</span></a></div><a class="button button-outline" href="https://www.youtube.com/channel/UCoz2lfYpVjxYmBp2Z9MZ25g/" target="_blank" rel="noopener">Visit YouTube channel ↗</a></div>
+    <div class="section-heading light-heading"><div><h2>Selected <em>work.</em></h2><p data-content-key="creator_intro">A selection of creator projects, video production, social media operations and channel-development work. This section brings together portfolio videos, campaign presentations, family-channel milestones and practical examples of the digital workflows I manage.</p><a href="#portfolioDetailModal" class="story-text-link" data-detail-story="creator-story">Explore details <span aria-hidden="true">↗</span></a></div><a class="button button-outline" href="https://www.youtube.com/channel/UCoz2lfYpVjxYmBp2Z9MZ25g/" target="_blank" rel="noopener">Visit YouTube channel ↗</a></div>
     <div class="video-grid">
       <a class="video-card featured-video" href="https://www.youtube.com/watch?v=3TjTSFc8TnQ" target="_blank" rel="noopener">
         <div class="video-thumb"><img src="https://img.youtube.com/vi/3TjTSFc8TnQ/hqdefault.jpg" alt="edcarSky online portfolio video thumbnail"><span class="play">▶</span><span class="video-label">PORTFOLIO</span></div><div class="video-info"><small>OCTOBER 2025 · INTRODUCTION</small><h3>edcarSky™ g! live Online Portfolio</h3><p>Online Marketing / Social Media Executive</p></div>
@@ -265,28 +368,7 @@ a.story-text-link,a.text-link{color:#A94358!important}
         </div>
       </div>
     </div>
-    <details class="community-full-details">
-      <summary>View full community profile, milestones and program details</summary>
-      <div class="community-full-details-body">
-      <div class="community-channel-description">
-        <div class="channel-description-heading"><span>OFFICIAL CHANNEL PROFILE</span><h3>edcarSky™ g! live</h3><p>Family Vlog · CALABARZON · Quezon Province</p></div>
-        <p>edcarSky™ g! live is our official family-vlog channel, documenting everyday life, family experiences and the places that make the Philippines worth exploring. The channel is rooted in CALABARZON, with particular attention to Quezon Province and nearby destinations. It brings together home life, family bonding, road trips, local discoveries and the stories behind each visit.</p>
-        <p>Our videos include the ordinary moments that become lasting memories, family celebrations, weekend trips, scenic roads, local attractions, food stops and encounters with local culture. We share destinations from a family point of view, including practical travel experiences, the atmosphere of each place and the small details that make a trip memorable.</p>
-        <strong>What you’ll see on our channel</strong>
-        <ul>
-          <li>Family vlogs, home life, celebrations and shared milestones</li>
-          <li>Road trips and travel around Quezon Province and CALABARZON</li>
-          <li>Local food trips, restaurants, markets and regional specialties</li>
-          <li>Culture, traditions, community events and local experiences</li>
-          <li>Nature views, scenic routes, attractions and peaceful destinations</li>
-          <li>Familia Thimawah stories and our 100K Creator Award milestone</li>
-          <li>Selected creator updates and Team edcarSky community activities</li>
-        </ul>
-        <p>Familia Thimawah is part of this channel’s family storytelling. Its videos preserve the memories, journeys and milestones we share as a family. The creator-community updates connect viewers with the wider edcarSky journey while keeping family content and creator-program information clear and distinct.</p>
-        <p>Subscribe to edcarSky™ g! live for family stories, travel features, food discoveries, cultural experiences and channel updates. For sponsorships, bookings or collaborations, message <strong>“EDCARSKY G LIVE”</strong> through the official Messenger contact.</p>
-        <small>edcarSky™ Copyright | All Rights Reserved © 2020–2026</small>
-      </div>
-
+    <div class="community-achievements-visible" aria-label="Team edcarSky achievements and client results">
     <div class="community-milestone-panel" aria-labelledby="teamMilestonesTitle">
       <div class="community-milestone-heading">
         <span class="milestone-trophy" aria-hidden="true">🏆</span>
@@ -329,6 +411,29 @@ a.story-text-link,a.text-link{color:#A94358!important}
         </article>
       </div>
     </div>
+
+    </div>
+    <details class="community-full-details">
+      <summary>View full community profile, milestones and program details</summary>
+      <div class="community-full-details-body">
+      <div class="community-channel-description">
+        <div class="channel-description-heading"><span>OFFICIAL CHANNEL PROFILE</span><h3>edcarSky™ g! live</h3><p>Family Vlog · CALABARZON · Quezon Province</p></div>
+        <p>edcarSky™ g! live is our official family-vlog channel, documenting everyday life, family experiences and the places that make the Philippines worth exploring. The channel is rooted in CALABARZON, with particular attention to Quezon Province and nearby destinations. It brings together home life, family bonding, road trips, local discoveries and the stories behind each visit.</p>
+        <p>Our videos include the ordinary moments that become lasting memories, family celebrations, weekend trips, scenic roads, local attractions, food stops and encounters with local culture. We share destinations from a family point of view, including practical travel experiences, the atmosphere of each place and the small details that make a trip memorable.</p>
+        <strong>What you’ll see on our channel</strong>
+        <ul>
+          <li>Family vlogs, home life, celebrations and shared milestones</li>
+          <li>Road trips and travel around Quezon Province and CALABARZON</li>
+          <li>Local food trips, restaurants, markets and regional specialties</li>
+          <li>Culture, traditions, community events and local experiences</li>
+          <li>Nature views, scenic routes, attractions and peaceful destinations</li>
+          <li>Familia Thimawah stories and our 100K Creator Award milestone</li>
+          <li>Selected creator updates and Team edcarSky community activities</li>
+        </ul>
+        <p>Familia Thimawah is part of this channel’s family storytelling. Its videos preserve the memories, journeys and milestones we share as a family. The creator-community updates connect viewers with the wider edcarSky journey while keeping family content and creator-program information clear and distinct.</p>
+        <p>Subscribe to edcarSky™ g! live for family stories, travel features, food discoveries, cultural experiences and channel updates. For sponsorships, bookings or collaborations, message <strong>“EDCARSKY G LIVE”</strong> through the official Messenger contact.</p>
+        <small>edcarSky™ Copyright | All Rights Reserved © 2020–2026</small>
+      </div>
 
     <div class="community-teasers community-program-grid">
       <article class="community-teaser">
@@ -504,12 +609,10 @@ a.story-text-link,a.text-link{color:#A94358!important}
     <div class="document-auth-options">
       <button type="button" data-doc-oauth-provider="google"><span class="doc-auth-icon doc-google">G</span><span><b>Google / YouTube</b><small>Connect with your Google account</small></span></button>
       <button type="button" data-doc-oauth-provider="facebook"><span class="doc-auth-icon doc-facebook">f</span><span><b>Facebook</b><small>Connect with your Facebook account</small></span></button>
-      <button type="button" data-doc-oauth-provider="custom:tiktok"><span class="doc-auth-icon doc-tiktok">♪</span><span><b>Connect with TikTok</b><small>Use your TikTok account for document access</small></span></button>
-      <button type="button" data-doc-oauth-provider="custom:instagram"><span class="doc-auth-icon doc-instagram">◎</span><span><b>Connect with Instagram</b><small>Use your Instagram account for document access</small></span></button>
-    </div>
-    <p id="documentAuthStatus" class="document-auth-status" aria-live="polite">One account is enough. You do not need to connect all platforms.</p>
+</div>
+    <p id="documentAuthStatus" class="document-auth-status" aria-live="polite">Choose one supported sign-in provider. Google and Facebook must be enabled in the secure sign-in settings.</p>
     <a id="documentAuthResult" class="button button-dark document-auth-result" href="#" target="_blank" rel="noopener" hidden>Open document ↗</a>
-    <small class="document-auth-privacy">Your account details are used only for identity verification. TikTok and Instagram sign-in will work after their developer apps and custom OAuth providers are configured in Supabase. Instagram Login is intended for eligible professional accounts.</small>
+    <small class="document-auth-privacy">Your account details are used only for identity verification. TikTok and Instagram open their public profiles and are not used for document sign-in.</small>
   </div>
 </div>
 <div id="testimonialModal" class="testimonial-modal" hidden role="dialog" aria-modal="true" aria-labelledby="testimonialModalTitle"><div class="testimonial-modal-backdrop" data-close-testimonial></div><div class="testimonial-modal-panel"><button type="button" class="testimonial-modal-close" data-close-testimonial aria-label="Close testimonial">×</button><div class="section-kicker">PROFESSIONAL TESTIMONIAL</div><h2 id="testimonialModalTitle">Recommendation</h2><blockquote id="testimonialModalQuote"></blockquote><p id="testimonialModalAuthor"></p></div></div>
@@ -546,4 +649,28 @@ a.story-text-link,a.text-link{color:#A94358!important}
 <script src="https://edcarsky.github.io/portfolio/slides.js?v=20261128-3"></script>
 <script src="https://edcarsky.github.io/portfolio/app.js?v=20261128-ai3"></script>
 <script src="https://edcarsky.github.io/portfolio/details.js?v=20261128-6" defer></script>
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  const palettes={1:["b1a","b1b","b1c"],2:["b2a","b2b","b2c"],3:["b3a","b3b","b3c"],4:["b4a","b4b","b4c"]};
+  let batch=1,index=0;
+  const buttons=[...document.querySelectorAll("[data-palette-batch]")];
+  const apply=()=>{
+    document.body.dataset.previewPalette=palettes[batch][index];
+    buttons.forEach(b=>b.setAttribute("aria-pressed",String(Number(b.dataset.paletteBatch)===batch)));
+    const refresh=document.getElementById("previewPaletteRefresh");
+    if(refresh)refresh.title="Palette "+(index+1)+" of 3 in Batch "+batch;
+  };
+  buttons.forEach(b=>b.addEventListener("click",()=>{
+    batch=Number(b.dataset.paletteBatch)||1;index=0;apply();
+  }));
+  document.getElementById("previewPaletteRefresh")?.addEventListener("click",()=>{
+    index=(index+1)%3;apply();
+  });
+  document.getElementById("themeRefresh")?.addEventListener("click",()=>{
+    index=(index+1)%3;apply();
+  });
+  apply();
+});
+</script>
 </body></html>
