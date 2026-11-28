@@ -80,3 +80,128 @@ main>section{width:100%;max-width:none;box-sizing:border-box;margin-left:0;margi
  .story-text-link{font-size:11px;margin-top:12px}
  .section-story-cta{margin:14px 0}
 }
+
+
+/* 28 November 2026: editorial text links and a consistent formal blue portfolio palette. */
+.story-text-link{
+  display:flex!important;
+  width:max-content!important;
+  max-width:100%!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:7px!important;
+  margin:18px 0 0!important;
+  padding:3px 0 4px!important;
+  border:0!important;
+  border-bottom:1px solid #7895b5!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#315b85!important;
+  font:700 11px/1.5 Manrope,sans-serif!important;
+  letter-spacing:.55px!important;
+  text-transform:uppercase!important;
+  text-decoration:none!important;
+  box-shadow:none!important;
+  cursor:pointer!important;
+  transition:color .18s ease,border-color .18s ease!important;
+}
+.story-text-link:hover{
+  color:#173a5d!important;
+  border-bottom-color:#173a5d!important;
+  text-decoration:none!important;
+}
+.story-text-link span{font-size:13px!important;line-height:1!important}
+.story-text-link:hover span{transform:translate(2px,-1px)!important}
+.story-link-light{
+  color:#d8e7f7!important;
+  border-bottom-color:#7898ba!important;
+}
+.story-link-light:hover{color:#fff!important;border-bottom-color:#fff!important}
+.section-story-cta{margin:20px 0 0!important}
+.journey-copy .story-text-link{margin-top:15px!important}
+.journey-copy .text-link{display:block;width:max-content;max-width:100%;margin:14px 0 0}
+.section-heading>div>.story-text-link{margin-top:16px!important}
+.certified-creator-copy>.story-text-link{margin:18px 0 18px!important}
+.testimonial-inner>div:first-child>.story-text-link{margin-top:18px!important}
+.journey-highlight>i{color:#c3d8ef!important}
+.story-text-link:focus-visible{outline:2px solid #a9c9ed!important;outline-offset:5px!important}
+
+/* Blue-only section surfaces. No maroon, burgundy, brown or white section backgrounds. */
+.program-announcement{
+  background:linear-gradient(100deg,#183653 0%,#244a70 55%,#193653 100%)!important;
+  color:#edf4fb!important;border-bottom:1px solid #8ba9c8!important;
+}
+.program-announcement>span,.program-announcement>strong,.program-announcement>a{color:#edf4fb!important}
+.site-header .mark,.footer-mark .mark,.nav-cta,.team-section .button-dark,.button-join-team{
+  background:#315b85!important;border-color:#7898ba!important;color:#fff!important;
+}
+.intro.section-wrap,.certified-creator-section,.join-team-section,.contact-section.section-wrap,.testimonial-section,.community-follow-section{
+  background:linear-gradient(132deg,#dce7f2 0%,#cbd9e8 52%,#e3ebf4 100%)!important;
+  color:#1c3550!important;
+}
+.professional-section.section-wrap{
+  background:linear-gradient(132deg,#cbd9e8 0%,#dce7f2 52%,#c4d5e7 100%)!important;
+  color:#1c3550!important;
+}
+.journey-section,.documents-section,.community-section,.team-section{
+  background:linear-gradient(132deg,#10243c 0%,#193653 52%,#294b6d 100%)!important;
+  color:#f2f6fb!important;
+}
+.creator-section{
+  background:linear-gradient(132deg,#dce7f2 0%,#cbd9e8 52%,#e3ebf4 100%)!important;
+  color:#1c3550!important;
+}
+.social-section{
+  background:linear-gradient(132deg,#142b46 0%,#203f60 52%,#315575 100%)!important;
+  color:#f2f6fb!important;
+}
+.community-follow-section{border-top:1px solid #a9bdd2!important}
+.community-follow-section .community-follow{border-color:#9fb4ca!important}
+.community-follow-section .community-social-links a{
+  background:linear-gradient(145deg,#e7eff7,#d6e3f0)!important;
+  border-color:#9fb4ca!important;color:#203c59!important;
+}
+.community-follow-section .community-social-links a:hover{background:#c6d8ea!important;border-color:#587da5!important}
+.community-follow-section .community-social-links span{color:#315b85!important}
+
+/* Blue-tinted panels keep depth without introducing white card surfaces. */
+.expertise-grid article,.document-card,.video-card,.join-team-side,
+.community-milestone-grid article,.community-milestone-panel,.client-success-panel,
+.testimonial-card,.testimonial-empty,.testimonial-modal-panel,.inquiry-form,
+.contact-form,.contact-panel,.team-stat,.team-program{
+  background:linear-gradient(145deg,#294866 0%,#203b58 100%)!important;
+  color:#f2f6fb!important;border-color:#6685a6!important;
+}
+.expertise-grid article h3,.document-card h3,.video-card h3,
+.testimonial-card h3,.testimonial-card strong,.testimonial-modal-panel h3,
+.community-milestone-grid article strong,.community-milestone-heading h3{
+  color:#f6f9fd!important;
+}
+.expertise-grid article p,.document-card p,.video-card p,
+.testimonial-card p,.testimonial-modal-panel p,.community-milestone-grid article span{
+  color:#d2e0ee!important;
+}
+.expertise-grid article>span,.video-info small,.doc-icon{color:#b9d2ec!important}
+.document-card .doc-icon{background:#365b80!important;border-color:#7898ba!important}
+.testimonial-section .testimonial-card{border-left-color:#9dbde0!important}
+.testimonial-section .testimonial-controls button,
+.testimonial-section .testimonial-controls a{
+  background:#315b85!important;border-color:#7898ba!important;color:#fff!important;
+}
+.join-team-reminder,.community-mumu-note{
+  background:linear-gradient(135deg,#1b3856,#294866)!important;
+  color:#edf4fb!important;border-color:#7898ba!important;
+}
+.join-team-reminder p,.community-mumu-note p{color:#d4e2ef!important}
+.join-team-links a{
+  background:#dce7f2!important;color:#1c3550!important;border-color:#8da8c4!important;
+}
+.float-share{background:#315b85!important}
+.promise-check{background:#dce9f7!important;color:#244a70!important;border-color:#8ba9c8!important}
+.story-text-link{scroll-margin-top:90px}
+@media(max-width:620px){
+  .story-text-link{margin-top:14px!important;font-size:10px!important;letter-spacing:.45px!important}
+  .section-story-cta{margin-top:15px!important}
+  .journey-copy .story-text-link{margin-top:12px!important}
+  .creator-section .section-heading>div>.story-text-link{margin-bottom:2px!important}
+}
