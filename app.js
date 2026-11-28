@@ -69,8 +69,23 @@
  }
  
  const documentAccessStatus=$("#documentAccessStatus");
+ const documentAuthGate=$("#documentAuthGate");
+ const documentLibrary=$("#documentLibrary");
+ const documentAuthMessage=$("#documentAuthMessage");
+ let documentAuthUser=null;
+ const updateDocumentAccess=(user)=>{
+  documentAuthUser=user||null;
+  if(documentAuthGate)documentAuthGate.hidden=!!documentAuthUser;
+  if(documentLibrary)documentLibrary.hidden=!documentAuthUser;
+  if(documentAuthUser&&documentAccessStatus)documentAccessStatus.textContent="Identity verified. Published CV and cover-letter access enabled.";
+ };
  const deliverDocument=async(type,action,button)=>{
-  if(!client){if(documentAccessStatus)documentAccessStatus.textContent="Document service is temporarily unavailable. Please contact the portfolio owner.";return;}
+  if(!documentAuthUser){
+   if(documentAuthMessage)documentAuthMessage.textContent="Connect with Google or Facebook first to access this document.";
+   documentAuthGate?.scrollIntoView({behavior:"smooth",block:"center"});
+   return;
+  }
+  if(!client){if(documentAuthMessage)documentAuthMessage.textContent="Document service is temporarily unavailable. Please contact the portfolio owner.";return;}
   const original=button?.textContent;
   if(button){button.disabled=true;button.textContent="Preparing secure link...";}
   if(documentAccessStatus)documentAccessStatus.textContent="Checking the published document...";
@@ -121,23 +136,34 @@
   if(socialMessage)socialMessage.textContent="Account connected. Supported name and email fields have been filled in. Review them before sending your inquiry.";
  };
  if(client){
-  client.auth.getUser().then(({data,error})=>{if(!error)applySocialProfile(data.user);});
+  client.auth.getUser().then(({data,error})=>{
+   if(!error){
+    updateDocumentAccess(data.user);
+    if(data.user)applySocialProfile(data.user);
+   }
+  });
   client.auth.onAuthStateChange((event,session)=>{
+   updateDocumentAccess(session?.user||null);
    if(event==="SIGNED_IN"&&session?.user)applySocialProfile(session.user);
   });
   document.querySelectorAll("[data-oauth-provider]").forEach(button=>{
    button.addEventListener("click",async()=>{
     const provider=button.dataset.oauthProvider;
-    if(socialMessage)socialMessage.textContent="Connecting securely to "+(provider==="google"?"Google":"Facebook")+"...";
-    const options={redirectTo:window.location.origin+window.location.pathname+"#contact"};
+    const isDocumentGate=button.dataset.oauthReturn==="documents";
+    const messageTarget=isDocumentGate?documentAuthMessage:socialMessage;
+    if(messageTarget)messageTarget.textContent="Connecting securely to "+(provider==="google"?"Google":"Facebook")+"...";
+    const returnHash=isDocumentGate?"#documents":"#contact";
+    const options={redirectTo:window.location.origin+window.location.pathname+returnHash};
     if(provider==="google")options.scopes="email profile";
     if(provider==="facebook")options.scopes="email public_profile";
     const {error}=await client.auth.signInWithOAuth({provider,options});
-    if(error&&socialMessage)socialMessage.textContent="Connection failed: "+error.message+". You may complete the form manually.";
+    if(error&&messageTarget)messageTarget.textContent="Connection failed: "+error.message+". Please try the other sign-in option or contact the portfolio owner.";
    });
   });
- }else if(socialMessage){
-  socialMessage.textContent="Social account connection is not active until Supabase is configured. You may complete the form manually.";
+ }else{
+  updateDocumentAccess(null);
+  if(socialMessage)socialMessage.textContent="Social account connection is not active until Supabase is configured. You may complete the form manually.";
+  if(documentAuthMessage)documentAuthMessage.textContent="Social sign-in is unavailable because the document service is not configured. Please contact the portfolio owner.";
  }
  $("#inquiryForm").addEventListener("submit",async e=>{e.preventDefault();const form=e.currentTarget,msg=$("#formMessage");if(!client){msg.textContent="This form is not connected yet. Use WhatsApp, Messenger or email until backend setup is complete.";return;}const fd=new FormData(form);const payload={full_name:fd.get("full_name").trim(),company:fd.get("company").trim()||null,affiliation:fd.get("affiliation").trim()||null,email:fd.get("email").trim(),phone:fd.get("phone").trim()||null,inquiry_type:fd.get("inquiry_type"),message:fd.get("message").trim(),consent:fd.get("consent")==="on"};const {error}=await client.from("inquiries").insert(payload);if(error){msg.textContent="Your inquiry was not sent. Please use WhatsApp, Messenger or email.";return;}form.reset();msg.textContent="Thank you. Your inquiry was submitted privately.";});
  const portfolioUrl="https://edcarsky.github.io/portfolio/";
