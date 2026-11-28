@@ -265,3 +265,115 @@ body[data-theme="burgundy"] .section-kicker{color:#9bb9da!important}
 .testimonial-section .testimonial-card{border-left-color:#9dbde0!important}
 .testimonial-section .testimonial-card-selectable:hover{border-color:#9dbde0!important}
 .testimonial-section .testimonial-card-selectable:focus-visible{outline-color:#9dbde0!important}
+
+
+/* 28 Nov 2026: distinct blue section bands and guaranteed text contrast. */
+.intro.section-wrap{
+  background:linear-gradient(135deg,#edf3f9 0%,#e2ebf5 100%)!important;
+  color:#1d344d!important;
+}
+.professional-section{
+  background:linear-gradient(135deg,#dce8f4 0%,#cfdeed 100%)!important;
+  color:#1b344e!important;
+}
+.journey-section{
+  background:linear-gradient(135deg,#17334f 0%,#244968 100%)!important;
+  color:#f4f7fb!important;
+}
+.documents-section{
+  background:linear-gradient(135deg,#244766 0%,#315879 100%)!important;
+  color:#f4f7fb!important;
+}
+.creator-section{
+  background:linear-gradient(135deg,#122a43 0%,#1d3b59 100%)!important;
+  color:#f4f7fb!important;
+}
+.social-section{
+  background:linear-gradient(135deg,#e6eef7 0%,#d8e5f1 100%)!important;
+  color:#1d344d!important;
+}
+.certified-creator-section{
+  background:linear-gradient(135deg,#dce8f4 0%,#edf3f9 100%)!important;
+  color:#1d344d!important;
+}
+.community-section{
+  background:linear-gradient(135deg,#1b3856 0%,#294866 100%)!important;
+  color:#f4f7fb!important;
+}
+.community-follow-section{
+  background:linear-gradient(135deg,#dce8f4 0%,#edf3f9 100%)!important;
+  color:#1d344d!important;
+}
+.testimonial-section{
+  background:linear-gradient(135deg,#203f5d 0%,#2b4c6b 100%)!important;
+  color:#f4f7fb!important;
+}
+.contact-section{
+  background:linear-gradient(135deg,#e8eff7 0%,#dce7f2 100%)!important;
+  color:#1d344d!important;
+}
+.intro.section-wrap h2,.professional-section h2,.social-section h2,
+.certified-creator-section h2,.contact-section h2{
+  color:#203a57!important;
+}
+.intro.section-wrap p,.professional-section p,.social-section p,
+.certified-creator-section p,.contact-section p{
+  color:#40566e!important;
+}
+.journey-section h2,.documents-section h2,.creator-section h2,
+.community-section h2,.testimonial-section h2{
+  color:#f7f9fc!important;
+}
+.journey-section p,.documents-section p,.creator-section p,
+.community-section p,.testimonial-section p{
+  color:#d8e3ee!important;
+}
+.journey-section .section-kicker,.documents-section .section-kicker,
+.creator-section .section-kicker,.community-section .section-kicker,
+.testimonial-section .section-kicker{
+  color:#b9d1e9!important;
+}
+.intro.section-wrap .pill-row span{
+  background:#d2e1ef!important;color:#203b58!important;border-color:#8da8c4!important;
+}
+.professional-section .expertise-grid article,
+.documents-section .document-card,.creator-section .video-card,
+.testimonial-section .testimonial-card,.community-section .community-milestone-panel,
+.community-section .client-success-panel{
+  background:linear-gradient(145deg,#294866 0%,#203b58 100%)!important;
+  color:#f2f6fb!important;border-color:#7898ba!important;
+}
+.professional-section .expertise-grid article h3,
+.documents-section .document-card h3,.creator-section .video-card h3,
+.testimonial-section .testimonial-card h3,
+.community-section .community-milestone-panel h3{
+  color:#f6f9fd!important;
+}
+.professional-section .expertise-grid article p,
+.documents-section .document-card p,.creator-section .video-card p,
+.testimonial-section .testimonial-card p{
+  color:#d2e0ee!important;
+}
+.social-section .social-grid a{
+  background:#f5f8fc!important;color:#203b58!important;border-color:#a9bfd6!important;
+}
+.social-section .social-grid a small{color:#536b83!important}
+.certified-creator-section .certified-creator-copy small{color:#536b83!important}
+.contact-section .inquiry-form,.contact-section .contact-form,
+.contact-section .contact-panel{
+  background:#f7fafd!important;color:#243b53!important;border-color:#a9bfd6!important;
+}
+.contact-section .inquiry-form p,.contact-section .inquiry-form label,
+.contact-section .contact-form p,.contact-section .contact-panel p{
+  color:#40566e!important;
+}
+.contact-section input,.contact-section textarea,.contact-section select{
+  color:#20364f!important;background:#fff!important;
+}
+@media(max-width:620px){
+  .intro.section-wrap,.professional-section,.journey-section,.documents-section,
+  .creator-section,.social-section,.certified-creator-section,
+  .community-section,.community-follow-section,.testimonial-section,.contact-section{
+    background-attachment:scroll!important;
+  }
+}
