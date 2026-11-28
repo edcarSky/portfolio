@@ -1318,3 +1318,23 @@ body.modal-open{overflow:hidden}
 .floating-contact .float-share .share-icon{display:block;width:22px;height:22px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
 .floating-contact .float-share{font-size:0!important;line-height:0!important}
 @media(max-width:620px){.floating-contact .brand-icon{width:22px;height:22px}}
+
+
+/* Public visitor AI chat */
+.float-ai-panel[hidden]{display:none!important}
+.ai-chat-panel{width:min(360px,calc(100vw - 88px));padding:0!important;overflow:hidden;background:#fff;color:#1d2d43}
+.ai-chat-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;background:#172b4d;color:#fff}
+.ai-chat-head strong,.ai-chat-head small{display:block;color:#fff}
+.ai-chat-head strong{font:800 13px Manrope,sans-serif}
+.ai-chat-head small{margin-top:3px;font-size:10px;opacity:.78}
+.ai-chat-head button{width:28px;height:28px;border:0;border-radius:50%;background:#ffffff20;color:#fff;font-size:21px;cursor:pointer}
+.ai-chat-messages{height:260px;overflow:auto;display:flex;flex-direction:column;gap:9px;padding:12px;background:#f5f8fb}
+.ai-chat-bubble{max-width:90%;padding:9px 11px;border-radius:10px;font:12px/1.55 "DM Sans",sans-serif;white-space:pre-wrap;overflow-wrap:anywhere}
+.ai-chat-bubble.bot{align-self:flex-start;background:#fff;border:1px solid #e0e7ef;color:#26384e}
+.ai-chat-bubble.user{align-self:flex-end;background:#203e60;color:#fff}
+.ai-chat-compose{display:flex;align-items:flex-end;gap:7px;padding:10px;border-top:1px solid #e3e9f0}
+.ai-chat-compose textarea{flex:1;min-width:0;resize:vertical;min-height:42px;max-height:100px;padding:9px;border:1px solid #d7e0ea;border-radius:8px;font:12px/1.4 "DM Sans",sans-serif;color:#20364f}
+.ai-chat-compose button{min-height:40px;padding:0 12px;border:0;border-radius:8px;background:#203e60;color:#fff;font:700 11px "DM Sans",sans-serif;cursor:pointer}
+.ai-chat-compose button:disabled{opacity:.55;cursor:wait}
+.ai-chat-status{margin:0;padding:0 12px 10px;color:#78879a;font:9px/1.5 "DM Sans",sans-serif}
+@media(max-width:620px){.ai-chat-panel{width:min(330px,calc(100vw - 70px));right:47px}.ai-chat-messages{height:230px}}
