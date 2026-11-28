@@ -1456,6 +1456,6 @@ body.modal-open{overflow:hidden}
 body.portfolio-fade-transition{overflow-x:hidden}
 body.portfolio-fade-transition::after{content:"";position:fixed;inset:0;z-index:99999;pointer-events:none;background:var(--transition-overlay,rgba(24,39,55,.96));opacity:0;transition:opacity .24s ease}
 body.portfolio-fade-transition.is-fading::after{opacity:1}
-body.portfolio-fade-transition[data-link-transition="lift"]::after{transform:translateY(8px);transition:opacity .24s ease,transform .24s ease}
-body.portfolio-fade-transition[data-link-transition="blur"]::after{backdrop-filter:blur(0);transition:opacity .24s ease,backdrop-filter .24s ease}
+body.portfolio-fade-transition[data-link-transition="lift"]::after{transform:translateY(12px);transition:opacity .24s ease,transform .24s ease}body.portfolio-fade-transition[data-link-transition="lift"].is-fading::after{transform:translateY(0)}
+body.portfolio-fade-transition[data-link-transition="blur"]::after{background:rgba(24,39,55,.58);backdrop-filter:blur(0);transition:opacity .24s ease,backdrop-filter .24s ease}body.portfolio-fade-transition[data-link-transition="blur"].is-fading::after{backdrop-filter:blur(7px)}
 @media(prefers-reduced-motion:reduce){body.portfolio-fade-transition::after{transition:none!important}}
