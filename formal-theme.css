@@ -448,3 +448,15 @@ a,.text-link,.story-text-link,.doc-link{color:#c6dcf2!important}
 .visitor-counter{color:#c5d2df!important}
 @media(max-width:760px){.career-note{grid-template-columns:1fr!important;gap:10px!important}.career-number{font-size:44px!important;line-height:1!important}.community-brand-panel,.community-brand-panel-clean{min-height:210px!important}.community-logo-image{max-height:220px!important}.join-team-program{grid-template-columns:1fr!important;gap:5px!important}.join-team-program>span{font-size:12px!important}.contact-grid{grid-template-columns:1fr!important}.testimonial-inner{grid-template-columns:1fr!important}}
 @media(max-width:620px){.career-note{padding:18px!important}.career-note p,.community-channel-description p,.community-channel-description li,.community-teaser p,.contact-copy .contact-description{font-size:13px!important;line-height:1.8!important}.community-brand-panel,.community-brand-panel-clean{min-height:180px!important}.community-logo-image{max-height:180px!important}.community-channel-description{padding:18px!important}.client-success-panel{padding:17px!important}.client-success-card{padding:16px!important}.detail-dialog{max-height:88vh!important;padding:24px 19px!important}.detail-modal-body{font-size:14px!important;line-height:1.8!important}}
+
+
+/* Section 01 current freelance engagement previews. */
+.current-work-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:26px 0 18px}
+.current-work-card{min-width:0;padding:20px 21px;background:linear-gradient(145deg,#2b4056 0%,#23374b 100%);border:1px solid #637b94;border-radius:13px;color:#edf2f7;box-shadow:0 10px 28px #07132125}
+.current-work-label{display:block;margin-bottom:11px;color:#c5d9ed;font-size:10px;font-weight:700;line-height:1.5;letter-spacing:1.05px}
+.current-work-card h3{margin:0 0 8px;color:#f0f4f8;font-size:clamp(16px,1.5vw,19px);line-height:1.35}
+.current-work-company{margin:0 0 9px!important;color:#c5d2df!important;font-size:12px;font-weight:700;line-height:1.5}
+.current-work-card>p:not(.current-work-company){margin:0 0 13px;color:#d0dbe6;font-size:13px;line-height:1.65}
+.current-work-card .story-text-link{display:inline-flex;margin-top:2px;color:#c5dcf4!important;font-size:13px;font-weight:700}
+.current-work-card .story-text-link:hover{color:#fff!important}
+@media(max-width:680px){.current-work-grid{grid-template-columns:1fr;gap:12px;margin:20px 0 14px}.current-work-card{padding:17px}.current-work-card h3{font-size:17px}}
