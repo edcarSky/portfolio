@@ -302,8 +302,48 @@ body{color:var(--section-ink)}
  #recommendations .testimonial-inner>div:first-child p{font-size:15px!important}
 }
 
-</style></head>
-<body><div class="program-announcement" role="region" aria-label="Team edcarSky program terms reminder">
+</style><style id="production-accessibility-fixes">
+/* Production fixes: document verification, logo framing and readable contrast. */
+#community .community-actions .button-light{background:#F7F9FB!important;color:#263746!important;border:1px solid #F7F9FB!important}
+#community .community-actions .button-outline{background:#263746!important;color:#FFFFFF!important;border:1px solid #E6A0AE!important}
+#community .community-actions .button-light:hover{background:#E6EBEF!important;color:#263746!important}
+#community .community-actions .button-outline:hover{background:#394B5B!important;color:#FFFFFF!important;border-color:#F2C0CA!important}
+#join-team{background:#394B5B!important;color:#F7F9FB!important}
+#join-team .join-team-copy h2,#join-team .join-team-copy h2 em,#join-team .join-team-copy .section-kicker{color:#FFFFFF!important}
+#join-team .join-team-copy>p,#join-team .join-team-note,#join-team .join-team-copy>small{color:#E8EDF2!important}
+#join-team .join-team-reminder{background:#263746!important;border:1px solid #E6A0AE!important;border-left:4px solid #E6A0AE!important}
+#join-team .join-team-reminder strong,#join-team .join-team-reminder p{color:#FFFFFF!important}
+#join-team .join-team-links a:not(.button-join-team){background:#F7F9FB!important;color:#263746!important;border:1px solid #F7F9FB!important}
+#join-team .join-team-links a:not(.button-join-team):hover{background:#E6EBEF!important;color:#263746!important}
+#join-team .join-team-links .button-join-team{background:#A94358!important;color:#FFFFFF!important;border:1px solid #F2C0CA!important}
+#join-team .join-team-links .button-join-team:hover{background:#873448!important;color:#FFFFFF!important}
+#join-team .join-team-side-compact{background:#263746!important;color:#FFFFFF!important;border:1px solid #E6A0AE!important}
+#join-team .join-team-side-compact p,#join-team .join-team-side-compact a,#join-team .join-program-chips a{color:#FFFFFF!important}
+#join-team .join-program-chips a{background:#354653!important;border-color:#E6A0AE!important}
+#join-team .join-program-chips a:hover,#join-team .join-program-chips a:focus-visible{background:#F2C0CA!important;color:#263746!important}
+#community .community-logo-frame,#join-team .join-logo-frame{border-radius:50%!important;overflow:hidden!important;background:#FFFFFF!important;border:2px solid #E6A0AE!important;box-shadow:0 8px 26px rgba(0,0,0,.24)!important}
+#community .community-logo-inline,#join-team .join-team-logo-inline{object-fit:contain!important;object-position:center!important;border-radius:0!important;background:transparent!important}
+.document-auth-gate{padding:22px 24px;background:#454047;border:1px solid #D98D9D;border-left:4px solid #D98D9D;border-radius:12px;color:#F8F3F4}
+.document-auth-kicker{display:block;color:#F2C0CA;font-size:10px;font-weight:850;letter-spacing:.12em}
+.document-auth-gate h3{margin:8px 0;color:#FFFFFF!important;font:800 clamp(21px,2vw,27px)/1.2 Manrope,sans-serif}
+.document-auth-gate>p{color:#F0E9EC!important;font-size:13px;line-height:1.7;margin:8px 0 14px}
+.document-auth-options{display:flex;flex-wrap:wrap;gap:10px}
+.document-auth-options .social-auth-button{display:flex;align-items:center;justify-content:center;gap:10px;min-width:190px;min-height:44px;padding:10px 14px;background:#F7F9FB!important;color:#263746!important;border:1px solid #FFFFFF!important;border-radius:8px;font-size:12px;font-weight:800}
+.document-auth-options .google-auth .auth-mark{color:#4285F4}
+.document-auth-options .facebook-auth .auth-mark{color:#1877F2}
+.document-auth-options .social-auth-button:hover{background:#E6EBEF!important;color:#263746!important}
+.document-auth-message{margin:12px 0 0!important;color:#F2C0CA!important;font-size:11px!important;line-height:1.6}
+.document-cards[hidden]{display:none!important}
+#documents .document-access-status{background:#263746!important;color:#FFFFFF!important;border-left-color:#E6A0AE!important}
+#documents .document-card{background:#454047!important;color:#F8F3F4!important;border:1px solid #D98D9D!important}
+#documents .document-card h3{color:#FFFFFF!important}
+#documents .document-card p{color:#E5DDE0!important}
+#documents .doc-link{color:#F2C0CA!important;text-decoration:underline;text-underline-offset:3px}
+#documents .doc-link:focus-visible,#documents .document-auth-options button:focus-visible,#community .community-actions .button:focus-visible,#join-team a:focus-visible{outline:3px solid #F2C0CA!important;outline-offset:3px!important}
+@media(max-width:700px){.document-auth-gate{padding:18px 15px}.document-auth-options{display:grid;grid-template-columns:1fr}.document-auth-options .social-auth-button{width:100%;min-width:0}}
+</style>
+</head>
+<body data-preview-palette="b1a"><div class="program-announcement" role="region" aria-label="Team edcarSky program terms reminder">
   <span>TEAM EDCARSKY™ · PROGRAM TERMS REMINDER</span>
   <strong>30-DAY PROGRAM · STRICTLY NO SELF-WATCHING ON MONETIZED CHANNELS</strong>
   <a href="#join-team">Read terms & join </a>
@@ -380,8 +420,18 @@ body{color:var(--section-ink)}
 <section id="documents" class="documents-section">
   <div class="section-wrap document-grid">
     <div><div class="section-kicker light-kicker">05 / PROFESSIONAL DOCUMENTS</div><h2>My credentials,<br><em>one click away.</em></h2><p data-content-key="documents_intro">My CV and general cover letter bring together the work history, skills, education and experience behind my applications for local and overseas opportunities.</p><a href="#portfolioDetailModal" class="story-text-link story-link-light" data-detail-story="documents-story">Explore details <span aria-hidden="true">↗</span></a></div>
-    <div class="document-cards">
-      <p id="documentAccessStatus" class="document-access-status" role="status" aria-live="polite">Published CV access. No social account required.</p>
+    <div id="documentAuthGate" class="document-auth-gate" role="region" aria-labelledby="documentAuthTitle">
+      <span class="document-auth-kicker">PROFESSIONAL DOCUMENT ACCESS</span>
+      <h3 id="documentAuthTitle">Connect to continue.</h3>
+      <p id="documentAuthDescription">Connect one of your social accounts to verify your identity before viewing or downloading the requested document. Your account is used for access verification, not public display.</p>
+      <div class="document-auth-options">
+        <button type="button" class="social-auth-button google-auth" data-oauth-provider="google" data-oauth-return="documents" aria-label="Continue with Google" title="Continue with Google"><span class="auth-mark">G</span><span>Continue with Google</span></button>
+        <button type="button" class="social-auth-button facebook-auth" data-oauth-provider="facebook" data-oauth-return="documents" aria-label="Continue with Facebook" title="Continue with Facebook"><span class="auth-mark">f</span><span>Continue with Facebook</span></button>
+      </div>
+      <p id="documentAuthMessage" class="document-auth-message" role="status" aria-live="polite">Choose Google or Facebook to verify access. Your profile details will not appear publicly.</p>
+    </div>
+    <div id="documentLibrary" class="document-cards" hidden>
+      <p id="documentAccessStatus" class="document-access-status" role="status" aria-live="polite">Identity verified. Published documents are available.</p>
       <article class="document-card"><div class="doc-icon">CV</div><div><h3>Curriculum Vitae</h3><p id="cvStatus">Updated 23 November 2026</p><button id="cvView" type="button" class="doc-link" data-document-action="view" data-document-type="cv">View CV ↗</button><button id="cvDownload" type="button" class="doc-link" data-document-action="download" data-document-type="cv">View / Download CV ↓</button></div></article>
       <article class="document-card"><div class="doc-icon">CL</div><div><h3>Professional Cover Letter</h3><p id="letterStatus">Updated 23 November 2026</p><button id="letterView" type="button" class="doc-link" data-document-action="view" data-document-type="cover_letter">View Cover Letter ↗</button><button id="letterDownload" type="button" class="doc-link" data-document-action="download" data-document-type="cover_letter">View / Download Cover Letter ↓</button></div></article>
     </div>
@@ -716,8 +766,7 @@ body{color:var(--section-ink)}
 <script src="https://edcarsky.github.io/portfolio/config.js"></script>
 <script data-goatcounter="https://edcarsky.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script src="https://edcarsky.github.io/portfolio/slides.js?v=20261128-final3"></script>
-<script src="https://edcarsky.github.io/portfolio/app.js?v=20261128-cvfade3"></script>
+<script src="https://edcarsky.github.io/portfolio/app.js?v=20261128-authgate1"></script>
 <script src="https://edcarsky.github.io/portfolio/details.js?v=20261128-final3" defer></script>
-
 
 </body></html>
