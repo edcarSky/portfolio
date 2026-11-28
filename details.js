@@ -135,6 +135,7 @@
     const launchStory = event => {
       if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
       if (event.type === "keydown") event.preventDefault();
+      if (event.type === "click") event.preventDefault();
       const title = key.replace(/-/g," ").replace(/\b\w/g,ch=>ch.toUpperCase());
       open(title, descriptions[key], trigger, storySources[key]);
     };
