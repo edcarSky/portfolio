@@ -603,3 +603,33 @@
  .intro-deck .deck-slide .hero-panel .panel-stats small{font-size:9px!important}
  .intro-deck .deck-controls{bottom:10px!important}
 }
+
+
+/* All five intro slides share the exact Slide 1 profile-card markup and geometry. */
+.intro-deck .deck-slide .hero-panel,
+.intro-deck .deck-slide:first-child .hero-panel{
+  width:100%!important;max-width:390px!important;justify-self:end!important;
+  padding:clamp(16px,1.8vw,22px)!important;
+  border:1px solid #9db9d6!important;border-radius:18px!important;
+  background:linear-gradient(155deg,#294968 0%,#1d3856 100%)!important;
+  color:#f4f8fc!important;
+}
+.intro-deck .deck-slide .hero-panel .profile-placeholder,
+.intro-deck .deck-slide:first-child .hero-panel .profile-placeholder{
+  width:100%!important;height:auto!important;min-height:0!important;
+  aspect-ratio:4/5!important;margin:12px 0 14px!important;padding:7px!important;
+  overflow:hidden!important;border:1px solid #9db9d6!important;border-radius:12px!important;
+  background:linear-gradient(145deg,#203e5d,#345778)!important;
+}
+.intro-deck .deck-slide .hero-panel .profile-placeholder img,
+.intro-deck .deck-slide:first-child .hero-panel .profile-placeholder img{
+  display:block!important;width:100%!important;height:100%!important;
+  max-height:none!important;object-fit:contain!important;object-position:center!important;
+  border-radius:7px!important;
+}
+@media(max-width:620px){
+ .intro-deck .deck-slide .hero-panel,
+ .intro-deck .deck-slide:first-child .hero-panel{max-width:100%!important}
+ .intro-deck .deck-slide .hero-panel .profile-placeholder,
+ .intro-deck .deck-slide:first-child .hero-panel .profile-placeholder{aspect-ratio:4/5!important}
+}
