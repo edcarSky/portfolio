@@ -68,83 +68,31 @@
 
  }
  
- const documentAuthModal=$("#documentAuthModal");
- let requestedDocument={type:null,action:null};
- const documentAuthStatus=$("#documentAuthStatus");
- const documentAuthResult=$("#documentAuthResult");
- const deliverDocument=async(intent)=>{
-  if(!client||!intent?.type||!intent?.action)return;
-  if(documentAuthResult){documentAuthResult.hidden=true;documentAuthResult.removeAttribute("href");}
-  if(documentAuthStatus)documentAuthStatus.textContent="Checking your sign-in and preparing a time-limited document link...";
-  const {data:{user},error:userError}=await client.auth.getUser();
-  if(userError||!user){
-   if(documentAuthStatus)documentAuthStatus.textContent="Please sign in with Google or Facebook to continue.";
-   return;
+ const documentAccessStatus=$("#documentAccessStatus");
+ const deliverDocument=async(type,action,button)=>{
+  if(!client){if(documentAccessStatus)documentAccessStatus.textContent="Document service is temporarily unavailable. Please contact the portfolio owner.";return;}
+  const original=button?.textContent;
+  if(button){button.disabled=true;button.textContent="Preparing secure link...";}
+  if(documentAccessStatus)documentAccessStatus.textContent="Checking the published document...";
+  try{
+   const {data:doc,error:docError}=await client.from("public_documents")
+    .select("document_type,display_name,storage_path")
+    .eq("document_type",type).eq("is_published",true).maybeSingle();
+   if(docError)throw docError;
+   if(!doc){if(documentAccessStatus)documentAccessStatus.textContent=type==="cover_letter"?"The cover letter has not been published yet.":"The CV is not published yet.";return;}
+   const options=action==="download"?{download:doc.display_name}:undefined;
+   const {data:signed,error:signedError}=await client.storage.from("portfolio-documents").createSignedUrl(doc.storage_path,900,options);
+   if(signedError||!signed?.signedUrl)throw signedError||new Error("A document link was not returned.");
+   if(documentAccessStatus)documentAccessStatus.textContent="Opening the published document...";
+   window.location.assign(signed.signedUrl);
+  }catch(error){
+   if(documentAccessStatus)documentAccessStatus.textContent="Document access failed. "+(error?.message||"Please try again later.");
+  }finally{
+   if(button){button.disabled=false;button.textContent=original;}
   }
-  const {data:doc,error:docError}=await client.from("public_documents")
-   .select("document_type,display_name,storage_path")
-   .eq("document_type",intent.type).eq("is_published",true).maybeSingle();
-  if(docError||!doc){
-   if(documentAuthStatus)documentAuthStatus.textContent=intent.type==="cover_letter"?"The cover letter file is not uploaded to private document storage yet. Please check back after the owner publishes it.":"The requested document is not published yet.";
-   return;
-  }
-  const options=intent.action==="download"?{download:doc.display_name}:undefined;
-  const {data:signed,error:signedError}=await client.storage.from("portfolio-documents").createSignedUrl(doc.storage_path,180,options);
-  if(signedError||!signed?.signedUrl){
-   if(documentAuthStatus)documentAuthStatus.textContent="The document link could not be created. Please try again or contact the portfolio owner.";
-   return;
-  }
-  if(documentAuthResult){
-   documentAuthResult.href=signed.signedUrl;
-   documentAuthResult.textContent=intent.action==="download"?"Download "+(intent.type==="cv"?"CV":"Cover Letter")+" ↓":"Open "+(intent.type==="cv"?"CV":"Cover Letter")+" ↗";
-   documentAuthResult.hidden=false;
-  }
-  if(documentAuthStatus)documentAuthStatus.textContent="Identity verified. This private document link expires in 3 minutes.";
- };
- const openDocumentAuth=(type,action)=>{
-  requestedDocument={type,action};
-  if(!documentAuthModal)return;
-  const label=type==="cv"?"Curriculum Vitae":"Professional Cover Letter";
-  $("#documentAuthTitle").textContent=(action==="download"?"Connect to download your ":"Connect to view your ")+label+".";
-  $("#documentAuthDescription").textContent="Connect with Google, Facebook, TikTok or Instagram to verify your identity before viewing or downloading this document. Your social account is not displayed publicly.";
-  if(documentAuthStatus)documentAuthStatus.textContent="One account is enough. You do not need to connect all platforms.";
-  documentAuthModal.hidden=false;
-  document.body.classList.add("modal-open");
-  documentAuthModal.querySelector(".document-auth-close")?.focus();
-  if(client)client.auth.getUser().then(({data,error})=>{if(!error&&data?.user)deliverDocument(requestedDocument);});
  };
  document.querySelectorAll("[data-document-action]").forEach(button=>{
-  button.addEventListener("click",()=>openDocumentAuth(button.dataset.documentType,button.dataset.documentAction));
- });
- const closeDocumentAuth=()=>{
-  if(documentAuthModal&&!documentAuthModal.hidden){
-   documentAuthModal.hidden=true;
-   document.body.classList.remove("modal-open");
-  }
- };
- document.querySelectorAll("[data-close-document-auth]").forEach(button=>button.addEventListener("click",closeDocumentAuth));
- document.addEventListener("keydown",event=>{if(event.key==="Escape")closeDocumentAuth();});
- document.querySelectorAll("[data-doc-oauth-provider]").forEach(button=>{
-  button.addEventListener("click",async()=>{
-   const provider=button.dataset.docOauthProvider;
-   if(button.disabled)return;
-   if(!client){
-    if(documentAuthStatus)documentAuthStatus.textContent="Secure social sign-in is not active until Supabase is configured.";
-    return;
-   }
-   if(!["google","facebook","linkedin_oidc","custom:tiktok","custom:instagram"].includes(provider)){
-    if(documentAuthStatus)documentAuthStatus.textContent="This provider is not supported by the current sign-in configuration.";
-    return;
-   }
-   if(documentAuthStatus)documentAuthStatus.textContent="Connecting securely. Complete the sign-in on the provider page.";
-   try{sessionStorage.setItem("edcarsky-document-intent",JSON.stringify(requestedDocument));}catch(e){}
-   const options={redirectTo:window.location.origin+window.location.pathname+"#documents"};
-   if(provider==="google")options.scopes="email profile";
-   if(provider==="facebook")options.scopes="email public_profile";
-   if(provider==="linkedin_oidc")options.scopes="openid profile email";
-   const {error}=await client.auth.signInWithOAuth({provider,options});
-   if(error&&documentAuthStatus)documentAuthStatus.textContent="Sign-in could not start: "+error.message;
-  });
+  button.addEventListener("click",()=>deliverDocument(button.dataset.documentType,button.dataset.documentAction,button));
  });
  const inquiryForm=$("#inquiryForm");
  const socialMessage=$("#socialAuthMessage");
@@ -175,17 +123,7 @@
  if(client){
   client.auth.getUser().then(({data,error})=>{if(!error)applySocialProfile(data.user);});
   client.auth.onAuthStateChange((event,session)=>{
-   if(event==="SIGNED_IN"&&session?.user){
-    applySocialProfile(session.user);
-    let intent=null;
-    try{intent=JSON.parse(sessionStorage.getItem("edcarsky-document-intent")||"null");sessionStorage.removeItem("edcarsky-document-intent");}catch(e){}
-    if(intent&&documentAuthModal){
-     requestedDocument=intent;
-     documentAuthModal.hidden=false;
-     document.body.classList.add("modal-open");
-     Promise.resolve().then(()=>deliverDocument(intent));
-    }
-   }
+   if(event==="SIGNED_IN"&&session?.user)applySocialProfile(session.user);
   });
   document.querySelectorAll("[data-oauth-provider]").forEach(button=>{
    button.addEventListener("click",async()=>{
