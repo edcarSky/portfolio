@@ -88,6 +88,33 @@ a.story-text-link,a.text-link{color:#A94358!important}
 .button-outline,.button-outline-dark{border-color:#D98D9D!important}
 ::selection{background:#D98D9D;color:#202D39}
 @media(max-width:700px){#professional .expertise-grid article{padding:18px!important}#documents .document-card{padding:17px!important}}
+
+/* Compact Team edcarSky preview layout, isolated to color.html */
+#community .community-hero-refined{display:grid;grid-template-columns:minmax(150px,220px) minmax(0,1fr);align-items:center;gap:clamp(20px,4vw,48px);padding:clamp(20px,3vw,34px);border:1px solid rgba(217,141,157,.28);border-radius:18px;background:rgba(255,255,255,.045)}
+#community .community-logo-inline{display:block;width:100%;max-width:210px;height:auto;max-height:190px;object-fit:contain;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:0!important;margin:auto}
+#community .community-brand-caption{font-size:11px;letter-spacing:.12em;font-weight:800;color:#D98D9D;margin-bottom:8px}
+#community .community-promise{font-size:clamp(13px,1.4vw,17px);font-weight:800;letter-spacing:.025em;color:#F4F5F6;margin-bottom:8px}
+#community .community-intro h2{font-size:clamp(25px,3vw,38px);line-height:1.08;margin:0 0 10px}
+#community .community-intro>p{max-width:720px;margin:0 0 12px;line-height:1.55}
+#community .community-ai-invite{display:none}
+#community .community-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+.community-full-details{margin:16px 0 20px;border:1px solid rgba(217,141,157,.3);border-radius:12px;background:rgba(255,255,255,.035);overflow:hidden}
+.community-full-details>summary{cursor:pointer;list-style:none;padding:14px 18px;font-weight:750;color:#F4F5F6}
+.community-full-details>summary::-webkit-details-marker{display:none}
+.community-full-details>summary:after{content:"＋";float:right;color:#D98D9D}
+.community-full-details[open]>summary:after{content:"−"}
+.community-full-details-body{padding:0 16px 16px}
+.community-full-details .community-channel-description{margin-top:4px}
+.community-full-details .community-milestone-panel,.community-full-details .client-success-panel,.community-full-details .community-program-grid,.community-full-details .community-mumu-note{margin-top:16px}
+#join-team .join-team-side-compact{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;padding:22px;border:1px solid rgba(227,154,166,.35);border-radius:16px;background:rgba(32,45,57,.55)}
+#join-team .join-team-logo-inline{display:block;width:min(190px,70%);height:auto;max-height:120px;object-fit:contain;object-position:left center;background:transparent;border:0;border-radius:0;box-shadow:none;padding:0}
+#join-team .join-program-chips{display:flex;flex-wrap:wrap;gap:8px}
+#join-team .join-program-chips span{display:inline-flex;padding:7px 10px;border:1px solid rgba(227,154,166,.4);border-radius:999px;color:#F4F5F6;font-size:12px;line-height:1.25}
+#join-team .join-team-side-foot{font-size:13px;font-weight:800;color:#fff}
+.skills-strip-expanded{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.skills-strip-expanded span{font-size:12px}
+@media(max-width:700px){#community .community-hero-refined{grid-template-columns:1fr;gap:12px;padding:18px}#community .community-logo-inline{width:145px;max-height:110px;object-position:left center;margin:0}#community .community-intro h2{font-size:27px}.community-full-details-body{padding:0 10px 12px}#join-team .join-team-side-compact{padding:16px}#join-team .join-team-logo-inline{width:145px}}
+
 </style></head>
 <body><div id="color-preview-notice" style="position:relative;z-index:9999;background:#D98D9D;color:#302D33;text-align:center;padding:8px 14px;font:700 11px/1.4 Arial,sans-serif;letter-spacing:.5px">DESIGN PREVIEW ONLY · FULL PORTFOLIO CONTENT PRESERVED · LIVE HOMEPAGE UNCHANGED</div>
 <div class="program-announcement" role="region" aria-label="Team edcarSky program terms reminder">
@@ -146,7 +173,7 @@ a.story-text-link,a.text-link{color:#A94358!important}
     <article><span>05</span><h3>Logistics & Customer Operations</h3><p>Service support, customer communication, inventory and logistics-related coordination.</p></article>
     <article><span>06</span><h3>Digital Content & Web</h3><p>Content publishing, social media workflows, website administration and digital production.</p></article>
   </div>
-  <a href="#portfolioDetailModal" class="story-text-link section-story-cta" data-detail-story="professional-story">Explore details <span aria-hidden="true">↗</span></a><div class="skills-strip"><b>TOOLS & SKILLS</b><span>Microsoft Office</span><span>Google Workspace</span><span>Windows</span><span>WordPress</span><span>HTML / CSS</span><span>PHP / MySQL</span><span>Image & Video Editing</span><span>Social Media</span></div>
+  <a href="#portfolioDetailModal" class="story-text-link section-story-cta" data-detail-story="professional-story">Explore details <span aria-hidden="true">↗</span></a><div class="skills-strip skills-strip-expanded"><b>TOOLS & SKILLS</b><span>Microsoft Office</span><span>Google Workspace</span><span>Windows</span><span>WordPress</span><span>HTML / CSS</span><span>PHP / MySQL</span><span>Python (.py) · Basic scripting</span><span>JavaScript · Basic</span><span>SQL · Database fundamentals</span><span>Java · Programming fundamentals</span><span>Image & Video Editing</span><span>Social Media Management</span><span>Basic AI Knowledge · Image, Video, Web & Programming Tools</span><span>AI-assisted research, prompting & workflow support</span></div>
   <div class="career-note"><div class="career-number">20<span>+</span></div><div><h3>Years of combined work experience</h3><p>Including approximately 15 years of employment in Riyadh, Saudi Arabia, across executive support, administration, HR, IT, logistics, hospitality and operations.</p><p><strong>Target roles:</strong> Executive Assistant, Administrative Assistant, Site Administrator, Operations Assistant, Logistics and Warehouse Support, Document Controller, HR Administrative Support, Hospitality, Facilities and General Operations.</p></div></div>
 </section>
 
@@ -221,41 +248,26 @@ a.story-text-link,a.text-link{color:#A94358!important}
   </div>
 </section>
 
-<section id="follow-edcarsky" class="community-follow-section">
-  <div class="section-wrap">
-    <div class="community-follow community-follow-compact">
-          <div><div class="section-kicker">FOLLOW EDCARSKY G! LIVE</div><h3>Find us on your social platforms.</h3></div>
-          <div class="community-social-links">
-            <a href="https://www.youtube.com/channel/UCoz2lfYpVjxYmBp2Z9MZ25g/" target="_blank" rel="noopener">YouTube <span>↗</span></a>
-            <a href="https://www.facebook.com/edcarSkyglive" target="_blank" rel="noopener">Facebook <span>↗</span></a>
-            <a href="https://www.tiktok.com/@edcarsky" target="_blank" rel="noopener">TikTok <span>↗</span></a>
-            <a href="https://www.instagram.com/edcarsky/" target="_blank" rel="noopener">Instagram <span>↗</span></a>
-            <a href="https://www.m.me/edcarSkyglive" target="_blank" rel="noopener">Messenger AI <span>↗</span></a>
-            <a href="https://wa.me/639177832874" target="_blank" rel="noopener">WhatsApp <span>↗</span></a>
-          </div>
-        </div>
-  </div>
-</section>
 
 <section id="community" class="community-section">
   <div class="section-wrap">
     <div class="section-kicker light-kicker">10 / ONLINE LIVE COMMUNITY</div>
-    <div class="community-hero community-hero-compact">
-      <div class="community-brand-panel community-brand-panel-clean" aria-label="Official edcarSky g! live logo">
-        <img class="community-logo-image" src="https://edcarsky.github.io/portfolio/assets/edcarsky-glive-logo.webp" alt="Official edcarSky g! live logo">
-        <div class="community-brand-caption">TEAM EDCARSKY™ · SINCE 2021</div>
-      </div>
+    <div class="community-hero community-hero-compact community-hero-refined">
+      <img class="community-logo-image community-logo-inline" src="https://edcarsky.github.io/portfolio/assets/edcarsky-glive-logo.webp" alt="Official edcarSky g! live logo">
       <div class="community-intro">
+        <div class="community-brand-caption">TEAM EDCARSKY™ · SINCE 2021</div>
         <div class="community-promise">100% LEGIT, SAFE & ORGANIC. <button type="button" class="promise-check" data-detail-story="integrity-story" aria-label="Read our organic integrity standards" title="Read our organic integrity standards">✓</button></div>
-        <h2>Build your audience.<br><em>Grow with purpose.</em></h2>
-        <p data-content-key="community_intro">Team edcarSky provides creator-support services built around organic audience development, channel analytics, monetization readiness, video promotion and recovery support. Our programs serve creators across digital and social platforms, not one network alone.</p>
-        <p class="community-ai-invite">Questions about AA+, SSP+ or joining the community? Our automated AI assistant on Facebook Messenger is ready to help with your inquiries.</p>
+        <h2>Build your audience. <em>Grow with purpose.</em></h2>
+        <p data-content-key="community_intro">Team edcarSky provides organic creator support, AA+ analytics, SSP+ promotion, monetization guidance and channel recovery across digital and social platforms.</p>
         <div class="community-actions">
           <a class="button button-light" href="https://www.m.me/edcarSkyglive" target="_blank" rel="noopener">Ask our AI assistant ↗</a>
           <a class="button button-outline" href="https://www.youtube.com/channel/UCoz2lfYpVjxYmBp2Z9MZ25g/" target="_blank" rel="noopener">View YouTube channel ↗</a>
         </div>
       </div>
     </div>
+    <details class="community-full-details">
+      <summary>View full community profile, milestones and program details</summary>
+      <div class="community-full-details-body">
       <div class="community-channel-description">
         <div class="channel-description-heading"><span>OFFICIAL CHANNEL PROFILE</span><h3>edcarSky™ g! live</h3><p>Family Vlog · CALABARZON · Quezon Province</p></div>
         <p>edcarSky™ g! live is our official family-vlog channel, documenting everyday life, family experiences and the places that make the Philippines worth exploring. The channel is rooted in CALABARZON, with particular attention to Quezon Province and nearby destinations. It brings together home life, family bonding, road trips, local discoveries and the stories behind each visit.</p>
@@ -397,8 +409,11 @@ a.story-text-link,a.text-link{color:#A94358!important}
       <span class="mumu-label">PAALALA SA CREATOR COMMUNITY</span>
       <h3>Huwag magpaloko sa “mumu” services.</h3>
       <p>Ang “mumu” para sa amin, iyong serbisyong sobrang mura sa simula pero sa huli, ikaw ang napapamura dahil nasira o na-risk ang channel mo. Hindi lahat ng mura ay sulit. Piliin ang serbisyong malinaw ang proseso, ligtas ang paraan at tunay na organic ang audience growth.</p>
-      <strong>Protect your channel. Protect your hard work.</strong><a href="#portfolioDetailModal" class="story-text-link" data-detail-story="mumu-story">Explore details <span aria-hidden="true">↗</span></a>
+      <strong>Protect your channel. Protect your hard work.</strong>
     </div>
+
+      </div>
+    </details>
 
     <div class="community-integrity community-integrity-compact">
       <strong>Creator-first support. Genuine growth. Transparent methods.</strong>
@@ -425,27 +440,10 @@ a.story-text-link,a.text-link{color:#A94358!important}
       </div>
       <small class="join-team-note">Review the Facebook-published terms before joining. YouTube controls membership availability and the final join process.</small><a href="#portfolioDetailModal" class="story-text-link section-story-cta" data-detail-story="team-story">One click for the full Team edcarSky story <span aria-hidden="true">↗</span></a>
     </div>
-    <div class="join-team-side" aria-label="Team edcarSky program overview">
-      <div class="join-team-side-logo"><img src="https://edcarsky.github.io/portfolio/assets/edcarsky-glive-logo.webp" alt="edcarSky g! live logo"></div>
-      <div class="join-team-program">
-        <span>AA+</span>
-        <div><strong>Analytics Program</strong><small>Program information and requirements are provided in the published terms.</small></div>
-      </div>
-      <div class="join-team-program">
-        <span>SSP+</span>
-        <div><strong>Social Sharing & Promotion</strong><small>Content distribution, campaign planning and audience discovery.</small></div>
-      </div>
-      <div class="join-team-program">
-        <span>SUB+ / FF+</span>
-        <div><strong>Subscribers, Followers & Fans</strong><small>Organic content discovery and audience development across supported platforms.</small></div>
-      </div>
-      <div class="join-team-program">
-        <span>WH+</span>
-        <div><strong>Watchtime & Retention</strong><small>Content strategy and viewer-retention support, not guaranteed or incentivized watch hours.</small></div>
-      </div>
-      <div class="join-team-program">
-        <span>APP+</span>
-        <div><strong>Auto Push Promotions & Creator Workflows</strong><small>Program workflow and content-distribution support, subject to the published terms.</small></div>
+    <div class="join-team-side join-team-side-compact" aria-label="Team edcarSky program overview">
+      <img class="join-team-logo-inline" src="https://edcarsky.github.io/portfolio/assets/edcarsky-glive-logo.webp" alt="edcarSky g! live">
+      <div class="join-program-chips" aria-label="Available programs">
+        <span>AA+ Analytics</span><span>SSP+ Promotion</span><span>SUB+ / FF+ Audience</span><span>WH+ Retention</span><span>APP+ Workflows</span><span>Free Monetization & Recovery</span>
       </div>
       <div class="join-team-side-foot">100% LEGIT, SAFE & ORGANIC. <button type="button" class="promise-check" data-detail-story="integrity-story" aria-label="Read our organic integrity standards" title="Read our organic integrity standards">✓</button></div>
     </div>
