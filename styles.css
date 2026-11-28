@@ -1449,3 +1449,13 @@ body.modal-open{overflow:hidden}
 .community-follow-section .community-social-links span{color:#a92f40}
 @media(max-width:850px){.community-follow-section .community-follow{grid-template-columns:1fr;gap:15px}}
 @media(max-width:620px){.community-follow-section{padding:22px 0 28px}.community-follow-section>.section-wrap{width:100%;padding:0 18px;box-sizing:border-box}.community-follow-section .community-follow{padding-top:14px}}
+
+/* 2026-11-28: public CV access status and fade-based internal navigation */
+.document-access-status{grid-column:1/-1;margin:0;padding:10px 14px;border-left:3px solid var(--accent,#b66b7d);background:rgba(255,255,255,.09);color:inherit;font-size:.9rem;line-height:1.55}
+[data-document-action]:disabled{opacity:.65;cursor:wait}
+body.portfolio-fade-transition{overflow-x:hidden}
+body.portfolio-fade-transition::after{content:"";position:fixed;inset:0;z-index:99999;pointer-events:none;background:var(--transition-overlay,rgba(24,39,55,.96));opacity:0;transition:opacity .24s ease}
+body.portfolio-fade-transition.is-fading::after{opacity:1}
+body.portfolio-fade-transition[data-link-transition="lift"]::after{transform:translateY(8px);transition:opacity .24s ease,transform .24s ease}
+body.portfolio-fade-transition[data-link-transition="blur"]::after{backdrop-filter:blur(0);transition:opacity .24s ease,backdrop-filter .24s ease}
+@media(prefers-reduced-motion:reduce){body.portfolio-fade-transition::after{transition:none!important}}
