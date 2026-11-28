@@ -101,6 +101,7 @@
   <div class="section-wrap document-grid">
     <div><div class="section-kicker light-kicker">05 / PROFESSIONAL DOCUMENTS</div><h2>My credentials,<br><em>one click away.</em></h2><p data-content-key="documents_intro">My CV and general cover letter bring together the work history, skills, education and experience behind my applications for local and overseas opportunities.</p><a href="#portfolioDetailModal" class="story-text-link story-link-light" data-detail-story="documents-story">Explore details <span aria-hidden="true">↗</span></a></div>
     <div class="document-cards">
+      <p id="documentAccessStatus" class="document-access-status" role="status" aria-live="polite">Published CV access. No social account required.</p>
       <article class="document-card"><div class="doc-icon">CV</div><div><h3>Curriculum Vitae</h3><p id="cvStatus">Updated 23 November 2026</p><button id="cvView" type="button" class="doc-link" data-document-action="view" data-document-type="cv">View CV ↗</button><button id="cvDownload" type="button" class="doc-link" data-document-action="download" data-document-type="cv">View / Download CV ↓</button></div></article>
       <article class="document-card"><div class="doc-icon">CL</div><div><h3>Professional Cover Letter</h3><p id="letterStatus">Updated 23 November 2026</p><button id="letterView" type="button" class="doc-link" data-document-action="view" data-document-type="cover_letter">View Cover Letter ↗</button><button id="letterDownload" type="button" class="doc-link" data-document-action="download" data-document-type="cover_letter">View / Download Cover Letter ↓</button></div></article>
     </div>
@@ -429,24 +430,6 @@
 <section id="recommendations" class="testimonial-section">
  <div class="section-wrap testimonial-inner"><div><div class="section-kicker">13 / PROFESSIONAL RECOMMENDATIONS</div><h2>Words from<br><em>people I've worked with.</em></h2><p data-content-key="testimonial_intro">Read professional feedback here without leaving this portfolio. Select a recommendation to open the complete comment, then use the details link to review the wider professional background.</p><a href="#portfolioDetailModal" class="story-text-link" data-detail-story="recommendations-story">Explore details <span aria-hidden="true">↗</span></a></div><div id="testimonials" class="testimonial-list" aria-live="polite"></div></div>
 </section>
-<div id="documentAuthModal" class="document-auth-modal" hidden role="dialog" aria-modal="true" aria-labelledby="documentAuthTitle">
-  <div class="document-auth-backdrop" data-close-document-auth></div>
-  <div class="document-auth-panel">
-    <button type="button" class="document-auth-close" data-close-document-auth aria-label="Close document access">×</button>
-    <div class="section-kicker">PROFESSIONAL DOCUMENT ACCESS</div>
-    <h2 id="documentAuthTitle">Connect to continue.</h2>
-    <p id="documentAuthDescription">Connect one of your social accounts to verify your identity before viewing or downloading the requested document. Your account is used for access verification, not public display.</p>
-    <div class="document-auth-options">
-      <button type="button" data-doc-oauth-provider="google"><span class="doc-auth-icon doc-google">G</span><span><b>Google / YouTube</b><small>Connect with your Google account</small></span></button>
-      <button type="button" data-doc-oauth-provider="facebook"><span class="doc-auth-icon doc-facebook">f</span><span><b>Facebook</b><small>Connect with your Facebook account</small></span></button>
-      <button type="button" data-doc-oauth-provider="custom:tiktok"><span class="doc-auth-icon doc-tiktok">♪</span><span><b>Connect with TikTok</b><small>Use your TikTok account for document access</small></span></button>
-      <button type="button" data-doc-oauth-provider="custom:instagram"><span class="doc-auth-icon doc-instagram">◎</span><span><b>Connect with Instagram</b><small>Use your Instagram account for document access</small></span></button>
-    </div>
-    <p id="documentAuthStatus" class="document-auth-status" aria-live="polite">One account is enough. You do not need to connect all platforms.</p>
-    <a id="documentAuthResult" class="button button-dark document-auth-result" href="#" target="_blank" rel="noopener" hidden>Open document ↗</a>
-    <small class="document-auth-privacy">Your account details are used only for identity verification. TikTok and Instagram sign-in will work after their developer apps and custom OAuth providers are configured in Supabase. Instagram Login is intended for eligible professional accounts.</small>
-  </div>
-</div>
 <div id="testimonialModal" class="testimonial-modal" hidden role="dialog" aria-modal="true" aria-labelledby="testimonialModalTitle"><div class="testimonial-modal-backdrop" data-close-testimonial></div><div class="testimonial-modal-panel"><button type="button" class="testimonial-modal-close" data-close-testimonial aria-label="Close testimonial">×</button><div class="section-kicker">PROFESSIONAL TESTIMONIAL</div><h2 id="testimonialModalTitle">Recommendation</h2><blockquote id="testimonialModalQuote"></blockquote><p id="testimonialModalAuthor"></p></div></div>
 </main>
 
