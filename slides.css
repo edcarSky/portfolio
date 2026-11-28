@@ -198,3 +198,49 @@
  .intro-deck .deck-slide .hero-panel .profile-placeholder{height:190px!important}
  .intro-deck .deck-slide .hero-panel h2{font-size:21px!important}
 }
+
+/* 28 November 2026: clear slider counter and protected opportunity label. */
+.intro-deck .deck-slide:first-child .hero-bottom{
+  bottom:82px!important;left:max(5vw,24px)!important;right:max(5vw,24px)!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  gap:12px!important;flex-wrap:wrap!important;padding:11px 15px!important;
+  border:1px solid rgba(86,116,151,.2)!important;border-radius:13px!important;
+  background:rgba(255,255,255,.76)!important;backdrop-filter:blur(16px)!important;
+  -webkit-backdrop-filter:blur(16px)!important;box-shadow:0 8px 24px rgba(28,53,80,.08)!important;
+  color:#526b86!important;font-size:9px!important;letter-spacing:1.2px!important;
+}
+.intro-deck .hero-bottom .hero-opportunity{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:7px 11px;border:1px solid #8ba6c4;border-radius:999px;
+  background:linear-gradient(135deg,#e8f1fa,#dce8f5);color:#24476d!important;
+  font-weight:900;letter-spacing:1px;text-align:center;
+}
+.intro-deck .deck-controls{
+  bottom:15px!important;gap:7px!important;padding:7px 10px!important;
+  border:1px solid rgba(255,255,255,.24)!important;
+  background:rgba(22,43,68,.9)!important;box-shadow:0 9px 28px rgba(10,27,47,.2)!important;
+  backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;
+}
+.intro-deck .deck-status{
+  min-width:58px!important;padding:7px 9px!important;border:1px solid #ffffff24!important;
+  border-radius:999px!important;background:rgba(255,255,255,.14)!important;
+  color:#fff!important;font-size:10px!important;font-weight:900!important;letter-spacing:1.2px!important;
+}
+.intro-deck .deck-dot[aria-current="true"]{background:#8fb5e4!important;color:#102944!important}
+.intro-deck .deck-arrow{background:rgba(255,255,255,.09)!important}
+.intro-deck .deck-story-button{margin-top:0}
+@media(max-width:620px){
+ .intro-deck .deck-slide:first-child{padding-bottom:140px!important}
+ .intro-deck .deck-slide:first-child .hero-bottom{
+  bottom:82px!important;left:14px!important;right:14px!important;
+  justify-content:center!important;gap:6px!important;padding:9px 10px!important;
+  font-size:7px!important;letter-spacing:.8px!important;
+ }
+ .intro-deck .hero-bottom>span:first-child{display:none!important}
+ .intro-deck .hero-bottom .hero-opportunity{order:0;width:100%;font-size:8px;padding:6px 8px}
+ .intro-deck .hero-bottom>span:last-child{order:1;width:100%;text-align:center}
+ .intro-deck .deck-controls{bottom:12px!important}
+ .intro-deck .deck-dot{width:25px!important;height:25px!important}
+ .intro-deck .deck-status{min-width:52px!important;font-size:9px!important}
+ .intro-deck .deck-story-button{width:100%}
+}
