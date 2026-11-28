@@ -9,6 +9,12 @@
  hero.classList.add("deck-slide","is-active");
  hero.dataset.slide="1";
  deck.append(hero);
+ const portfolioStoryButton=document.createElement("button");
+ portfolioStoryButton.type="button";
+ portfolioStoryButton.className="button button-outline deck-story-button";
+ portfolioStoryButton.dataset.detailStory="portfolio-story";
+ portfolioStoryButton.innerHTML="One click for more info <span aria-hidden=\"true\">↗</span>";
+ hero.querySelector(".hero-actions")?.append(portfolioStoryButton);
  const slides=[
   {name:"Professional",kicker:"02 / PROFESSIONAL PROFILE",title:"Lead. Support.<br><em>Deliver.</em>",desc:"Executive administration, operations coordination, IT support and digital operations, backed by international work experience and a practical, service-focused approach.",primary:"Explore professional profile",href:"#professional",secondary:"View CV & documents",href2:"#documents",number:"02"},
   {name:"Content Creator",kicker:"03 / DIGITAL CONTENT CREATOR",title:"Create. Publish.<br><em>Grow.</em>",desc:"A portfolio of creator projects, video production, social platforms, digital promotion programs and channel development work.",primary:"View creator projects",href:"#creator",secondary:"Visit my main YouTube channel",href2:"https://www.youtube.com/channel/UCoz2lfYpVjxYmBp2Z9MZ25g/",number:"03"},
