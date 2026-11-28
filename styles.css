@@ -1338,3 +1338,102 @@ body.modal-open{overflow:hidden}
 .ai-chat-compose button:disabled{opacity:.55;cursor:wait}
 .ai-chat-status{margin:0;padding:0 12px 10px;color:#78879a;font:9px/1.5 "DM Sans",sans-serif}
 @media(max-width:620px){.ai-chat-panel{width:min(330px,calc(100vw - 70px));right:47px}.ai-chat-messages{height:230px}}
+
+
+/* November 28 readability and milestone layout correction. */
+.community-milestone-grid{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:10px!important;
+}
+.community-milestone-grid article{
+  min-width:0;
+  min-height:112px!important;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:16px 15px!important;
+  border:1px solid #d2dfeb!important;
+  border-radius:10px!important;
+  background:#fff!important;
+  color:#263b50!important;
+}
+.community-milestone-grid article:nth-child(n+5){grid-column:span 2}
+.community-milestone-grid article strong{
+  display:block;
+  color:#183b60!important;
+  font:800 clamp(23px,2.25vw,31px)/1.1 Manrope,sans-serif!important;
+  overflow-wrap:anywhere;
+}
+.community-milestone-grid article span{
+  display:block;
+  margin-top:8px!important;
+  color:#42566b!important;
+  font-size:11px!important;
+  line-height:1.5!important;
+  overflow-wrap:anywhere;
+}
+.community-milestone-grid .milestone-recovery{
+  background:#f4f8fc!important;
+  border-color:#c4d6e8!important;
+}
+.community-milestone-panel{
+  background:#f7fafc!important;
+  color:#263b50!important;
+}
+.community-milestone-heading h3{color:#20364b!important}
+.community-milestone-heading p{color:#526579!important}
+
+/* Readable foregrounds on the portfolio's fixed light and dark section backgrounds. */
+.intro,.professional-section,.certified-creator-section,.join-team-section,
+.contact-section,.testimonial-section{
+  color:#203247;
+}
+.intro p,.professional-section p,.certified-creator-section p,
+.join-team-section p,.contact-section p,.testimonial-section p{
+  color:#42556b;
+}
+.journey-section,.documents-section,.creator-section,.social-section,
+.community-section{
+  color:#f4f7fb;
+}
+.journey-section p,.documents-section p,.creator-section p,
+.social-section p,.community-section p{
+  color:#d1dbe7;
+}
+.journey-section .section-kicker,.documents-section .section-kicker,
+.creator-section .section-kicker,.social-section .section-kicker,
+.community-section .section-kicker,.light-kicker{
+  color:#b8cbe2!important;
+}
+.journey-section h2,.documents-section h2,.creator-section h2,
+.social-section h2,.community-section h2{
+  color:#fff;
+}
+.journey-section h2 em,.documents-section h2 em,.creator-section h2 em,
+.social-section h2 em,.community-section h2 em{
+  color:#b8d1f0;
+}
+.community-section .community-milestone-panel,
+.community-section .client-success-panel{
+  color:#263b50!important;
+}
+.community-section .community-milestone-panel p,
+.community-section .client-success-panel p{
+  color:#42566b!important;
+}
+.contact-section .contact-description{color:#42556b!important}
+.contact-section .contact-buttons a{color:#fff}
+.contact-section .contact-buttons .button-outline-dark{color:#20364f!important}
+.inquiry-form,.inquiry-form p,.inquiry-form label{color:#26384c!important}
+.inquiry-form .form-heading small{color:#176b4b!important}
+@media(max-width:900px){
+  .community-milestone-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .community-milestone-grid article:nth-child(n+5){grid-column:auto}
+}
+@media(max-width:620px){
+  .community-milestone-grid{grid-template-columns:1fr!important}
+  .community-milestone-grid article{min-height:0!important;padding:14px!important}
+  .community-milestone-grid article strong{font-size:23px!important}
+  .community-milestone-grid article span{font-size:12px!important}
+}
