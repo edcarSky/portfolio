@@ -301,3 +301,74 @@ button:disabled{opacity:.65}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+
+/* Announcement strip stays within the formal blue-gray palette. */
+.program-announcement{background:#263b50!important;color:#eaf1f7!important;border-bottom:1px solid #647b93!important}
+.program-announcement>span,.program-announcement>strong{color:#e3ebf3!important}
+.program-announcement a{color:#c5dcf4!important}
+
+/* Team and community feature panels. */
+.team-section{background:linear-gradient(135deg,#1c3044,#2a425a)!important;color:#edf2f7!important}
+.team-section h2,.team-section h3,.team-section .team-heading h2{color:#f0f4f8!important}
+.team-section p,.team-section .team-note{color:#d2deea!important}
+.team-section .team-stat,.team-section .team-program{background:#2b4056!important;color:#edf2f7!important;border-color:#637b94!important}
+.team-section .team-stat b,.team-section .team-program h3{color:#edf3f8!important}
+.team-section .team-note{background:#263b50!important;border-color:#8aa5c1!important}
+.community-section .community-teaser,.community-section .community-integrity-compact,
+.community-section .community-social-links a,.community-section .community-featured-videos a{
+  background:#2b4056!important;color:#edf2f7!important;border-color:#637b94!important;
+}
+.community-section .community-teaser h3,.community-section .community-integrity-compact strong{color:#f0f4f8!important}
+.community-section .community-teaser p,.community-section .community-integrity-compact span{color:#d0dce7!important}
+
+/* Owner Admin dashboard: dark slate panels and readable form controls. */
+.admin-shell{color:#edf2f7!important}
+.admin-head h1,.admin-card h2,.admin-card h3{color:#f0f4f8!important}
+.admin-card{background:linear-gradient(145deg,#2b4056,#23374b)!important;color:#edf2f7!important;border-color:#637b94!important}
+.admin-card p,.admin-card .hint,.hint{color:#c4d0dc!important}
+.admin-card label{color:#e1e9f1!important}
+.admin-card input:not([type=checkbox]):not([type=range]),
+.admin-card textarea,.admin-card select{
+  background:#172838!important;color:#f0f4f8!important;border:1px solid #70869d!important;
+}
+.admin-card input::placeholder,.admin-card textarea::placeholder{color:#aebdcb!important}
+.admin-card input:focus,.admin-card textarea:focus,.admin-card select:focus{outline:2px solid #9bb9d9!important}
+.admin-table th,.admin-table td{color:#dce5ee!important;border-color:#52677d!important}
+.admin-table tr{background:#2b4056!important}
+.admin-table th{background:#1b2c3d!important;color:#edf3f8!important}
+.admin-table .status{background:#405a74!important;color:#edf3f8!important}
+.admin-note{background:#344b63!important;color:#edf2f7!important;border:1px solid #7892ad!important}
+#cropStage,.doc-preview{background:#1a2b3c!important;color:#dce6ef!important;border:1px solid #60778f!important}
+.admin-card .button-outline-dark{background:#30465d!important;color:#edf2f7!important;border-color:#70869d!important}
+
+/* Job Search Center shares the same formal palette, including text inputs and result cards. */
+.jobs-header{background:#121f2c!important;color:#edf2f7!important;border-bottom:1px solid #52677d!important}
+.jobs-header a,.jobs-header .brand{color:#edf2f7!important}
+.jobs-shell,.jobs-hero{color:#edf2f7!important}
+.jobs-shell{background:#172536!important}
+.jobs-hero{background:linear-gradient(135deg,#20364c,#2b4259)!important}
+.jobs-hero h1,.jobs-hero h2,.jobs-hero h3{color:#f0f4f8!important}
+.jobs-hero p,.jobs-hero .hero-copy,.jobs-hero .source-note{color:#d0dce7!important}
+.search-panel,.ats-studio,.job-results,.job-detail,.job-listing,
+.ats-output pre,.ats-version-list,.job-detail-meta,.job-detail-empty{
+  background:#2b4056!important;color:#edf2f7!important;border-color:#637b94!important;
+}
+.search-panel label,.job-filter-grid label,.ats-studio label{color:#e0e8f0!important}
+.search-panel input,.search-panel select,.search-panel textarea,
+.job-filter-grid input,.job-filter-grid select,
+.ats-studio input:not([type=checkbox]),.ats-studio select,.ats-studio textarea{
+  background:#172838!important;color:#f0f4f8!important;border:1px solid #70869d!important;
+}
+.search-panel input::placeholder,.ats-studio input::placeholder,.ats-studio textarea::placeholder{color:#aebdcb!important}
+.job-listing{border-bottom:1px solid #52677d!important;color:#edf2f7!important}
+.job-listing:hover,.job-listing[aria-pressed="true"]{background:#3a536d!important}
+.job-listing h3,.job-detail h3{color:#f0f4f8!important}
+.job-listing .list-company,.job-listing .list-meta,.job-listing .list-source,
+.job-detail .detail-company,.job-detail .detail-description,.job-detail .detail-source,
+.job-detail-empty,.ats-heading p{color:#d0dce7!important}
+.job-listing .list-type,.job-detail .detail-meta span{background:#405a74!important;color:#edf3f8!important}
+.job-detail .detail-actions{border-color:#637b94!important}
+.job-detail .detail-apply,.primary-button{background:#496987!important;color:#fff!important}
+.job-detail .detail-save,.more-jobs-button{background:#30465d!important;color:#edf2f7!important;border:1px solid #7189a3!important}
+.ats-model{background:#344d63!important;color:#d6e7f6!important}
