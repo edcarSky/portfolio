@@ -21,20 +21,20 @@ main>section{width:100%;max-width:none;box-sizing:border-box;margin-left:0;margi
 .join-team-section{width:100%;background:linear-gradient(135deg,#f1f5f9 0%,#e5edf5 52%,#f6f8fa 100%)}
 .contact-section.section-wrap{background:linear-gradient(135deg,#f7f9fc 0%,#eaf0f6 58%,#f4f7fa 100%)}
 .testimonial-section{width:100%;background:linear-gradient(135deg,#e9f0f7 0%,#f4f7fa 55%,#e4edf6 100%)}
-.story-link-button{
-  display:inline-flex;align-items:center;justify-content:center;gap:9px;
-  min-height:38px;margin:15px 0 0;padding:9px 14px;
-  border:1px solid #9db2ca;border-radius:999px;
-  background:linear-gradient(135deg,#fff,#edf3f9);color:#294968;
-  font:800 10px/1.2 Manrope,sans-serif;letter-spacing:.8px;text-transform:uppercase;
-  cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+.story-text-link{
+  display:inline-flex;align-items:center;gap:6px;
+  margin:14px 0 0;padding:0;border:0;border-radius:0;background:transparent;
+  color:#365b80;font:700 12px/1.5 Manrope,sans-serif;
+  letter-spacing:0;text-transform:none;text-decoration:none;
+  cursor:pointer;transition:color .18s ease;
 }
-.story-link-button:hover{transform:translateY(-2px);border-color:#6687ac;box-shadow:0 7px 18px rgba(29,57,86,.12)}
-.story-link-button:focus-visible,.journey-highlight:focus-visible{outline:3px solid #83a9d4;outline-offset:3px}
-.story-link-button span{font-size:14px}
-.story-link-light{border-color:#ffffff55;background:#ffffff12;color:#fff}
-.story-link-light:hover{background:#ffffff20;border-color:#ffffff99}
-.section-story-cta{margin:20px 0}
+.story-text-link:hover{color:#b34a55;text-decoration:underline;text-underline-offset:4px}
+.story-text-link:focus-visible,.journey-highlight:focus-visible{outline:2px solid #83a9d4;outline-offset:4px}
+.story-text-link span{font-size:13px;transition:transform .18s ease}
+.story-text-link:hover span{transform:translate(2px,-2px)}
+.story-link-light{color:#e5edf7}
+.story-link-light:hover{color:#fff}
+.section-story-cta{margin:18px 0}
 .journey-highlights{
   display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;
   margin:35px auto 0;max-width:1160px;
@@ -77,6 +77,6 @@ main>section{width:100%;max-width:none;box-sizing:border-box;margin-left:0;margi
  .journey-highlight{min-height:145px;padding:17px}
  .join-team-action-row{display:grid;grid-template-columns:1fr;gap:9px}
  .join-team-action-row>a{width:100%;min-height:43px}
- .story-link-button{font-size:9px;min-height:36px;padding:8px 12px}
+ .story-text-link{font-size:11px;margin-top:12px}
  .section-story-cta{margin:14px 0}
 }
