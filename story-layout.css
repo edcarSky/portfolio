@@ -64,7 +64,7 @@ main>section{width:100%;max-width:none;box-sizing:border-box;margin-left:0;margi
 }
 .join-team-action-row>a:first-child:hover{background:#edf3f9;border-color:#6687ac}
 .join-team-action-row .button-join-team{margin:0}
-.join-team-reminder .story-link-button,.community-mumu-note .story-link-button{margin-top:13px}
+.join-team-reminder .story-text-link,.community-mumu-note .story-text-link{margin-top:13px}
 .email-contact-button{display:inline-flex;align-items:center}
 @media(max-width:800px){
  .journey-highlights{grid-template-columns:1fr 1fr}
