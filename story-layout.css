@@ -205,3 +205,63 @@ main>section{width:100%;max-width:none;box-sizing:border-box;margin-left:0;margi
   .journey-copy .story-text-link{margin-top:12px!important}
   .creator-section .section-heading>div>.story-text-link{margin-bottom:2px!important}
 }
+
+
+/* 28 November 2026: requested compact focus row, discreet professional CTA and contrast cleanup. */
+.intro .pill-row{
+  display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;
+  align-items:center!important;gap:7px 9px!important;margin:18px 0 0!important;
+}
+.intro .pill-row span{
+  display:inline-flex!important;align-items:center!important;
+  min-height:28px!important;padding:5px 10px!important;
+  border:1px solid #8da8c4!important;border-radius:5px!important;
+  background:#d4e1ee!important;color:#203b58!important;
+  font-size:10px!important;font-weight:700!important;line-height:1.35!important;
+  white-space:nowrap!important;
+}
+.intro .story-text-link{margin-top:11px!important;font-size:10px!important}
+.professional-heading-copy{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
+.professional-heading-copy>p{max-width:680px}
+.professional-story-cta{
+  margin:7px 0 0!important;padding:1px 0 2px!important;
+  border-bottom:0!important;color:#42678d!important;
+  font-size:9px!important;font-weight:700!important;letter-spacing:.35px!important;
+}
+.professional-story-cta:hover{color:#203f60!important;text-decoration:underline!important;text-underline-offset:3px}
+.professional-section .section-heading{align-items:flex-end!important}
+.professional-section .section-heading>.button{flex:0 0 auto}
+@media(max-width:620px){
+ .intro .pill-row{gap:6px!important;margin-top:14px!important}
+ .intro .pill-row span{min-height:26px!important;padding:4px 8px!important;font-size:9px!important}
+ .professional-section .section-heading{align-items:flex-start!important;flex-direction:column!important}
+ .professional-heading-copy{width:100%}
+ .professional-story-cta{margin-top:5px!important}
+}
+
+/* Replace legacy maroon/burgundy accents with restrained blue accents. */
+.story-text-link:hover{color:#24496d!important;border-bottom-color:#7898ba!important}
+.journey-highlight i{color:#c5d9ef!important}
+body[data-theme="burgundy"] .mark,
+body[data-theme="burgundy"] .button-dark,
+body[data-theme="burgundy"] .nav-cta,
+body[data-theme="burgundy"] .team-section .button-dark{background:#315b85!important;color:#fff!important}
+body[data-theme="burgundy"] .section-kicker{color:#9bb9da!important}
+.professional-section .expertise-grid article>span,
+.community-section .community-intro h2 em,
+.community-section .community-promise,
+.community-integrity strong,
+.testimonial-card .testimonial-note{color:#b9d2ec!important}
+.team-note{border-left-color:#7898ba!important}
+.team-stat,.team-program{border-color:#7898ba!important}
+.contact-section .email-line a{color:#315b85!important}
+.inquiry-expand:hover{border-color:#7898ba!important}
+.community-integrity{border-color:#7898ba!important;background:#203b58!important}
+.community-brand-panel{background:radial-gradient(circle at 50% 40%,#7898ba22,transparent 58%),linear-gradient(145deg,#1b3856,#10243c)!important}
+.community-brand-mark span{color:#b9d2ec!important}
+.community-mumu-note{border-left-color:#7898ba!important}
+.community-milestone-grid .milestone-recovery{background:#294866!important;border-color:#7898ba!important}
+.community-milestone-grid .milestone-recovery strong{color:#f2f6fb!important}
+.testimonial-section .testimonial-card{border-left-color:#9dbde0!important}
+.testimonial-section .testimonial-card-selectable:hover{border-color:#9dbde0!important}
+.testimonial-section .testimonial-card-selectable:focus-visible{outline-color:#9dbde0!important}
