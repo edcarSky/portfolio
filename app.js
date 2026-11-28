@@ -194,7 +194,33 @@
  const copyStarterMessage=async()=>{try{await navigator.clipboard.writeText(starterMessage);return true;}catch(e){return false;}};
  document.querySelectorAll("[data-copy-message]").forEach(link=>link.addEventListener("click",async()=>{if(await copyStarterMessage())link.title="Message copied. Paste it into the chat if it does not appear automatically.";}));
  const aiToggle=$("#aiDemoToggle"),aiPanel=$("#aiDemoPanel"),shareToggle=$("#sharePortfolioToggle"),sharePanel=$("#sharePortfolioPanel");
- aiToggle?.addEventListener("click",()=>{if(aiPanel)aiPanel.hidden=!aiPanel.hidden;if(sharePanel)sharePanel.hidden=true;});
+ const aiChatForm=$("#aiChatForm"),aiChatInput=$("#aiChatInput"),aiChatMessages=$("#aiChatMessages"),aiChatStatus=$("#aiChatStatus"),aiChatSend=$("#aiChatSend"),aiChatClose=$("#aiChatClose");
+ let aiChatHistory=[];
+ const addAiChatMessage=(role,message)=>{const bubble=document.createElement("div");bubble.className="ai-chat-bubble "+role;bubble.textContent=message;aiChatMessages?.append(bubble);if(aiChatMessages)aiChatMessages.scrollTop=aiChatMessages.scrollHeight;};
+ const openAiChat=()=>{if(!aiPanel)return;aiPanel.hidden=false;if(sharePanel)sharePanel.hidden=true;aiChatInput?.focus();};
+ aiToggle?.addEventListener("click",()=>aiPanel?.hidden?openAiChat():(aiPanel.hidden=true));
+ aiChatClose?.addEventListener("click",()=>{if(aiPanel)aiPanel.hidden=true;});
+ aiChatForm?.addEventListener("submit",async event=>{
+  event.preventDefault();
+  const message=aiChatInput?.value.trim()||"";
+  if(!message||!client||!aiChatSend)return;
+  addAiChatMessage("user",message);aiChatInput.value="";aiChatSend.disabled=true;
+  if(aiChatStatus)aiChatStatus.textContent="Thinking...";
+  try{
+   const {data,error}=await client.functions.invoke("portfolio-ai-chat",{body:{message,history:aiChatHistory}});
+   if(error)throw error;
+   if(data?.error)throw new Error(data.error);
+   const answer=String(data?.answer||"I did not receive a response. Please try again.");
+   aiChatHistory.push({role:"user",text:message},{role:"model",text:answer});aiChatHistory=aiChatHistory.slice(-8);
+   addAiChatMessage("bot",answer);
+   if(aiChatStatus)aiChatStatus.textContent="Connected · "+(data.model||"Gemini")+". Public information only.";
+  }catch(error){
+   const detail=String(error?.message||"");
+   const friendly=detail.includes("GEMINI_API_KEY")||detail.includes("Gemini is not connected")?"AI service setup is incomplete. The owner needs to add the Gemini API key to Supabase Edge Function Secrets.":detail.includes("429")||detail.toLowerCase().includes("quota")?"Gemini Free Tier limit reached. Please try again later. No paid service will be used.":"The AI service did not respond. Please try again later.";
+   addAiChatMessage("bot",friendly);
+   if(aiChatStatus)aiChatStatus.textContent="Request not completed.";
+  }finally{aiChatSend.disabled=false;aiChatInput?.focus();}
+ });
  shareToggle?.addEventListener("click",async()=>{
    if(aiPanel)aiPanel.hidden=true;
    const shareData={title:"edcarSky Professional Online Portfolio",text:"Visit edcarSky Professional Online Portfolio.",url:portfolioUrl};
