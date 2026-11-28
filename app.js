@@ -37,7 +37,7 @@
   window.setTimeout(()=>{
    const header=document.querySelector(".site-header,header");
    const offset=header?header.getBoundingClientRect().height:0;
-   window.scrollTo({top:Math.max(0,target.getBoundingClientRect().top+window.scrollY-offset),behavior:"instant"});
+   window.scrollTo(0,Math.max(0,target.getBoundingClientRect().top+window.scrollY-offset));
    if(history.replaceState)history.replaceState(null,"","#"+encodeURIComponent(id));
    window.setTimeout(()=>document.body.classList.remove("is-fading"),35);
   },245);
