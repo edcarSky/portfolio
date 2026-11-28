@@ -460,3 +460,67 @@ a,.text-link,.story-text-link,.doc-link{color:#c6dcf2!important}
 .current-work-card .story-text-link{display:inline-flex;margin-top:2px;color:#c5dcf4!important;font-size:13px;font-weight:700}
 .current-work-card .story-text-link:hover{color:#fff!important}
 @media(max-width:680px){.current-work-grid{grid-template-columns:1fr;gap:12px;margin:20px 0 14px}.current-work-card{padding:17px}.current-work-card h3{font-size:17px}}
+
+
+/* 2026-11-28 readability and circular brand-mark corrections */
+.hero .eyebrow{display:none!important}
+.professional-section .career-note{
+  background:linear-gradient(145deg,#304b66 0%,#263d54 100%)!important;
+  color:#f4f7fb!important;border:1px solid #8aa5c1!important;
+}
+.professional-section .career-number,
+.professional-section .career-number span{color:#e3effb!important;text-shadow:0 1px 2px #071321!important}
+.professional-section .career-note h3{color:#fff!important}
+.professional-section .career-note p,
+.professional-section .career-note p strong{color:#e3ebf4!important}
+.creator-section .section-heading>div>p,
+.creator-section .section-heading p{color:#e5edf6!important}
+.creator-section .section-heading .story-text-link,
+.creator-section .section-heading .story-text-link span{color:#d7e8f8!important}
+.creator-section .section-heading .button,
+.creator-section .section-heading .button-outline{color:#fff!important;background:#304b66!important;border-color:#91a9c2!important}
+.creator-section .section-foot{color:#e7eef6!important}
+.creator-section .section-foot>span{color:#e7eef6!important;font-weight:800!important;letter-spacing:.08em}
+.creator-section .section-foot a{color:#d7e8f8!important}
+.certified-creator-section .certified-creator-copy p,
+.certified-creator-section .certified-creator-copy small{color:#e5edf6!important;opacity:1!important}
+.certified-creator-section .certified-creator-copy small{display:block!important;line-height:1.75!important;margin-top:16px!important;font-size:12px!important}
+.community-follow-section .community-follow h3,
+.community-follow-section .community-follow .section-kicker{color:#f4f7fb!important}
+.community-follow-section .community-social-links a,
+.community-follow-section .community-social-links a span{color:#e5edf6!important}
+.community-follow-section .community-social-links a{background:#2b435b!important;border:1px solid #7892ad!important}
+.community-section .community-ai-invite{color:#f0f5fa!important;background:#2b435b!important;border:1px solid #7189a3!important;border-radius:10px!important;padding:14px 16px!important;line-height:1.75!important}
+.community-section .community-intro>p,
+.community-section .community-intro h2{color:#f0f5fa!important}
+.community-section .client-success-heading .client-success-kicker,
+.community-section .client-success-heading h3,
+.community-section .client-success-heading p{color:#f0f5fa!important}
+.community-section .client-success-card strong{color:#fff!important;display:block!important;line-height:1.4!important}
+.community-section .client-success-card .client-result-tag{display:block!important;color:#d5e6f6!important;font-size:12px!important;font-weight:700!important;line-height:1.6!important;margin:6px 0!important}
+.community-section .client-success-card p{color:#e2ebf4!important;line-height:1.75!important}
+.join-team-section .join-team-note,
+.join-team-section .join-team-copy>small{color:#e6eef6!important;opacity:1!important;line-height:1.75!important}
+.join-team-section .join-team-copy>p,
+.join-team-section .join-team-reminder p{color:#e2ebf4!important}
+.contact-section .contact-copy .contact-description,
+.contact-section .contact-copy h2{color:#f0f5fa!important;opacity:1!important}
+.contact-section .contact-copy .contact-description{font-size:15px!important;line-height:1.9!important}
+.community-logo-image,
+.join-team-side-logo img{
+  display:block!important;width:clamp(190px,24vw,270px)!important;
+  height:auto!important;aspect-ratio:1/1!important;max-width:100%!important;
+  max-height:none!important;object-fit:contain!important;object-position:center!important;
+  border-radius:50%!important;overflow:hidden!important;
+  padding:12px!important;background:#172638!important;
+  border:2px solid #8ba8c5!important;
+  box-shadow:0 10px 26px #07132166!important;
+}
+.community-brand-panel,.join-team-side-logo{display:grid!important;place-items:center!important}
+.current-work-grid{margin-top:22px!important}
+.current-work-card .story-text-link{color:#d7e8f8!important}
+.current-work-card .story-text-link:hover{color:#fff!important}
+@media(max-width:760px){
+ .community-logo-image,.join-team-side-logo img{width:min(68vw,220px)!important}
+ .contact-section .contact-copy .contact-description{font-size:14px!important;line-height:1.85!important}
+}
