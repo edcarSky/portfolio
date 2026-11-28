@@ -4,29 +4,35 @@
  const client=configured&&window.supabase?window.supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_ANON_KEY):null;
  $("#year").textContent=new Date().getFullYear();
  const visitorCounter=$("#visitorCount");
- const loadVisitorCount=async()=>{
+ const loadVisitorCount=()=>{
   if(!visitorCounter)return;
   visitorCounter.textContent="Loading";
-  try{
-   const response=await fetch("https://edcarsky.goatcounter.com/counter/TOTAL.json",{mode:"cors",cache:"no-store"});
-   if(!response.ok)throw new Error("Public counter endpoint returned "+response.status);
-   const data=await response.json();
-   if(typeof data.count!=="string"&&typeof data.count!=="number")throw new Error("Counter response is missing count");
-   visitorCounter.textContent=String(data.count);
-  }catch(error){
-   let attempts=0;
-   const retry=setInterval(()=>{
-    attempts++;
-    if(window.goatcounter?.visit_count){
-     clearInterval(retry);visitorCounter.replaceChildren();
-     try{window.goatcounter.visit_count({append:"#visitorCount",path:"TOTAL",type:"html",no_branding:true});}
-     catch(e){visitorCounter.textContent="Counter unavailable";}
-    }else if(attempts>=30){
-     clearInterval(retry);visitorCounter.textContent="Enable public counter";
-     visitorCounter.title="In GoatCounter settings, enable Allow adding visitor counts on your website.";
-    }
-   },200);
-  }
+  let attempts=0;
+  const mountCounter=()=>{
+   if(!window.goatcounter?.visit_count)return false;
+   visitorCounter.replaceChildren();
+   try{
+    window.goatcounter.visit_count({
+     append:"#visitorCount",path:"TOTAL",type:"html",no_branding:true,
+     attr:{class:"visitor-count-output","aria-label":"Total portfolio page views"}
+    });
+    return true;
+   }catch(error){
+    visitorCounter.textContent="Counter unavailable";
+    return true;
+   }
+  };
+  if(mountCounter())return;
+  const wait=setInterval(()=>{
+   attempts++;
+   if(mountCounter()){
+    clearInterval(wait);
+   }else if(attempts>=50){
+    clearInterval(wait);
+    visitorCounter.textContent="Counter unavailable";
+    visitorCounter.title="GoatCounter visitor-count script or public counter permission is unavailable.";
+   }
+  },200);
  };
  loadVisitorCount();
  $("#menuToggle").addEventListener("click",()=>$("#mainNav").classList.toggle("open"));
